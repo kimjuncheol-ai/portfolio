@@ -24,6 +24,7 @@
 html {
   background: #000;
   color-scheme: dark;
+  scrollbar-gutter: stable;
 }
 
 body {
