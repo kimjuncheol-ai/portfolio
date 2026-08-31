@@ -490,15 +490,46 @@ a:focus-visible {
   font-size: clamp(0.78rem, 1.15vw, 1rem);
 }
 
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.youtube,
 .instagram {
   position: relative;
+  display: block;
+  flex: 0 0 auto;
+  text-decoration: none;
+  transition: transform 0.15s, filter 0.15s;
+}
+
+.youtube {
+  width: 1.65rem;
+  height: 1.15rem;
+  border: 2px solid currentColor;
+  border-radius: 0.3rem;
+}
+
+.youtube::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border-top: 0.28rem solid transparent;
+  border-bottom: 0.28rem solid transparent;
+  border-left: 0.45rem solid currentColor;
+  transform: translate(-42%, -50%);
+}
+
+.instagram {
   width: 1.35rem;
   height: 1.35rem;
   border: 2px solid currentColor;
   border-radius: 0.32rem;
-  text-decoration: none;
-  display: block;
-  flex: 0 0 auto;
 }
 
 .instagram::before {
@@ -523,6 +554,8 @@ a:focus-visible {
   top: 0.18rem;
 }
 
+.youtube:hover,
+.youtube:focus-visible,
 .instagram:hover,
 .instagram:focus-visible {
   transform: translateY(-2px);
