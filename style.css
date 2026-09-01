@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Gulim&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Song+Myung&display=swap");
 
 @font-face {
   font-family: "Jetendard Hangul";
@@ -484,6 +485,295 @@ a:focus-visible {
   .win95-info-card__bar { align-items: flex-start; flex-direction: column; gap: 0.2rem; }
   .win95-review-card { grid-template-columns: auto 1fr; }
   .win95-review-open { grid-column: 2; }
+}
+
+.about-main {
+  --brand-ink: #111111;
+  --brand-red: #c02828;
+  --brand-paper: #f5f2ec;
+}
+
+.brand-console {
+  width: min(100%, 1500px);
+  margin: clamp(2rem, 5vw, 4rem) auto 0;
+  border: 1px solid var(--green);
+  background: #000;
+  box-shadow: inset 0 0 2rem rgba(0, 255, 32, 0.035);
+}
+
+.brand-console__bar,
+.brand-console__status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--green);
+  font-size: clamp(0.68rem, 1vw, 0.82rem);
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+}
+
+.brand-console__bar {
+  min-height: 2.5rem;
+  padding: 0.55rem clamp(0.8rem, 2vw, 1.25rem);
+  border-bottom: 1px dashed var(--muted);
+}
+
+.brand-console__status {
+  min-height: 2.35rem;
+  padding: 0.5rem clamp(0.8rem, 2vw, 1.25rem);
+  border-top: 1px dashed var(--muted);
+}
+
+.brand-paper {
+  margin: clamp(0.65rem, 1.4vw, 1.15rem);
+  padding: clamp(1.25rem, 4vw, 4rem);
+  color: var(--brand-ink);
+  background-color: var(--brand-paper);
+  background-image:
+    linear-gradient(rgba(17, 17, 17, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 17, 17, 0.018) 1px, transparent 1px);
+  background-size: 32px 32px;
+  font-family: "Gowun Batang", "Batang", serif;
+}
+
+.brand-paper__intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.88fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+
+.brand-marks {
+  min-width: 0;
+  margin: 0;
+}
+
+.brand-marks p {
+  margin: 0 0 0.7rem;
+  color: var(--brand-red);
+  font-size: clamp(0.62rem, 0.85vw, 0.74rem);
+  font-family: "Song Myung", "Gowun Batang", serif;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+}
+
+.brand-marks__master {
+  padding: clamp(1.25rem, 3vw, 2.75rem);
+  border: 1px solid rgba(17, 17, 17, 0.28);
+}
+
+.brand-marks__master img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.brand-marks__variants {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-right: 1px solid rgba(17, 17, 17, 0.28);
+  border-bottom: 1px solid rgba(17, 17, 17, 0.28);
+}
+
+.brand-marks__variants > div {
+  display: grid;
+  place-items: center;
+  min-height: clamp(9rem, 18vw, 15rem);
+  padding: clamp(1rem, 2.5vw, 2rem);
+  border-left: 1px solid rgba(17, 17, 17, 0.28);
+}
+
+.brand-marks__variants p { justify-self: start; align-self: start; }
+.brand-marks__variants img { display: block; width: 100%; height: clamp(9rem, 18vw, 15rem); object-fit: contain; }
+.brand-marks__single img { filter: grayscale(1) contrast(1.85); }
+
+.brand-marks figcaption {
+  margin-top: 0.6rem;
+  font-size: clamp(0.62rem, 0.85vw, 0.74rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.brand-story__eyebrow,
+.brand-section-label {
+  margin: 0 0 0.55rem;
+  color: var(--brand-red);
+  font-size: clamp(0.66rem, 0.9vw, 0.78rem);
+  font-family: "Song Myung", "Gowun Batang", serif;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.brand-story h2 {
+  margin: 0;
+  font-size: clamp(2.4rem, 6vw, 6rem);
+  font-family: "Song Myung", "Gowun Batang", serif;
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.08em;
+}
+
+.brand-story__slogan {
+  margin: clamp(1.25rem, 3vw, 2.5rem) 0;
+  padding-left: 1rem;
+  border-left: 0.45rem solid var(--brand-red);
+  font-family: "Song Myung", "Gowun Batang", serif;
+  font-size: clamp(0.98rem, 1.65vw, 1.45rem);
+  font-weight: 400;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+.brand-story > p:not([class]) {
+  margin: 0 0 1rem;
+  font-size: clamp(0.84rem, 1.15vw, 1rem);
+  line-height: 1.8;
+  word-break: keep-all;
+}
+
+.brand-facts {
+  margin: clamp(1.5rem, 3vw, 2.5rem) 0 0;
+  border-top: 2px solid var(--brand-ink);
+}
+
+.brand-facts div {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  gap: 1rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.35);
+  font-size: clamp(0.72rem, 1vw, 0.86rem);
+}
+
+.brand-facts dt {
+  color: var(--brand-red);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.brand-facts dd { margin: 0; }
+
+.brand-palette,
+.brand-rules {
+  margin-top: clamp(3.5rem, 7vw, 7rem);
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+  border-top: 2px solid var(--brand-ink);
+}
+
+.brand-palette {
+  display: grid;
+  grid-template-columns: minmax(160px, 0.35fr) 1fr;
+  gap: clamp(1.5rem, 4vw, 4rem);
+}
+
+.brand-palette h3,
+.brand-rules h3 {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.5vw, 2.25rem);
+  font-family: "Song Myung", "Gowun Batang", serif;
+  font-weight: 400;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.brand-palette ul {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.brand-palette li {
+  display: flex;
+  min-height: 18rem;
+  flex-direction: column;
+  min-width: 0;
+  border: 1px solid var(--brand-ink);
+  overflow: hidden;
+}
+
+.brand-swatch { display: block; width: 100%; height: clamp(5.5rem, 9vw, 8rem); border-bottom: 1px solid var(--brand-ink); }
+.brand-swatch--ink { background: var(--brand-ink); }
+.brand-swatch--red { background: var(--brand-red); }
+
+.brand-color-meta { display: grid; gap: 0.35rem; padding: clamp(0.8rem, 1.5vw, 1.15rem); }
+.brand-color-meta > span { color: var(--brand-red); font-size: clamp(0.58rem, 0.8vw, 0.68rem); letter-spacing: 0.08em; }
+.brand-color-meta > strong { font-family: "Song Myung", "Gowun Batang", serif; font-size: clamp(1rem, 1.5vw, 1.3rem); font-weight: 400; }
+.brand-color-meta dl { margin: 0.6rem 0 0; border-top: 1px solid rgba(17, 17, 17, 0.35); }
+.brand-color-meta dl div { display: grid; grid-template-columns: 3.5rem 1fr; padding: 0.28rem 0; border-bottom: 1px solid rgba(17, 17, 17, 0.18); font-size: clamp(0.6rem, 0.8vw, 0.72rem); }
+.brand-color-meta dt { font-weight: 700; }
+.brand-color-meta dd { margin: 0; }
+
+.brand-rules {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.4fr) 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+}
+
+.brand-rules__heading > p:last-child {
+  max-width: 24rem;
+  margin: 1.25rem 0 0;
+  font-size: clamp(0.78rem, 1vw, 0.9rem);
+  line-height: 1.7;
+  word-break: keep-all;
+}
+
+.brand-rules ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--brand-ink);
+  list-style: none;
+}
+
+.brand-rules__content { min-width: 0; }
+.brand-rule-visuals { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(0.8rem, 1.8vw, 1.4rem); margin-bottom: clamp(1.5rem, 3vw, 2.5rem); }
+.brand-rule-visuals figure { margin: 0; }
+.brand-rule-crop { position: relative; overflow: hidden; border: 1px solid var(--brand-ink); }
+.brand-rule-crop img { display: block; max-width: none; height: auto; }
+.brand-rule-crop--clear { aspect-ratio: 1234 / 656; }
+.brand-rule-crop--clear img { width: 124.47%; transform: translate(-9.77%, -17.97%); }
+.brand-rule-crop--misuse { aspect-ratio: 1684 / 646; }
+.brand-rule-crop--misuse img { width: 106.83%; transform: translate(-3.17%, -14.99%); }
+.brand-rule-visuals figcaption { margin-top: 0.45rem; font-size: clamp(0.58rem, 0.8vw, 0.7rem); letter-spacing: 0.035em; }
+
+.brand-rules li {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 0.75rem;
+  padding: 1.15rem 1rem 1.15rem 0;
+  border-bottom: 1px solid var(--brand-ink);
+}
+
+.brand-rules li:nth-child(odd) { border-right: 1px solid var(--brand-ink); }
+.brand-rules li:nth-child(even) { padding-left: 1rem; }
+.brand-rules li > span { color: var(--brand-red); font-weight: 700; }
+.brand-rules strong { font-size: clamp(0.84rem, 1.1vw, 0.98rem); }
+.brand-rules li p { margin: 0.45rem 0 0; font-size: clamp(0.72rem, 0.95vw, 0.84rem); line-height: 1.65; word-break: keep-all; }
+
+@media (max-width: 900px) {
+  .brand-paper__intro,
+  .brand-rules { grid-template-columns: 1fr; }
+  .brand-marks { max-width: 680px; }
+}
+
+@media (max-width: 620px) {
+  .brand-console__status { flex-wrap: wrap; }
+  .brand-paper { margin: 0.45rem; }
+  .brand-palette { grid-template-columns: 1fr; }
+  .brand-palette ul { grid-template-columns: 1fr; }
+  .brand-palette li { min-height: 0; }
+  .brand-rule-visuals { grid-template-columns: 1fr; }
+  .brand-rules ol { grid-template-columns: 1fr; }
+  .brand-rules li:nth-child(odd) { border-right: 0; }
+  .brand-rules li:nth-child(even) { padding-left: 0; }
 }
 
 .site-footer {
