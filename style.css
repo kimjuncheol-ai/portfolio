@@ -439,6 +439,7 @@ a:focus-visible {
 .win95-sidebar, .win95-content { min-height: 0; overflow: auto; background: #fff; border-top: 2px solid #808080; border-left: 2px solid #808080; border-right: 2px solid #fff; border-bottom: 2px solid #fff; }
 .win95-sidebar { padding: 0.65rem 0.45rem; display: flex; flex-direction: column; align-items: stretch; gap: 0.25rem; }
 .win95-folder { width: 100%; padding: 0.35rem 0.45rem; border: 1px solid transparent; display: flex; align-items: center; gap: 0.6rem; color: #000; background: transparent; text-align: left; font-size: 0.90rem; }
+.win95-folder[hidden] { display: none; }
 .win95-folder:hover, .win95-folder:focus-visible, .win95-folder.is-active { color: #fff; background: #000080; outline: 1px dotted #fff; outline-offset: -3px; }
 .folder-icon { position: relative; width: 1.15rem; height: 0.8rem; flex: 0 0 auto; background: #ffff00; border: 1px solid #806000; box-shadow: inset 1px 1px #fff7a0; }
 .folder-icon::before { content: ""; position: absolute; left: 1px; top: -5px; width: 0.55rem; height: 0.3rem; background: #ffff00; border: 1px solid #806000; border-bottom: 0; }
@@ -472,6 +473,12 @@ a:focus-visible {
 .win95-review-copy strong { line-height: 1.45; word-break: keep-all; }
 .win95-review-copy small { font-size: 0.78rem; }
 .win95-review-open { white-space: nowrap; font-size: 0.78rem; }
+.win95-motion-meta { display: flex; justify-content: space-between; gap: 1rem; margin: 0 0 0.75rem; padding: 0.4rem 0.5rem; color: #fff; background: #000080; font-size: 0.82rem; }
+.win95-motion-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0.65rem; align-items: start; }
+.win95-motion-card { grid-column: span 2; min-width: 0; background: #c0c0c0; border-top: 2px solid #fff; border-left: 2px solid #fff; border-right: 2px solid #080808; border-bottom: 2px solid #080808; }
+.win95-motion-card:nth-child(-n + 2) { grid-column: span 3; }
+.win95-motion-card__bar { padding: 0.35rem 0.45rem; overflow: hidden; color: #fff; background: #000080; font-size: 0.78rem; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+.win95-motion-card video { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: #000; }
 .win95-statusbar { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; padding-top: 3px; font-size: 0.84rem; }
 .win95-statusbar span { padding: 0.25rem 0.4rem; border-top: 1px solid #808080; border-left: 1px solid #808080; border-right: 1px solid #fff; border-bottom: 1px solid #fff; }
 
@@ -485,6 +492,8 @@ a:focus-visible {
   .win95-info-card__bar { align-items: flex-start; flex-direction: column; gap: 0.2rem; }
   .win95-review-card { grid-template-columns: auto 1fr; }
   .win95-review-open { grid-column: 2; }
+  .win95-motion-card,
+  .win95-motion-card:nth-child(-n + 2) { grid-column: span 6; }
 }
 
 .about-main {

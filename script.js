@@ -138,6 +138,13 @@ if (tourPopup) {
         { title: '부산현대미술관에서 만난 세 전시 관람 후기', author: '부산광역시', url: 'https://blog.naver.com/cooolbusan/224328255685' },
         { title: '무료로 만나는 〈코뿔소와 유니콘〉 전시 관람 후기', author: '부산교육', url: 'https://blog.naver.com/with_pen/224327082717' },
         { title: '부산현대미술관 무료전시, 초등 아이와 다녀온 후기', author: '텔미', url: 'https://blog.naver.com/tellmememory/224330861096' }
+      ],
+      motionVideos: [
+        'assets/video/busan-moca-card-1.mp4',
+        'assets/video/busan-moca-card-2.mp4',
+        'assets/video/busan-moca-card-3.mp4',
+        'assets/video/busan-moca-card-4.mp4',
+        'assets/video/busan-moca-card-5.mp4'
       ]
     },
     bma: {
@@ -187,8 +194,10 @@ if (tourPopup) {
   const popupAddress = tourPopup.querySelector('#popup-address');
   const popupContent = tourPopup.querySelector('#popup-content');
   const popupStatus = tourPopup.querySelector('#popup-status');
+  const popupItemCount = tourPopup.querySelector('#popup-item-count');
   const officialLink = tourPopup.querySelector('#popup-official-link');
   const folderButtons = [...tourPopup.querySelectorAll('.win95-folder')];
+  const motionFolder = tourPopup.querySelector('[data-motion-folder]');
   const closeButton = tourPopup.querySelector('.win95-close');
   const titlebar = tourPopup.querySelector('.win95-titlebar');
   let activeTour = tourData.moca;
@@ -229,10 +238,27 @@ if (tourPopup) {
       <div class="win95-review-list">${reviews}</div>`;
   };
 
+  const renderMotionCards = () => {
+    const videos = activeTour.motionVideos.map((src, index) => `
+      <article class="win95-motion-card">
+        <div class="win95-motion-card__bar"><span>[${index + 1}] MOTION CARD</span></div>
+        <video autoplay muted loop playsinline controls preload="metadata" aria-label="부산현대미술관 모션 카드뉴스 ${index + 1}">
+          <source src="${src}" type="video/mp4">
+          이 브라우저에서는 MP4 영상을 재생할 수 없습니다.
+        </video>
+      </article>`).join('');
+    popupContent.innerHTML = `
+      <h2>${activeTour.name} — 모션 카드뉴스</h2>
+      <div class="win95-motion-meta"><span>5개 영상</span><span>자동 재생 · 반복</span></div>
+      <div class="win95-motion-grid">${videos}</div>`;
+    popupContent.querySelectorAll('video').forEach((video) => video.play().catch(() => {}));
+  };
+
   const selectFolder = (section) => {
     folderButtons.forEach((button) => button.classList.toggle('is-active', button.dataset.section === section));
     popupStatus.textContent = section;
     popupAddress.textContent = `C:\\${activeTour.name}\\${section}`;
+    popupItemCount.textContent = section === '모션 카드뉴스' ? '5개 영상' : `${activeTour.motionVideos ? 4 : 3}개 개체`;
     officialLink.classList.toggle('is-program-link', section === '체험 프로그램');
     if (section === '홈') {
       officialLink.hidden = false;
@@ -251,6 +277,8 @@ if (tourPopup) {
       renderPrograms();
     } else if (section === '방문자 후기') {
       renderReviews();
+    } else if (section === '모션 카드뉴스' && activeTour.motionVideos) {
+      renderMotionCards();
     } else {
       popupContent.innerHTML = `<h2>${section}</h2><p>이 폴더의 내용은 준비 중입니다.</p>`;
     }
@@ -259,6 +287,7 @@ if (tourPopup) {
   document.querySelectorAll('[data-popup-title]').forEach((button) => {
     button.addEventListener('click', () => {
       activeTour = tourData[button.dataset.popupKey];
+      motionFolder.hidden = !activeTour.motionVideos;
       popupTitle.textContent = `${button.dataset.popupTitle} - 탐색기`;
       officialLink.dataset.homeUrl = button.dataset.officialUrl;
       selectFolder('홈');
