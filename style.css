@@ -996,10 +996,11 @@ a:focus-visible {
 
 /* Site-only RAG assistant */
 .site-ai {
+  --site-ai-edge: clamp(0.75rem, 1.2vw, 1rem);
   position: fixed;
   z-index: 900;
-  right: clamp(1rem, 2.2vw, 2rem);
-  bottom: clamp(4.8rem, 7vw, 6.2rem);
+  right: var(--site-ai-edge);
+  bottom: var(--site-ai-edge);
   color: var(--green);
   font-family: "JetBrains Mono", "Jetendard Hangul", monospace;
 }
@@ -1245,7 +1246,7 @@ a:focus-visible {
 .rag-switch input:focus-visible + span { outline: 2px solid #fff; outline-offset: 2px; }
 
 @media (max-width: 700px) {
-  .site-ai { right: 0.8rem; bottom: 5.3rem; }
+  .site-ai { --site-ai-edge: 0.65rem; }
   .site-ai__panel { width: calc(100vw - 1.6rem); height: min(35rem, calc(100svh - 10.3rem)); }
   .site-ai__message { font-size: 0.74rem; }
   .rag-admin { width: 100%; min-height: 100svh; margin: 0; border-inline: 0; }
