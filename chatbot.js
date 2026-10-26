@@ -56,8 +56,8 @@
         <dl>
           <div><dt>수집 항목</dt><dd>익명 세션 ID, 질문·답변, 접속 페이지, 이용 시각</dd></div>
           <div><dt>이용 목적</dt><dd>사이트 질문 응답, 답변 시나리오 개선</dd></div>
-          <div><dt>보관 기간</dt><dd>수집일로부터 90일</dd></div>
-          <div><dt>저장 위치</dt><dd>Supabase 클라우드 데이터베이스</dd></div>
+          <div><dt>보관 기간</dt><dd>현재 탭: 탭 종료 시 삭제 / 서버: 수집일로부터 90일</dd></div>
+          <div><dt>저장 위치</dt><dd>현재 브라우저 탭 및 Supabase 클라우드 데이터베이스</dd></div>
         </dl>
         <p class="site-ai__consent-note">동의를 거부할 수 있으나, 거부하면 챗봇을 이용할 수 없습니다. 광고·마케팅 목적으로 사용하지 않습니다.</p>
         <label class="site-ai__consent-check"><input type="checkbox"><span>위 내용을 확인했으며 정보 수집에 동의합니다.</span></label>
@@ -88,14 +88,41 @@
   const consentAccept = shell.querySelector('[data-consent-accept]');
   const consentClose = shell.querySelector('[data-consent-close]');
   const consentWithdraw = shell.querySelector('[data-consent-withdraw]');
-  const history = [];
-  const sessionId = crypto.randomUUID?.() || `${Date.now()}-${Math.random()}`;
+  const tabStateKey = 'site-ai-tab-state-v1';
   const consentKey = 'site-ai-consent-v1';
+  const createSessionId = () => crypto.randomUUID?.() || `${Date.now()}-${Math.random()}`;
+  const readTabState = () => {
+    try {
+      const stored = JSON.parse(sessionStorage.getItem(tabStateKey) || 'null');
+      return stored?.version === 1 ? stored : null;
+    } catch (error) {
+      return null;
+    }
+  };
+  const savedTabState = readTabState();
+  let sessionId = typeof savedTabState?.sessionId === 'string' ? savedTabState.sessionId : createSessionId();
+  const history = Array.isArray(savedTabState?.history)
+    ? savedTabState.history.filter((item) => ['user', 'assistant'].includes(item?.role) && typeof item?.content === 'string').slice(-12)
+    : [];
+  const transcript = Array.isArray(savedTabState?.transcript)
+    ? savedTabState.transcript.filter((item) => ['user', 'assistant'].includes(item?.role) && typeof item?.text === 'string').slice(-30)
+    : [];
+  const persistTabState = () => {
+    try {
+      sessionStorage.setItem(tabStateKey, JSON.stringify({
+        version: 1,
+        sessionId,
+        history: history.slice(-12),
+        transcript: transcript.slice(-30),
+        panelOpen: !panel.hidden
+      }));
+    } catch (error) { /* Continue without persistence when storage is unavailable. */ }
+  };
   let hasConsent = false;
   try { hasConsent = localStorage.getItem(consentKey) === 'accepted'; } catch (error) { hasConsent = false; }
   consentPanel.hidden = hasConsent;
 
-  const addMessage = (role, text, sources = []) => {
+  const addMessage = (role, text, sources = [], { persist = true } = {}) => {
     const item = document.createElement('article');
     item.className = `site-ai__message site-ai__message--${role}`;
     const label = document.createElement('strong');
@@ -117,6 +144,11 @@
     }
     messages.append(item);
     messages.scrollTop = messages.scrollHeight;
+    if (persist) {
+      transcript.push({ role, text, sources });
+      if (transcript.length > 30) transcript.splice(0, transcript.length - 30);
+      persistTabState();
+    }
     return item;
   };
 
@@ -162,7 +194,8 @@
     suggestions.hidden = true;
     addMessage('user', question);
     history.push({ role: 'user', content: question });
-    const waiting = addMessage('assistant', '자료를 검색하고 있습니다…');
+    persistTabState();
+    const waiting = addMessage('assistant', '자료를 검색하고 있습니다…', [], { persist: false });
     waiting.classList.add('is-waiting');
     submitButton.disabled = true;
     input.disabled = true;
@@ -171,11 +204,15 @@
       waiting.remove();
       addMessage('assistant', result.answer, result.sources || []);
       history.push({ role: 'assistant', content: result.answer });
+      persistTabState();
       window.gtag?.('event', 'chatbot_question', { page_path: pageName, answer_mode: isConfigured ? 'rag' : 'local' });
     } catch (error) {
       waiting.remove();
       const fallback = localAnswer(question);
-      addMessage('assistant', `${fallback.answer}\n\n(현재 RAG 서버 연결이 원활하지 않아 사이트 기본 자료로 답했습니다.)`, fallback.sources);
+      const fallbackAnswer = `${fallback.answer}\n\n(현재 RAG 서버 연결이 원활하지 않아 사이트 기본 자료로 답했습니다.)`;
+      addMessage('assistant', fallbackAnswer, fallback.sources);
+      history.push({ role: 'assistant', content: fallbackAnswer });
+      persistTabState();
     } finally {
       submitButton.disabled = false;
       input.disabled = false;
@@ -188,12 +225,14 @@
     launcher.setAttribute('aria-expanded', 'true');
     launcher.setAttribute('aria-label', '사이트 안내 AI 닫기');
     input.focus();
+    persistTabState();
     window.gtag?.('event', 'chatbot_open', { page_path: pageName });
   };
   const closePanel = () => {
     panel.hidden = true;
     launcher.setAttribute('aria-expanded', 'false');
     launcher.setAttribute('aria-label', '사이트 안내 AI 열기');
+    persistTabState();
     launcher.focus();
   };
 
@@ -239,8 +278,11 @@
       }).catch(() => {});
     }
     try { localStorage.removeItem(consentKey); } catch (error) { /* Local storage may be unavailable. */ }
+    try { sessionStorage.removeItem(tabStateKey); } catch (error) { /* Session storage may be unavailable. */ }
     hasConsent = false;
+    sessionId = createSessionId();
     history.length = 0;
+    transcript.length = 0;
     messages.replaceChildren();
     addMessage('assistant', '안녕하세요. 김준철의 포트폴리오 안내 AI입니다. 이 사이트에 있는 내용만 바탕으로 답합니다. 무엇이 궁금하신가요?');
     consentCheck.checked = false;
@@ -248,5 +290,16 @@
     consentPanel.hidden = false;
   });
 
-  addMessage('assistant', '안녕하세요. 김준철의 포트폴리오 안내 AI입니다. 이 사이트에 있는 내용만 바탕으로 답합니다. 무엇이 궁금하신가요?');
+  if (transcript.length) {
+    transcript.forEach((message) => addMessage(message.role, message.text, message.sources || [], { persist: false }));
+    suggestions.hidden = history.some((message) => message.role === 'user');
+  } else {
+    addMessage('assistant', '안녕하세요. 김준철의 포트폴리오 안내 AI입니다. 이 사이트에 있는 내용만 바탕으로 답합니다. 무엇이 궁금하신가요?');
+  }
+  if (savedTabState?.panelOpen) {
+    panel.hidden = false;
+    launcher.setAttribute('aria-expanded', 'true');
+    launcher.setAttribute('aria-label', '사이트 안내 AI 닫기');
+  }
+  persistTabState();
 })();
