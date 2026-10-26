@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="kimjuncheol site RAG admin">
+  <meta name="robots" content="noindex,nofollow">
+  <title>chatbot.admin | kimjuncheol</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="rag-admin-body">
+  <main class="rag-admin" tabindex="-1">
+    <header class="rag-admin__header">
+      <div><a href="index.html">kimjuncheol</a><span>/ chatbot.admin</span></div>
+      <span class="rag-admin__status"><i aria-hidden="true"></i><span id="admin-connection">checking</span></span>
+    </header>
+
+    <section class="rag-login" id="rag-login" aria-labelledby="login-title">
+      <p class="rag-admin__kicker">AUTHENTICATION REQUIRED</p>
+      <h1 id="login-title">관리자 로그인</h1>
+      <p>사이트 챗봇의 답변 시나리오, 지식 자료와 대화 기록을 관리합니다.</p>
+      <form id="admin-login-form">
+        <label>이메일<input type="email" name="email" autocomplete="username" required></label>
+        <label>비밀번호<input type="password" name="password" autocomplete="current-password" required></label>
+        <button type="submit">login --secure</button>
+        <p class="rag-form-message" id="login-message" role="status"></p>
+      </form>
+    </section>
+
+    <section class="rag-dashboard" id="rag-dashboard" hidden>
+      <div class="rag-dashboard__title">
+        <div><p class="rag-admin__kicker">CHATBOT CONTROL</p><h1>site-only chatbot console</h1></div>
+        <button class="rag-button rag-button--quiet" id="admin-logout" type="button">logout</button>
+      </div>
+      <div class="rag-stats" aria-label="지식베이스 현황">
+        <div><span>documents</span><strong id="stat-documents">0</strong></div>
+        <div><span>pages</span><strong id="stat-pages">0</strong></div>
+        <div><span>scenarios</span><strong id="stat-faqs">0</strong></div>
+        <div><span>last sync</span><strong id="stat-sync">—</strong></div>
+      </div>
+      <nav class="rag-tabs" aria-label="챗봇 관리자 메뉴">
+        <button type="button" class="is-active" data-admin-tab="knowledge">knowledge</button>
+        <button type="button" data-admin-tab="scenarios">scenarios</button>
+        <button type="button" data-admin-tab="conversations">conversations</button>
+      </nav>
+      <section class="rag-admin-panel is-active" data-admin-panel="knowledge">
+      <div class="rag-toolbar">
+        <div><strong>$ sync-site</strong><span>지정된 6개 페이지를 다시 수집하고 임베딩합니다.</span></div>
+        <button class="rag-button" id="sync-site" type="button">run sync</button>
+      </div>
+      <p class="rag-form-message" id="dashboard-message" role="status"></p>
+      <div class="rag-table-wrap">
+        <table class="rag-table">
+          <thead><tr><th>page</th><th>section / preview</th><th>updated</th><th>active</th></tr></thead>
+          <tbody id="document-list"></tbody>
+        </table>
+      </div>
+      </section>
+      <section class="rag-admin-panel" data-admin-panel="scenarios" hidden>
+        <div class="rag-panel-heading"><div><strong>$ answer-scenarios</strong><span>질문 의도별 답변을 수정하거나 잠시 끌 수 있습니다.</span></div></div>
+        <div class="rag-scenario-list" id="scenario-list"></div>
+      </section>
+      <section class="rag-admin-panel" data-admin-panel="conversations" hidden>
+        <div class="rag-panel-heading"><div><strong>$ recent-conversations</strong><span>최근 방문자의 질문과 챗봇 답변입니다.</span></div><button class="rag-button rag-button--quiet" id="refresh-conversations" type="button">refresh</button></div>
+        <div class="rag-conversation-list" id="conversation-list"></div>
+      </section>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
