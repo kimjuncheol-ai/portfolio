@@ -336,3 +336,36 @@ if (tourPopup) {
     if (event.target === tourPopup) tourPopup.close();
   });
 }
+
+// Fit native-ratio video cards into a compact grid without cropping their frames.
+(() => {
+  const grids = document.querySelectorAll('.archive-video-grid:not(.archive-video-grid--idol)');
+  grids.forEach((grid) => {
+    let queued = false;
+    const arrange = () => {
+      queued = false;
+      const cards = [...grid.children];
+      const singleColumn = window.matchMedia('(max-width: 700px)').matches;
+      grid.classList.toggle('has-masonry', !singleColumn);
+      if (singleColumn) return;
+      const styles = getComputedStyle(grid);
+      const row = parseFloat(styles.gridAutoRows);
+      const gap = parseFloat(styles.rowGap);
+      cards.forEach((card) => {
+        const rows = Math.ceil((card.getBoundingClientRect().height + gap) / (row + gap));
+        card.style.setProperty('--card-rows', rows);
+      });
+    };
+    const schedule = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(arrange);
+    };
+    const observer = new ResizeObserver(schedule);
+    observer.observe(grid);
+    [...grid.children].forEach((card) => observer.observe(card));
+    document.fonts.ready.then(schedule);
+    window.addEventListener('resize', schedule, { passive: true });
+    arrange();
+  });
+})();

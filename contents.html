@@ -11,10 +11,15 @@
 	</script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="kimjuncheol contents">
+	<meta name="description" content="김준철의 AI 제작 연습 영상 아카이브">
 	<title>contents | kimjuncheol</title>
 	<link rel="icon" href="favicon.svg" type="image/svg+xml">
 	<link rel="stylesheet" href="style.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Song+Myung&amp;display=swap">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Song+Myung&amp;display=swap" media="print" onload="this.media='all'">
+	<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Song+Myung&amp;display=swap"></noscript>
 	<script src="script.js" defer></script>
 	<script src="supabase-config.js" defer></script>
 	<script src="chatbot.js" defer></script>
@@ -28,14 +33,106 @@
 				<a href="about.html">about</a><a href="report.html">report</a><a href="contents.html">contents</a><a href="sns.html">sns</a><a href="final.html">final_project</a>
 			</nav>
 		</header>
-		<main class="site-main" tabindex="-1">
-			<h1 class="page-title"><span aria-hidden="true">$ </span>contents</h1>
+		<main class="site-main site-main--collection" tabindex="-1">
+			<h1 class="page-title terminal-heading"><span aria-hidden="true">$ </span>contents</h1>
+			<nav class="archive-index" aria-label="콘텐츠 분류">
+				<a href="#projects">01 프로젝트</a><a href="#visual-development">02 캐릭터·포스터</a><a href="#ai-practice">03 AI 영상</a><a href="#idol-practice">04 AI 아이돌</a><a href="#story-films">05 브이로그·퍼포먼스</a><a href="#action-previz">06 액션 프리비즈</a>
+			</nav>
+			<section id="projects" class="content-session project-session" aria-labelledby="projects-title">
+				<div class="collection-status">
+					<span>path: <strong>~/contents/projects</strong></span>
+					<span>projects: <strong>4</strong></span>
+				</div>
+				<header class="collection-intro">
+					<p>SESSION_01 / SELECTED PROJECTS</p>
+					<h2 id="projects-title">AI로 만들고, 연결한 것들</h2>
+					<p>부산을 무대로 만든 게임과 예술지도, 콘텐츠 캠페인, 장면을 설계하는 프리비즈 도구를 모았습니다.</p>
+				</header>
+				<div class="project-list">
+					<article class="project-entry" id="bukang-project">
+						<a class="project-entry__preview" href="assets/projects/bukang.png" target="_blank" rel="noopener" aria-label="집에 가자 부캉아 실행 화면 크게 보기"><img src="assets/projects/bukang.png" alt="북항 수로에서 물대포를 발사하는 상어 부캉이의 3D 게임 실행 화면" width="1400" height="900" loading="lazy"><span>preview ↗</span></a>
+						<div class="project-entry__body">
+							<p class="project-entry__kind">[01] / GAME PROTOTYPE</p>
+							<h3>집에 가자 부캉아</h3>
+							<p>북항 수로를 헤엄치는 부캉이의 횡스크롤 액션 게임. 부산의 친수공원을 재구성한 3D 공간에서 물대포와 파도를 사용해 수로를 탈출합니다.</p>
+							<dl class="project-facts"><div><dt>구현</dt><dd>Unity 6 · 3D · WebGL / Windows</dd></div><div><dt>설계</dt><dd>다섯 유형의 관람객 · 150초 뒤 보스 등장</dd></div></dl>
+							<details class="project-details"><summary>제작 내용 보기</summary><p>수면 반사와 굴절, 물보라와 항적을 구현하고 이동·도약·물대포·파도·일시정지를 구성했습니다. 실제 북항친수공원의 풍경을 게임의 동선에 맞춰 재해석했습니다.</p><p class="project-note">현재는 실행 화면을 공개합니다. 대용량 게임 빌드의 웹 배포는 준비 중입니다.</p></details>
+						</div>
+					</article>
+					<article class="project-entry" id="seagull-project">
+						<a class="project-entry__preview" href="assets/projects/seagull.png" target="_blank" rel="noopener" aria-label="씨걸이의 부산 예술지도 화면 크게 보기"><img src="assets/projects/seagull.png" alt="씨걸이 캐릭터와 부산의 다섯 예술 공간이 배치된 탐험 지도" width="1440" height="1000" loading="lazy"><span>preview ↗</span></a>
+						<div class="project-entry__body">
+							<p class="project-entry__kind">[02] / INTERACTIVE ART MAP</p>
+							<h3>씨걸이의 부산 예술지도</h3>
+							<p>건물을 누르면 그 공간의 장면으로 들어가는 부산 예술 탐험 지도. 씨걸이와 함께 다섯 예술 공간의 방문 안내와 전시 소식, 이어 걷기 좋은 코스를 발견합니다.</p>
+							<dl class="project-facts"><div><dt>경험</dt><dd>지도 → 공간 → 방문·전시·산책 정보</dd></div><div><dt>기능</dt><dd>날짜별 전시 탐색 · 가고 싶은 곳 저장</dd></div></dl>
+							<details class="project-details"><summary>제작 내용 보기</summary><p>부산갤러리, 스페이스 이신, 이우환공간, 고은사진미술관, 고은 깁슨 사진미술관을 연결했습니다. 실제 공간 사진과 건축 그림을 함께 사용하고 자료의 출처를 안내합니다.</p><p class="project-note">로그인 없이 자유롭게 둘러볼 수 있습니다. 운영·전시 정보는 2026.10.19 조사 기준입니다.</p><a href="https://seagull-busan-artour.skp-k-2881.chatgpt.site/" target="_blank" rel="noopener noreferrer">예술지도 열기 ↗</a></details>
+						</div>
+					</article>
+					<article class="project-entry" id="artour-project">
+						<a class="project-entry__preview project-entry__preview--campaign" href="sns.html" aria-label="아르투어부산 다섯 채널 소개 보기"><img src="assets/projects/artour.png" alt="아르투어부산 예술관광 콘텐츠 캠페인 대표 비주얼" loading="lazy"><span>channels ↗</span></a>
+						<div class="project-entry__body">
+							<p class="project-entry__kind">[03] / FIVE-CHANNEL CAMPAIGN</p>
+							<h3>아르투어부산 5채널 캠페인</h3>
+							<p>부산의 예술과 여행을 하나의 브랜드로 연결한 콘텐츠 캠페인. 같은 주제를 채널별 화면비와 읽는 방식에 맞춰 카드뉴스, 숏폼, 블로그 기록으로 풀어냈습니다.</p>
+							<dl class="project-facts"><div><dt>채널</dt><dd>Instagram · YouTube · Naver Blog · X · Facebook</dd></div><div><dt>제작</dt><dd>브랜드 비주얼 · 카드뉴스 · 세로형 영상</dd></div></dl>
+							<div class="project-actions"><a href="sns.html">5개 채널 보기 →</a><a href="sns.html#artour-character">캐릭터와 초기 구상 →</a><a href="https://www.youtube.com/shorts/8KEOQmPHO7A" target="_blank" rel="noopener noreferrer">숏폼 보기 ↗</a></div>
+						</div>
+					</article>
+					<article class="project-entry" id="frame-project">
+						<a class="project-entry__preview" href="projects/frame/index.html" target="_blank" rel="noopener" aria-label="FRAME 프리비즈 스튜디오 새 탭에서 실행"><img src="assets/projects/frame.png" alt="3D 마네킹과 카메라 조절 패널을 갖춘 FRAME 프리비즈 스튜디오" width="1440" height="1000" loading="lazy"><span>launch ↗</span></a>
+						<div class="project-entry__body">
+							<p class="project-entry__kind">[04] / BROWSER CREATIVE TOOL</p>
+							<h3>FRAME 프리비즈 스튜디오</h3>
+							<p>사진과 3D 마네킹, 제품을 배치해 촬영 구도를 설계하는 브라우저 도구. 카메라 각도와 초점거리, 화면비를 조절하고 완성한 장면을 PNG로 저장할 수 있습니다.</p>
+							<dl class="project-facts"><div><dt>도구</dt><dd>Three.js · 2.5D 사진 배경 · 3D 장면 편집</dd></div><div><dt>처리</dt><dd>사진은 브라우저 안에서 처리 · API 키 불필요</dd></div></dl>
+							<div class="project-actions"><a href="projects/frame/index.html" target="_blank" rel="noopener">스튜디오 실행 ↗</a></div>
+							<details class="project-details"><summary>제작 내용 보기</summary><p>앞·뒤 사진을 적용한 제품의 두께와 크기를 조절하고 마네킹의 손에 배치할 수 있습니다. 배경의 입체감은 사진 밝기를 이용한 간이 깊이 표현이며, 실제 3D 스캔을 대신하지 않습니다.</p></details>
+						</div>
+					</article>
+				</div>
+			</section>
+			<section id="visual-development" class="content-session archive-section" aria-labelledby="visual-development-title"><div class="collection-status"><span>path: <strong>~/contents/visual-development</strong></span><span>works: <strong>2</strong></span></div><header class="collection-intro"><p>SESSION_02 / VISUAL DEVELOPMENT</p><h2 id="visual-development-title">이미지로 먼저 그린 이야기</h2><p>캐릭터의 세계관을 정리하고, 부산의 풍경을 새로운 시각으로 재구성한 초기 디자인과 포스터 작업입니다.</p></header>
+				<article class="visual-case" id="ppoo-project">
+					<header class="archive-case-heading"><p>[01] / INITIAL CHARACTER IP</p><h3>부산에 떨어진 뿌</h3><p>우주선 고장으로 부산에 불시착한 외계인 뿌가 음식과 사투리, 예술과 온천을 낯선 시선으로 만나는 로컬 관찰 예능 IP입니다. 호기심 많은 탐험가의 성격과 성장 아이템, 표정과 세계관을 초기 캐릭터 시트로 정리했습니다.</p></header>
+					<div class="ppoo-gallery"><figure class="archive-figure ppoo-gallery__sheet"><a href="assets/visual/ppoo-character-sheet.png" target="_blank" rel="noopener" aria-label="초기 캐릭터·세계관 시트 원본 크게 보기"><img src="assets/visual/ppoo-character-sheet.png" alt="뿌의 기본 형태, 감정 표현, 성장 아이템, 부산 체험 장면을 정리한 초기 캐릭터 설정 시트" width="1536" height="1024" loading="lazy"></a><figcaption>초기 캐릭터·세계관 시트<span aria-hidden="true">↗</span></figcaption></figure><figure class="archive-figure "><a href="assets/visual/ppoo-selfie.png" target="_blank" rel="noopener" aria-label="부산 상공의 셀피 원본 크게 보기"><img src="assets/visual/ppoo-selfie.png" alt="부산 도시와 바다 위에서 셀피를 찍는 연두색 외계인 뿌" width="1254" height="1254" loading="lazy"></a><figcaption>부산 상공의 셀피<span aria-hidden="true">↗</span></figcaption></figure><figure class="archive-figure "><a href="assets/visual/ppoo-window.png" target="_blank" rel="noopener" aria-label="창밖으로 찾아온 뿌 원본 크게 보기"><img src="assets/visual/ppoo-window.png" alt="노을이 비치는 창밖에서 실내를 들여다보는 거대한 뿌" width="1254" height="1254" loading="lazy"></a><figcaption>창밖으로 찾아온 뿌<span aria-hidden="true">↗</span></figcaption></figure></div>
+				</article>
+				<article class="visual-case" id="busan-posters">
+					<header class="archive-case-heading"><p>[02] / TOURISM POSTER STUDIES</p><h3>부산 홍보 포스터</h3><p>북항의 야경을 상어의 형상과 결합한 이미지와, 세일러 캐릭터를 앞세운 관광 홍보 이미지입니다. AI 이미지로 부산의 장소성과 캐릭터를 연결해 본 포스터 제작 실습입니다.</p></header>
+					<div class="poster-gallery"><figure class="archive-figure "><a href="assets/visual/busan-bukhang-poster.png" target="_blank" rel="noopener" aria-label="북항 · 모두의 해양수도로 놀러 오이소! 원본 크게 보기"><img src="assets/visual/busan-bukhang-poster.png" alt="상어의 입 안에 부산 북항 야경을 담은 세로형 관광 홍보 포스터" width="1024" height="1536" loading="lazy"></a><figcaption>북항 · 모두의 해양수도로 놀러 오이소!<span aria-hidden="true">↗</span></figcaption></figure><figure class="archive-figure "><a href="assets/visual/busan-character-poster.png" target="_blank" rel="noopener" aria-label="부캉이의 도시, 부산! 원본 크게 보기"><img src="assets/visual/busan-character-poster.png" alt="세일러 복장의 인물과 상어 캐릭터를 배치한 부산 관광 홍보 포스터" width="2100" height="1485" loading="lazy"></a><figcaption>부캉이의 도시, 부산!<span aria-hidden="true">↗</span></figcaption></figure></div>
+				</article>
+			</section>
+			<section id="ai-practice" class="content-session archive-section" aria-labelledby="ai-practice-title"><div class="collection-status"><span>path: <strong>~/contents/ai-practice</strong></span><span>videos: <strong>8</strong></span></div><header class="collection-intro"><p>SESSION_03 / AI PRACTICE</p><h2 id="ai-practice-title">AI 영상 제작 연습</h2><p>빛과 질감, 인물과 캐릭터의 움직임, 카메라와 게임 화면까지. 짧은 장면을 만들며 생성형 영상의 표현 범위를 탐색했습니다.</p></header>
+				<div class="practice-grid archive-video-grid"><article class="practice-card"><header><span>[01]</span><strong>빛과 질감</strong></header><div class="practice-card__screen" style="--video-ratio: 1936 / 1080"><video width="1936" height="1080" controls autoplay loop playsinline muted preload="metadata" src="assets/video/ai-practice-01.mp4" aria-label="빛과 질감"></video></div><footer><span>빛과 질감의 움직임</span><a href="assets/video/ai-practice-01.mp4" target="_blank" rel="noopener" aria-label="빛과 질감 영상 크게 보기">크게 보기 ↗</a></footer></article>
+<article class="practice-card"><header><span>[02]</span><strong>캐릭터 움직임</strong></header><div class="practice-card__screen" style="--video-ratio: 1920 / 1080"><video width="1920" height="1080" controls autoplay loop playsinline muted preload="metadata" src="assets/video/ai-practice-02.mp4" aria-label="캐릭터 움직임"></video></div><footer><span>캐릭터 애니메이션</span><a href="assets/video/ai-practice-02.mp4" target="_blank" rel="noopener" aria-label="캐릭터 움직임 영상 크게 보기">크게 보기 ↗</a></footer></article>
+<article class="practice-card"><header><span>[03]</span><strong>인물 동작</strong></header><div class="practice-card__screen" style="--video-ratio: 1620 / 1080"><video width="1620" height="1080" controls autoplay loop playsinline muted preload="metadata" src="assets/video/ai-practice-03.mp4" aria-label="인물 동작"></video></div><footer><span>동작과 화면 구성</span><a href="assets/video/ai-practice-03.mp4" target="_blank" rel="noopener" aria-label="인물 동작 영상 크게 보기">크게 보기 ↗</a></footer></article>
+<article class="practice-card"><header><span>[04]</span><strong>장면·카메라 실험</strong></header><div class="practice-card__screen" style="--video-ratio: 480 / 854"><video width="480" height="854" controls autoplay loop playsinline muted preload="metadata" src="assets/video/ai-practice-04.mp4" aria-label="장면·카메라 실험"></video></div><footer><span>5초 · 세로</span><a href="assets/video/ai-practice-04.mp4" target="_blank" rel="noopener" aria-label="장면·카메라 실험 영상 크게 보기">크게 보기 ↗</a></footer></article>
+<article class="practice-card"><header><span>[05]</span><strong>시네마틱 액션</strong></header><div class="practice-card__screen" style="--video-ratio: 832 / 464"><video width="832" height="464" controls autoplay loop playsinline muted preload="metadata" src="assets/video/ai-practice-05.mp4" aria-label="시네마틱 액션"></video></div><footer><span>5초 · 가로</span><a href="assets/video/ai-practice-05.mp4" target="_blank" rel="noopener" aria-label="시네마틱 액션 영상 크게 보기">크게 보기 ↗</a></footer></article>
+<article class="practice-card"><header><span>[06]</span><strong>2D 캐릭터 애니메이션</strong></header><div class="practice-card__screen" style="--video-ratio: 1080 / 1080"><video width="1080" height="1080" controls autoplay loop playsinline muted preload="metadata" src="assets/video/ai-practice-06.mp4" aria-label="2D 캐릭터 애니메이션"></video></div><footer><span>5초 · 정방형</span><a href="assets/video/ai-practice-06.mp4" target="_blank" rel="noopener" aria-label="2D 캐릭터 애니메이션 영상 크게 보기">크게 보기 ↗</a></footer></article>
+<article class="practice-card"><header><span>[07]</span><strong>3D 캐릭터 퍼포먼스</strong></header><div class="practice-card__screen" style="--video-ratio: 960 / 960"><video width="960" height="960" controls autoplay loop playsinline muted preload="metadata" src="assets/video/ai-practice-07.mp4" aria-label="3D 캐릭터 퍼포먼스"></video></div><footer><span>16초 · 정방형</span><a href="assets/video/ai-practice-07.mp4" target="_blank" rel="noopener" aria-label="3D 캐릭터 퍼포먼스 영상 크게 보기">크게 보기 ↗</a></footer></article>
+<article class="practice-card"><header><span>[08]</span><strong>게임 화면 연출</strong></header><div class="practice-card__screen" style="--video-ratio: 720 / 1280"><video width="720" height="1280" controls autoplay loop playsinline muted preload="metadata" src="assets/video/ai-practice-08.mp4" aria-label="게임 화면 연출"></video></div><footer><span>6초 · 세로</span><a href="assets/video/ai-practice-08.mp4" target="_blank" rel="noopener" aria-label="게임 화면 연출 영상 크게 보기">크게 보기 ↗</a></footer></article></div>
+			</section>
+			<section id="idol-practice" class="content-session archive-section" aria-labelledby="idol-practice-title"><div class="collection-status"><span>path: <strong>~/contents/idol-practice</strong></span><span>videos: <strong>3</strong></span></div><header class="collection-intro"><p>SESSION_04 / IDOL PRACTICE</p><h2 id="idol-practice-title">AI 아이돌 제작 연습</h2><p>무대 영상과 캐릭터 퍼포먼스를 실사·3D 스타일로 실험했습니다. 인물의 표정과 포즈, 스타일 변화와 화면 연출을 살펴보는 세 편입니다.</p></header>
+				<div class="practice-grid archive-video-grid archive-video-grid--idol"><article class="practice-card"><header><span>[01]</span><strong>실사 스타일 퍼포먼스</strong></header><div class="practice-card__screen" style="--video-ratio: 854 / 480"><video width="854" height="480" controls autoplay loop playsinline muted preload="metadata" src="assets/video/idol-practice-03.mp4" aria-label="실사 스타일 퍼포먼스"></video></div><footer><span>4초 · 가로</span><a href="assets/video/idol-practice-03.mp4" target="_blank" rel="noopener" aria-label="실사 스타일 퍼포먼스 영상 크게 보기">크게 보기 ↗</a></footer></article><article class="practice-card"><header><span>[02]</span><strong>무대 영상 편집</strong></header><div class="practice-card__screen" style="--video-ratio: 1920 / 1080"><video width="1920" height="1080" controls autoplay loop playsinline muted preload="metadata" src="assets/video/idol-practice-01.mp4" aria-label="무대 영상 편집"></video></div><footer><span>8초 · 가로</span><a href="assets/video/idol-practice-01.mp4" target="_blank" rel="noopener" aria-label="무대 영상 편집 영상 크게 보기">크게 보기 ↗</a></footer></article><article class="practice-card"><header><span>[03]</span><strong>3D 스타일 아이돌</strong></header><div class="practice-card__screen" style="--video-ratio: 480 / 854"><video width="480" height="854" controls autoplay loop playsinline muted preload="metadata" src="assets/video/idol-practice-02.mp4" aria-label="3D 스타일 아이돌"></video></div><footer><span>10초 · 세로</span><a href="assets/video/idol-practice-02.mp4" target="_blank" rel="noopener" aria-label="3D 스타일 아이돌 영상 크게 보기">크게 보기 ↗</a></footer></article></div>
+			</section>
+			<section id="story-films" class="content-session archive-section" aria-labelledby="story-films-title"><div class="collection-status"><span>path: <strong>~/contents/story-films</strong></span><span>videos: <strong>2</strong></span></div><header class="collection-intro"><p>SESSION_05 / STORY FILMS</p><h2 id="story-films-title">장면을 이야기로 연결하기</h2><p>부산을 여행하는 캐릭터의 브이로그와 도시 풍경을 무대로 삼은 퍼포먼스 영상입니다. 각 화면의 소리 버튼으로 음성을 켤 수 있습니다.</p></header>
+				<div class="story-film-grid"><article class="practice-card"><header><span>[01]</span><strong>엘라의 부산 당일치기</strong></header><div class="practice-card__screen" style="--video-ratio: 1280 / 720"><video width="1280" height="720" controls autoplay loop playsinline muted preload="metadata" src="assets/video/ella-busan-vlog.mp4" aria-label="엘라의 부산 당일치기"></video></div><footer><span>56초 · AI 캐릭터 브이로그</span><a href="assets/video/ella-busan-vlog.mp4" target="_blank" rel="noopener" aria-label="엘라의 부산 당일치기 영상 크게 보기">크게 보기 ↗</a></footer></article><article class="practice-card"><header><span>[02]</span><strong>부산 배경 퍼포먼스</strong></header><div class="practice-card__screen" style="--video-ratio: 406 / 720"><video width="406" height="720" controls autoplay loop playsinline muted preload="metadata" src="assets/video/busan-performance.mp4" aria-label="부산 배경 퍼포먼스"></video></div><footer><span>8초 · 세로형 영상</span><a href="assets/video/busan-performance.mp4" target="_blank" rel="noopener" aria-label="부산 배경 퍼포먼스 영상 크게 보기">크게 보기 ↗</a></footer></article></div>
+			</section>
+			<section id="action-previz" class="content-session archive-section" aria-labelledby="action-previz-title"><div class="collection-status"><span>path: <strong>~/contents/action-previz</strong></span><span>videos: <strong>2</strong></span></div><header class="collection-intro"><p>SESSION_06 / ACTION PREVIZ</p><h2 id="action-previz-title">액션 프리비즈에서 장면으로</h2><p>단순한 입체 도형으로 액션의 동선과 타이밍을 설계한 뒤, 캐릭터와 공간 레퍼런스를 더한 영상 실험으로 연결했습니다.</p></header>
+				<div class="action-film-grid"><article class="practice-card"><header><span>[01]</span><strong>액션 프리비즈 · 원본</strong></header><div class="practice-card__screen" style="--video-ratio: 1280 / 720"><video width="1280" height="720" controls autoplay loop playsinline muted preload="metadata" src="assets/video/rect-rush-10s.mp4" aria-label="액션 프리비즈 · 원본"></video></div><footer><span>10초 · 동선·타이밍 설계</span><a href="assets/video/rect-rush-10s.mp4" target="_blank" rel="noopener" aria-label="액션 프리비즈 · 원본 영상 크게 보기">크게 보기 ↗</a></footer></article><article class="practice-card"><header><span>[02]</span><strong>캐릭터·공간 적용 실험</strong></header><div class="practice-card__screen" style="--video-ratio: 854 / 480"><video width="854" height="480" controls autoplay loop playsinline muted preload="metadata" src="assets/video/action-style-study.mp4" aria-label="캐릭터·공간 적용 실험"></video></div><footer><span>10초 · 스타일 영상</span><a href="assets/video/action-style-study.mp4" target="_blank" rel="noopener" aria-label="캐릭터·공간 적용 실험 영상 크게 보기">크게 보기 ↗</a></footer></article></div>
+				<div class="action-reference-heading"><h3>캐릭터와 장소 레퍼런스</h3><p>영상과 함께 사용한 두 캐릭터의 시트와 스카이브리지 공간 이미지입니다.</p></div>
+				<div class="reference-gallery"><figure class="archive-figure "><a href="assets/visual/action-character-gray.png" target="_blank" rel="noopener" aria-label="캐릭터 01 · 회색 무도가 원본 크게 보기"><img src="assets/visual/action-character-gray.png" alt="회색 의상을 입은 무도가의 얼굴과 정면·후면 캐릭터 시트" width="1536" height="1024" loading="lazy"></a><figcaption>캐릭터 01 · 회색 무도가<span aria-hidden="true">↗</span></figcaption></figure><figure class="archive-figure "><a href="assets/visual/action-character-lace.png" target="_blank" rel="noopener" aria-label="캐릭터 02 · 레이스 무도가 원본 크게 보기"><img src="assets/visual/action-character-lace.png" alt="레이스 의상을 입은 무도가의 얼굴과 정면·후면 캐릭터 시트" width="1536" height="1024" loading="lazy"></a><figcaption>캐릭터 02 · 레이스 무도가<span aria-hidden="true">↗</span></figcaption></figure><figure class="archive-figure "><a href="assets/visual/action-skybridge.png" target="_blank" rel="noopener" aria-label="장소 · 스카이브리지 원본 크게 보기"><img src="assets/visual/action-skybridge.png" alt="도시와 강을 내려다보는 초고층 스카이브리지의 장소 레퍼런스" width="1672" height="941" loading="lazy"></a><figcaption>장소 · 스카이브리지<span aria-hidden="true">↗</span></figcaption></figure></div>
+			</section>
+			<div class="terminal-prompt" aria-hidden="true">_</div>
 		</main>
 		<footer class="site-footer">
 			<a href="mailto:kkimjuncheol@gmail.com">kkimjuncheol@gmail.com</a>
-			<div class="social-links">
-				<a class="youtube" href="https://www.youtube.com/@PPOOinBusan" target="_blank" rel="noopener noreferrer" aria-label="PPOO in Busan 유튜브"><span aria-hidden="true"></span></a>
-				<a class="instagram" href="https://www.instagram.com/ppooinbusan" target="_blank" rel="noopener noreferrer" aria-label="PPOO in Busan 인스타그램"><span aria-hidden="true"></span></a>
+			<div class="social-links" role="group" aria-label="아르투어부산 소셜 채널">
+				<a class="social-x" href="https://x.com/artour_busan" target="_blank" rel="noopener noreferrer" aria-label="아르투어부산 X" title="아르투어부산 X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-7.4L5.5 22H2.3l7.4-8.5L.8 2h6.5l4.5 6.8L18.9 2Zm-1.1 18h1.7L6.3 3.9H4.5L17.8 20Z" fill="currentColor"/></svg></a>
+				<a class="youtube" href="https://www.youtube.com/@artour_busan" target="_blank" rel="noopener noreferrer" aria-label="아르투어부산 유튜브" title="아르투어부산 유튜브"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="5" width="20" height="14" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m10 8 6 4-6 4Z" fill="currentColor"/></svg></a>
+				<a class="instagram" href="https://www.instagram.com/artour_busan/" target="_blank" rel="noopener noreferrer" aria-label="아르투어부산 인스타그램" title="아르투어부산 인스타그램"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></a>
+				<a class="facebook" href="https://www.facebook.com/profile.php?id=61595298063187" target="_blank" rel="noopener noreferrer" aria-label="아르투어부산 페이스북" title="아르투어부산 페이스북"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 22v-9h3l.5-3.5H14V7.3c0-1 .3-1.8 1.8-1.8h1.9V2.4a24 24 0 0 0-2.8-.2c-2.8 0-4.7 1.7-4.7 4.9v2.4H7V13h3.2v9Z" fill="currentColor"/></svg></a>
+				<a class="naver-blog" href="https://blog.naver.com/artour_busan" target="_blank" rel="noopener noreferrer" aria-label="아르투어부산 네이버 블로그" title="아르투어부산 네이버 블로그"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 3h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6l-4 3v-3H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" fill="currentColor"/><path d="M7 15V7h3l4 5V7h3v8h-3l-4-5v5Z" fill="var(--bg)"/></svg></a>
 			</div>
 		</footer>
 	</div>
