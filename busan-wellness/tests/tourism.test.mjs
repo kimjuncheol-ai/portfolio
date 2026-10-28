@@ -22,6 +22,9 @@ test('manual field names and unsafe links',()=>{
  assert.equal(normalizeWellness({mapX:'',mapY:''}).lat,null);
  assert.equal(safeURL('javascript:alert(1)'),'');assert.equal(safeURL('//example.com'),'');
  assert.equal(normalizeFestival({UC_SEQ:1,MAIN_TITLE:'불꽃',USAGE_DAY_WEEK_AND_TIME:'매년 11월'}).period,'매년 11월');
+ assert.equal(normalizeFestival({MAIN_TITLE:'센텀맥주축제(한,영,중간,중번,일)'}).title,'센텀맥주축제');
+ assert.equal(normalizeFestival({MAIN_TITLE:'부산축제 (한, 영, 중간, 중번, 일)'}).title,'부산축제');
+ assert.equal(normalizeFestival({MAIN_TITLE:'부산축제(특별행사)'}).title,'부산축제(특별행사)');
 });
 test('encoded key is decoded once, provider parameter names follow both guides',()=>{
  const u=providerURL('wellness','abc%2Bdef%3D');assert.equal(u.searchParams.get('serviceKey'),'abc+def=');assert.equal(u.searchParams.get('lDongRegnCd'),'26');assert.equal(u.searchParams.get('langDivCd'),'KOR');

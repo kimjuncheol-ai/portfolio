@@ -8,7 +8,8 @@ export function normalizeWellness(i) {
 }
 export function normalizeFestival(i) {
   const homepage = String(i.HOMEPAGE_URL || '').match(/https?:\/\/[^\s<>"']+/)?.[0];
-  return { id: `f-${i.UC_SEQ}`, sourceId: String(i.UC_SEQ), kind: 'festival', title: clean(i.MAIN_TITLE || i.TITLE), district: clean(i.GUGUN_NM) || district(i.ADDR1), address: clean(i.ADDR1), lat: coord(i.LAT, 33, 39), lng: coord(i.LNG, 124, 132), theme: '축제', image: safeURL(i.MAIN_IMG_NORMAL), description: clean(i.ITEMCNTNTS || i.SUBTITLE), tel: clean(i.CNTCT_TEL), homepage: safeURL(homepage), period: clean(i.USAGE_DAY_WEEK_AND_TIME || i.USAGE_DAY), price: clean(i.USAGE_AMOUNT), transport: clean(i.TRFC_INFO), accessibility: clean(i.MIDDLE_SIZE_RM1), source: '부산광역시 부산축제정보 서비스' };
+  const title = clean(i.MAIN_TITLE || i.TITLE).replace(/\s*[（(]\s*(?:한|영|중간|중번|일)(?:\s*[,、·/]\s*(?:한|영|중간|중번|일))+\s*[）)]\s*$/u, '').trim();
+  return { id: `f-${i.UC_SEQ}`, sourceId: String(i.UC_SEQ), kind: 'festival', title, district: clean(i.GUGUN_NM) || district(i.ADDR1), address: clean(i.ADDR1), lat: coord(i.LAT, 33, 39), lng: coord(i.LNG, 124, 132), theme: '축제', image: safeURL(i.MAIN_IMG_NORMAL), description: clean(i.ITEMCNTNTS || i.SUBTITLE), tel: clean(i.CNTCT_TEL), homepage: safeURL(homepage), period: clean(i.USAGE_DAY_WEEK_AND_TIME || i.USAGE_DAY), price: clean(i.USAGE_AMOUNT), transport: clean(i.TRFC_INFO), accessibility: clean(i.MIDDLE_SIZE_RM1), source: '부산광역시 부산축제정보 서비스' };
 }
 export function distance(a, b) {
   if ([a.lat, a.lng, b.lat, b.lng].some(v => v == null || !Number.isFinite(v))) return null;
