@@ -3,3 +3,7 @@ node_modules/
 Thumbs.db
 # Added by code-review-graph
 .code-review-graph/
+.env
+.env.*
+!.env.example
+.vercel/

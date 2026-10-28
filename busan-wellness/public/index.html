@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#edf0e8">
+  <title>슬로웨이브 부산 — 쉼과 설렘 사이</title>
+  <meta name="description" content="부산의 웰니스와 축제를 연결하는 여행. 가까운 두 장소를 찾아 나만의 부산 여행 조합을 만들어 보세요.">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/fonts/google-fonts.css">
+<link rel="stylesheet" href="/style.css"><script type="module" src="/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#explore">본문으로 건너뛰기</a>
+<header class="header"><a href="/" class="brand" aria-label="슬로웨이브 부산 홈"><img src="/assets/logo.svg" alt="" width="35" height="35"><span>slowwave<span class="brand-city">BUSAN</span></span></a><nav aria-label="주 메뉴"><button class="nav active" data-view="pairs">추천 조합</button><button class="nav" data-view="wellness">웰니스</button><button class="nav" data-view="festivals">축제</button></nav><button class="saved-nav" id="saved-nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v17l-6-4-6 4z"/></svg><span>저장한 여행</span><b id="saved-count">0</b></button></header>
+<main>
+<section class="hero" aria-labelledby="hero-title"><div class="hero-copy"><div class="eyebrow"><span></span> WELLNESS MEETS FESTIVAL</div><h1 id="hero-title">조금 느리게,<br>조금 더 <em>부산답게.</em></h1><p>낮에는 나를 돌보는 쉼, 저녁에는 마음을 채우는 축제.<br>당신의 속도에 맞는 부산 여행을 연결해 드려요.</p><a class="hero-link" href="#explore">나에게 맞는 조합 찾기 <span>↗</span></a><div class="hero-foot"><span class="mini-wave">≈</span> 쉼과 설렘 사이, 나만의 부산</div></div><div class="hero-art"><img id="hero-photo" src="/assets/busan.jpg" alt="부산의 해안과 바다 풍경" fetchpriority="high"><div class="photo-tint"></div><span class="photo-label"><span>35°09′ N &nbsp; 129°09′ E</span>BUSAN, AT YOUR PACE</span><div class="hero-note"><span class="note-icon">↗</span><div><small>오늘의 여행 취향</small><strong>잘 쉬고, 마음껏 즐기기</strong></div></div><span class="vertical-text">TAKE A BREATH. MAKE A MEMORY.</span></div></section>
+<section class="explore" id="explore" aria-labelledby="section-title"><div class="section-heading"><div><div class="eyebrow">FIND YOUR OWN RHYTHM</div><h2 id="section-title">쉼에 축제를 더한, 여행 조합</h2><p id="section-description">함께 가기 좋은 웰니스와 축제, 가까운 곳끼리 모았어요.</p></div><span class="section-mark" aria-hidden="true">↝</span></div>
+<form class="search-form" id="search-form"><label><span>어디로 떠날까요?</span><select id="district" aria-label="지역 선택"><option value="">부산 전체 지역</option></select></label><label><span>어떤 쉼이 필요하세요?</span><select id="theme" aria-label="웰니스 테마 선택"><option value="">모든 웰니스</option><option>온천·스파</option><option>숲·자연</option><option>명상·쉼</option><option>한방 체험</option><option>웰니스</option></select></label><label><span>축제는 언제?</span><select id="month" aria-label="축제 개최 월 선택"><option value="">시기 전체</option><option value="5">5월</option><option value="11">11월</option><option value="unknown">일정 미정</option></select></label><button class="search-button" type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>조합 찾아보기</button></form>
+<div class="toolbar"><div class="chips" aria-label="빠른 테마 선택"><button class="chip selected" data-theme="">전체</button><button class="chip" data-theme="온천·스파">♨ <span>온천·스파</span></button><button class="chip" data-theme="숲·자연">♧ <span>숲·자연</span></button><button class="chip" data-theme="명상·쉼">☼ <span>명상·쉼</span></button></div><div class="view-switch" role="group" aria-label="보기 방식"><button id="list-view" class="selected" aria-pressed="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 2h6v6H2zm10 0h6v6h-6zM2 12h6v6H2zm10 0h6v6h-6z"/></svg>목록</button><button id="map-view" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 5 6-2 6 2 6-2v16l-6 2-6-2-6 2zM9 3v16m6-14v16"/></svg>지역 지도</button></div></div>
+<div class="data-notice" id="data-notice" role="status"><span class="notice-dot"></span><span id="data-message">여행 정보를 불러오고 있어요.</span><button id="refresh" aria-label="공공데이터 새로고침">새로고침 ↻</button></div>
+<div class="results-heading"><p id="result-count" aria-live="polite">가까운 여행을 찾는 중</p><label class="sort-label">정렬 <select id="sort" aria-label="정렬 방식"><option value="recommended">추천순</option><option value="distance">가까운 거리순</option><option value="name">이름순</option></select></label></div>
+<div id="map-panel" hidden><div class="map-intro"><h3>부산, 어디에서 쉬어볼까요?</h3><p>지역을 선택하면 그곳의 여행 조합을 볼 수 있어요.</p><small>위치 안내용 지역 개념도 · 실제 경계·축척과 다릅니다.</small></div><div class="region-map" id="region-map"></div></div>
+<div class="results-grid" id="results" aria-live="polite"></div>
+<div class="empty" id="empty" hidden><span>≈</span><h3>아직 연결된 여행이 없어요</h3><p id="empty-description">지역이나 테마를 바꾸면 새로운 조합을 만날 수 있어요.</p><button id="reset">필터 초기화</button></div>
+<div class="load-more-wrap"><button id="load-more" hidden>여행 조합 더 보기 <span>↓</span></button></div>
+<aside class="method-note"><span class="method-symbol">↝</span><div><h3>가까워서, 함께 가기 좋은 여행</h3><p>같은 구·군과 직선거리 25km 이내의 장소를 연결해요. 추천은 위치 기준이며, 이동 시간과 축제 개최 여부는 방문 전 확인해 주세요.</p></div><button id="about-data">데이터 안내 ↗</button></aside>
+</section>
+<section class="closing"><span>YOUR PACE, YOUR BUSAN</span><p>가끔은 쉬어가는 것도,<br>멋진 여행이니까.</p><img src="/assets/logo.svg" width="70" height="70" alt=""></section>
+</main>
+<footer><a href="/" class="brand">slowwave <span class="footer-city">BUSAN</span></a><p>한국관광공사 웰니스관광정보 × 부산광역시 부산축제정보<br><a href="https://commons.wikimedia.org/wiki/File:Busan_City_Haeundae_Beach_KOGL_(01).jpg" target="_blank" rel="noopener noreferrer">해운대 사진: 부산광역시 · 공공누리 제1유형 · Wikimedia Commons</a></p><small>© 2026 Slowwave Busan. 쉼과 설렘을 연결합니다.</small></footer>
+<dialog id="detail-dialog" aria-labelledby="dialog-title"><div class="dialog-top"><span class="eyebrow">YOUR BUSAN JOURNEY</span><button id="close-dialog" aria-label="상세 창 닫기">×</button></div><div id="dialog-content"></div></dialog>
+<div class="toast" id="toast" role="status" hidden></div>
+</body></html>
