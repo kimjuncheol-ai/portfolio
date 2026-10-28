@@ -14,8 +14,15 @@ function Invoke-Vercel {
     & $cli @cliPrefix @CliArgs
     if ($LASTEXITCODE -ne 0) { throw 'Vercel command failed. Check login/project access and retry.' }
 }
-& $cli @cliPrefix whoami 2>$null | Out-Null
-if ($LASTEXITCODE -ne 0) { Invoke-Vercel -CliArgs @('login') }
+# Windows PowerShell 5 turns redirected native stderr into NativeCommandError.
+# Vercel writes its version to stderr even when it exits successfully.
+$savedPreference = $ErrorActionPreference
+try {
+    $ErrorActionPreference = 'Continue'
+    & $cli @cliPrefix whoami 2>$null | Out-Null
+    $authExitCode = $LASTEXITCODE
+} finally { $ErrorActionPreference = $savedPreference }
+if ($authExitCode -ne 0) { Invoke-Vercel -CliArgs @('login') }
 if (-not (Test-Path -LiteralPath '.vercel/project.json')) { Invoke-Vercel -CliArgs @('link') }
 $settings = @{}
 foreach ($line in [IO.File]::ReadAllLines((Join-Path (Get-Location) '.env'))) { if ($line -match '^(TOUR_API_KEY|BUSAN_FESTIVAL_API_KEY)=(.+)$') { $settings[$matches[1]] = $matches[2] } }
