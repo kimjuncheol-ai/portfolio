@@ -1,6 +1,7 @@
 import 'jsr:@supabase/functions-js/edge-runtime.d.ts'
 import { createClient } from 'npm:@supabase/supabase-js@2'
 import { corsHeaders, json } from '../_shared/cors.ts'
+import { verifyServiceRole } from '../_shared/service-auth.ts'
 
 const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')
 const supabaseUrl = Deno.env.get('SUPABASE_URL')
@@ -60,7 +61,7 @@ Deno.serve(async (request) => {
     const token = request.headers.get('Authorization')?.replace(/^Bearer\s+/i, '')
     if (!token) return json({ error: 'Authentication required.' }, 401)
     const supabase = createClient(supabaseUrl, serviceKey, { auth: { persistSession: false } })
-    if (token !== serviceKey) {
+    if (token !== serviceKey && !await verifyServiceRole(token, supabaseUrl, serviceKey)) {
       const { data: userData, error: userError } = await supabase.auth.getUser(token)
       if (userError || !userData.user) return json({ error: 'Invalid session.' }, 401)
       const { data: admin } = await supabase.from('site_admins').select('user_id').eq('user_id', userData.user.id).maybeSingle()

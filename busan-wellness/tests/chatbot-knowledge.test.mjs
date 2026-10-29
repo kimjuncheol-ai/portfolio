@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
 import { lexicalScore } from '../../supabase/functions/_shared/faq-score.ts';
+import { verifyServiceRole } from '../../supabase/functions/_shared/service-auth.ts';
 const source = readFileSync(new URL('../../chatbot.js', import.meta.url), 'utf8');
 const literal = source.slice(source.indexOf('const fallbackKnowledge = ') + 'const fallbackKnowledge = '.length, source.indexOf('\n  ];') + 4);
 const knowledge = vm.runInNewContext('(' + literal + ')');
@@ -28,4 +29,11 @@ test('API live state and current ticket prices are not invented in fixed answers
   assert.ok(!api.includes('지금 정상 작동'));
   assert.ok(!knowledge.some(e => e.answer.includes('세 곳입니다')));
   assert.ok(knowledge.every(e => /^(report|contents|sns|about|index)\.html(?:#|$)/.test(e.source[0])));
+});
+test('forged service-role payload alone cannot authorize synchronization', async () => {
+  const forged = 'e30.' + Buffer.from(JSON.stringify({role:'service_role'})).toString('base64url') + '.invalid';
+  let checked = false;
+  assert.equal(await verifyServiceRole(forged, 'https://project.example', 'server-only', async (_url, init) => { checked = true; assert.equal(init.method, 'HEAD'); return {ok:false}; }), false);
+  assert.equal(checked, true);
+  assert.equal(await verifyServiceRole('not-a-jwt', 'https://project.example', 'server-only', async () => { throw new Error(); }), false);
 });
