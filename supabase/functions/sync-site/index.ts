@@ -73,6 +73,9 @@ Deno.serve(async (request) => {
     const pagesToSync = requestedPage === '__faq__' ? [] : approvedPages.includes(requestedPage) ? [requestedPage] : []
     if (!requestedPage || (!pagesToSync.length && requestedPage !== '__faq__')) return json({ error: 'An approved sync target is required.' }, 400)
     let chunkCount = 0
+    let completedPages = 0
+    let nextChunk: number | null = null
+    let sourceChecksum: string | null = null
     for (const pagePath of pagesToSync) {
       const sourceUrl = `${siteUrl}/${pagePath}`
       const response = await fetch(sourceUrl, { headers: { 'User-Agent': 'kimjuncheol-site-indexer/1.0' } })
@@ -80,8 +83,13 @@ Deno.serve(async (request) => {
       const html = await response.text()
       const title = decodeHtml(html.match(/<title>([\s\S]*?)<\/title>/i)?.[1]?.trim() || pagePath)
       const chunks = makeChunks(htmlToText(html))
+      sourceChecksum = await sha256(chunks.join('\n'))
+      if (body.sourceChecksum && body.sourceChecksum !== sourceChecksum) return json({ error: 'The source changed. Restart this page sync.' }, 409)
+      const chunkIndex = Number(body.chunkIndex ?? 0)
+      if (!Number.isInteger(chunkIndex) || chunkIndex < 0 || chunkIndex >= chunks.length) return json({ error: 'Invalid chunk index.' }, 400)
       const rows = []
-      for (let index = 0; index < chunks.length; index += 1) {
+      // One embedding per request stays within the free Edge Function CPU budget.
+      for (let index = chunkIndex; index < Math.min(chunkIndex + 1, chunks.length); index += 1) {
         const content = chunks[index]
         const embedding = await model.run(content, { mean_pool: true, normalize: true })
         rows.push({
@@ -96,13 +104,19 @@ Deno.serve(async (request) => {
           updated_at: new Date().toISOString(),
         })
       }
-      const { error: deleteError } = await supabase.from('site_documents').delete().eq('page_path', pagePath)
-      if (deleteError) throw deleteError
       if (rows.length) {
-        const { error: insertError } = await supabase.from('site_documents').insert(rows)
+        const { error: insertError } = await supabase.from('site_documents').upsert(rows, { onConflict: 'page_path,checksum' })
         if (insertError) throw insertError
       }
       chunkCount += rows.length
+      if (chunkIndex + 1 < chunks.length) nextChunk = chunkIndex + 1
+      else {
+        // Keep prior documents until the whole replacement has been embedded successfully.
+        const checksums = await Promise.all(chunks.map(sha256))
+        const { error: deleteError } = await supabase.from('site_documents').delete().eq('page_path', pagePath).not('checksum', 'in', `(${checksums.join(',')})`)
+        if (deleteError) throw deleteError
+        completedPages += 1
+      }
     }
     let faqCount = 0
     if (requestedPage === '__faq__') {
@@ -118,7 +132,7 @@ Deno.serve(async (request) => {
       }
       faqCount = faqs?.length || 0
     }
-    return json({ ok: true, pages: pagesToSync.length, chunks: chunkCount, faqs: faqCount })
+    return json({ ok: true, pages: completedPages, chunks: chunkCount, faqs: faqCount, nextChunk, sourceChecksum })
   } catch (error) {
     console.error(error)
     return json({ error: error instanceof Error ? error.message : 'Sync failed.' }, 500)

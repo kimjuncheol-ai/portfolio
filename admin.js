@@ -199,17 +199,23 @@
       ];
       const total = { pages: 0, chunks: 0, faqs: 0 };
       for (let index = 0; index < targets.length; index += 1) {
-        setMessage(dashboardMessage, `동기화 중 ${index + 1}/${targets.length}: ${targets[index].page}`);
-        const response = await fetch(`${config.supabaseUrl}/functions/v1/${config.syncFunction || 'sync-site'}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', apikey: config.publishableKey, Authorization: `Bearer ${sessionData.session.access_token}` },
-          body: JSON.stringify({ action: 'sync', ...targets[index] })
-        });
-        const result = await response.json().catch(() => ({}));
-        if (!response.ok) throw new Error(result.error || `${targets[index].page} 동기화에 실패했습니다.`);
-        total.pages += result.pages || 0;
-        total.chunks += result.chunks || 0;
-        total.faqs += result.faqs || 0;
+        let chunkIndex = 0;
+        let sourceChecksum;
+        do {
+          setMessage(dashboardMessage, `동기화 중 ${index + 1}/${targets.length}: ${targets[index].page} · 분할 ${chunkIndex + 1}`);
+          const response = await fetch(`${config.supabaseUrl}/functions/v1/${config.syncFunction || 'sync-site'}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', apikey: config.publishableKey, Authorization: `Bearer ${sessionData.session.access_token}` },
+            body: JSON.stringify({ action: 'sync', ...targets[index], chunkIndex, sourceChecksum })
+          });
+          const result = await response.json().catch(() => ({}));
+          if (!response.ok) throw new Error(result.error || `${targets[index].page} 동기화에 실패했습니다.`);
+          total.pages += result.pages || 0;
+          total.chunks += result.chunks || 0;
+          total.faqs += result.faqs || 0;
+          sourceChecksum = result.sourceChecksum;
+          chunkIndex = result.nextChunk;
+        } while (Number.isInteger(chunkIndex) && chunkIndex > 0);
       }
       setMessage(dashboardMessage, `${total.pages}개 페이지, ${total.chunks}개 문서, ${total.faqs}개 시나리오를 동기화했습니다.`);
       await loadAdmin();
