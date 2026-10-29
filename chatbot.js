@@ -5,13 +5,43 @@
 
   const fallbackKnowledge = [
     {
+      terms: ['아르떼뮤지엄', '아르떼 뮤지엄', 'arte museum', '영도 미디어아트'],
+      answer: '아르떼뮤지엄 부산은 영도구 해양로247번길 29에 있는 몰입형 미디어아트 전시 공간입니다. 빛·소리·향으로 자연과 부산의 풍경을 경험하며, report의 [4] 카드에서 상세 소개와 공식 홈페이지를 확인할 수 있습니다.',
+      source: ['report.html', 'report']
+    },
+    {
+      terms: ['뮤지엄 원', '뮤지엄원', 'museum1', 'museum 1', '센텀 미디어아트'],
+      answer: '뮤지엄 원은 해운대구 센텀서로 20에 있는 미디어 전문 현대미술관입니다. LED로 둘러싸인 공간의 영상과 설치 작품을 감상할 수 있으며, report의 [3] 카드에서 상세 소개와 공식 홈페이지를 확인할 수 있습니다.',
+      source: ['report.html', 'report']
+    },
+    {
+      terms: ['허심청', '동래온천', '온천욕', '온천', '찜질'],
+      answer: '허심청은 동래구 온천장로107번길 32에 있는 도시형 온천 시설입니다. 다양한 온천탕과 찜질·휴식 공간을 이용할 수 있습니다. report의 [5] 카드에서 상세 내용을 볼 수 있으며 이용 시간·요금은 공식 홈페이지를 확인해 주세요.',
+      source: ['report.html', 'report']
+    },
+    {
+      terms: ['공공데이터', 'api', '데이터 연결', '실시간', '자동 갱신', '업데이트', 'led'],
+      answer: 'Report는 한국관광공사_국문 관광정보 서비스_GW와 한국관광공사_웰니스관광정보 API를 사용합니다. 부산 6곳의 주소·상세 소개와 팝업의 제공 사진을 갱신하며 카드의 녹색 픽셀 이미지는 고정합니다. 초록 LED는 두 API 정상 응답, 노랑은 확인 중·부분 연결, 빨강은 응답 확인 불가를 뜻합니다. 응답은 최대 30분 캐시하므로 실시간 운영·예약 가능 여부를 보증하지 않습니다. 인증키는 서버에서만 사용합니다.',
+      source: ['report.html#resource-api-title', 'API 연결 상태와 출처']
+    },
+    {
+      terms: ['구현 예정', '추가 예정', '예정 목록', 'next destinations', 'f1963', '고은사진미술관', '도모헌', '깡깡이'],
+      answer: 'Report에는 F1963, 고은사진미술관, 부산근현대역사관, 영화의전당, 부산영화체험박물관, 부산문화회관, 깡깡이예술마을, 흰여울문화마을, 부산박물관, 복천박물관, 도모헌, 을숙도생태공원 등 부산 12곳을 추가 구현 예정으로 소개합니다. 아직 상세 카드와 API 연동이 완료된 목록은 아닙니다.',
+      source: ['report.html#resource-planned-title', '추가 구현 예정 공간']
+    },
+    {
+      terms: ['픽셀', '픽셀 이미지', '8비트', '8bit', '카드 이미지', '녹색 이미지'],
+      answer: 'Report의 관광지 6곳은 녹색 계열의 1:1 픽셀 아트 카드로 통일했습니다. 이미지에 마우스를 올리면 밝아지고, 클릭하면 Windows 95 탐색기 스타일의 상세 팝업이 열립니다. API가 갱신되어도 카드의 픽셀 이미지는 유지됩니다.',
+      source: ['report.html', 'report']
+    },
+    {
       terms: ['김준철', '누구', '소개', '전공', 'root'],
       answer: '김준철은 대학에서 신학을, 대학원에서 종교철학을 공부했습니다. 대한성공회 부산교구 성직청원자이며 AI를 활용한 로컬 관광 콘텐츠·서비스 제작 역량을 기르고 있습니다.',
       source: ['index.html', 'home']
     },
     {
-      terms: ['관광', '자원', '추천', '미술관', '치유'],
-      answer: '이 사이트가 선정한 관광 자원은 부산현대미술관, 부산시립미술관, 부산어린이대공원 치유의 숲 세 곳입니다. 문화·예술과 자연·웰니스 경험을 중심으로 소개합니다.',
+      terms: ['관광', '자원', '추천', '미술관', 'report', '몇 곳', '여섯 곳', '6곳'],
+      answer: 'Report의 부산 관광 자원은 총 여섯 곳입니다. [1] 부산현대미술관, [2] 부산시립미술관, [3] 뮤지엄 원, [4] 아르떼뮤지엄 부산, [5] 허심청, [6] 부산어린이대공원 치유의 숲 순서로, 예술 감상에서 온천·자연 속 휴식으로 이어지도록 배치했습니다.',
       source: ['report.html', 'report']
     },
     {
@@ -21,7 +51,7 @@
     },
     {
       terms: ['시립미술관', '이우환'],
-      answer: '부산시립미술관은 부산 미술의 흐름과 국내외 현대미술을 연결하는 공립미술관입니다. 기획·소장품 전시와 이우환공간, 미술 교육 프로그램을 소개하고 있습니다.',
+      answer: '부산시립미술관은 부산 미술과 국내외 현대미술을 연결하는 공립미술관입니다. 공식 홈페이지의 2026년 10월 29일 확인 기준으로 본관과 이우환공간은 정상 운영 중입니다. 방문 전 최신 전시·운영 안내를 공식 홈페이지에서 확인해 주세요.',
       source: ['report.html', 'report']
     },
     {
@@ -81,8 +111,18 @@
     },
     {
       terms: ['아르투어부산', '아르투어 부산', 'sns', '인스타그램', '유튜브', '네이버 블로그', '페이스북', 'facebook', '트위터', '5채널'],
-      answer: '아르투어부산은 부산의 풍경과 일상을 예술의 시선으로 소개하는 로컬 아트 여행 채널입니다. Instagram, YouTube, Naver Blog, X, Facebook 다섯 채널에서 카드뉴스, 짧은 영상과 장소 기록을 이어갑니다. SNS 페이지에서 각 채널로 이동할 수 있습니다.',
+      answer: '아르투어부산은 부산의 풍경과 일상을 예술의 시선으로 소개하는 로컬 아트 여행 채널입니다. 사이트에는 X → YouTube → Instagram → Facebook → 네이버 블로그 순서로 다섯 채널을 안내합니다. 카드뉴스·숏폼·장소 기록을 다루며 SNS 페이지와 공통 푸터에서 각 채널로 이동할 수 있습니다.',
       source: ['sns.html', 'sns']
+    },
+    {
+      terms: ['슬로웨이브', 'slowwave', '웰니스 축제', '축제 여행'],
+      answer: '슬로웨이브 부산은 한국관광공사 웰니스관광정보와 부산축제정보 공공데이터 API로 부산의 쉼과 축제를 연결하는 여행 추천 웹서비스입니다. Contents의 [5] 프로젝트에 있는 웹사이트 보기 링크로 이용할 수 있습니다. Report의 관광지 API 연동과는 별도의 서비스입니다.',
+      source: ['contents.html#slowwave-project', '슬로웨이브 부산']
+    },
+    {
+      terms: ['체험 프로그램', '프로그램', '체험', '교육 프로그램'],
+      answer: 'Report 카드의 이미지를 눌러 탐색기를 연 다음 체험 프로그램 폴더를 선택하세요. 미술관은 전시·미디어아트 감상, 허심청은 온천욕·찜질·휴식, 어린이대공원 치유의 숲은 숲길·수원지 산책을 소개합니다. 일정과 예약·요금은 공식 홈페이지에서 확인해야 합니다.',
+      source: ['report.html', 'report']
     }
   ];
 
@@ -202,7 +242,9 @@
     return item;
   };
 
-  const suggestionsList = ['김준철은 어떤 사람인가요?', '선정 관광 자원 알려줘', '딸깍상사는 뭐예요?'];
+  const suggestionsList = pageName === 'report.html'
+    ? ['선정 관광 자원 여섯 곳 알려줘', '아르떼뮤지엄은 어떤 곳인가요?', '어떤 API를 사용하나요?']
+    : ['김준철은 어떤 사람인가요?', '선정 관광 자원 알려줘', '딸깍상사는 뭐예요?'];
   suggestionsList.forEach((question) => {
     const button = document.createElement('button');
     button.type = 'button';
@@ -215,9 +257,13 @@
   });
 
   const localAnswer = (question) => {
-    const normalized = question.toLowerCase().replace(/\s+/g, ' ');
+    const normalizeTerm = value => value.toLowerCase().replace(/[^0-9a-z가-힣]/g, '');
+    const normalized = normalizeTerm(question);
     const ranked = fallbackKnowledge
-      .map((entry) => ({ entry, score: entry.terms.reduce((score, term) => score + (normalized.includes(term.toLowerCase()) ? 1 : 0), 0) }))
+      .map((entry) => {
+        const matched = entry.terms.map(normalizeTerm).filter(term => term && normalized.includes(term));
+        return { entry, score: Math.max(0, ...matched.map(term => term.length ** 2)) + Math.min(matched.length, 5) / 100 };
+      })
       .sort((a, b) => b.score - a.score);
     if (!ranked[0]?.score) {
       return { answer: '현재 사이트에서 확인할 수 없는 내용입니다. 김준철 소개, 선정 관광 자원, 딸깍상사에 관해 질문해 주세요.', sources: [] };

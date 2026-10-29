@@ -34,6 +34,21 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\register-keys.ps1
 - 축제 월 검색은 원문의 `N월`만 사용. 월 범위의 중간 달·숫자 날짜·현재 진행 여부는 추정하지 않음.
 - 실제 API 실패 시 오류 표시, 예시로 조용히 대체하지 않음. 성공 결과는 서버 메모리에 30분 캐싱.
 
+## 포트폴리오 report 연동
+
+`GET /api/report-resources`는 포트폴리오의 부산 관광지 6곳만 제공하는 공개 읽기 API입니다. 기존 앱의 `/api/explore` 동작은 유지합니다.
+
+- [한국관광공사_국문 관광정보 서비스_GW](https://www.data.go.kr/data/15101578/openapi.do): `KorService2/searchKeyword2`, `detailCommon2`. 부산현대미술관, 부산시립미술관, 뮤지엄 원, 아르떼뮤지엄 부산, 부산 어린이대공원.
+- [한국관광공사_웰니스관광정보](https://www.data.go.kr/data/15144030/openapi.do): `WellnessTursmService/detailCommon`. 허심청.
+- 현재 국문 API는 `lDongRegnCd=26`으로 검색하고, 응답에서도 부산 주소와 지역 코드를 다시 확인합니다. 구형 `areaCode=6`만 사용하면 신분류로 전환된 자료가 빠질 수 있습니다.
+- 서버의 기존 `TOUR_API_KEY`를 공유합니다. 국문 서비스만 다른 키를 써야 할 때만 서버 환경변수 `KTO_KOR_API_KEY`를 지정합니다. 해당 서비스 활용 승인이 필요합니다.
+- 성공 응답은 최대 30분, 부분 응답·오류는 최대 5분 서버 메모리에 캐시합니다. 화면의 확인 시각은 해당 API 조회 시각이며, 다시 확인 버튼도 서버 캐시를 존중합니다.
+- 주소·팝업의 상세 소개와 원본 사진을 갱신합니다. 카드의 픽셀 아트는 여섯 곳 모두 고정하며 API가 원본 사진으로 덮어쓰지 않습니다. 대표 유형·체험·추천 시기는 편집 정보입니다. 치유의 숲에는 상위 어린이대공원 정보를 연결하고 그 범위를 화면에 명시합니다.
+- API에 대표 사진이 없는 아르떼뮤지엄 부산은 공식 부산 페이지의 사진을 사용합니다. 공공누리 제3유형 사진은 파일을 변형하지 않고 원본 비율을 유지하며 출처를 표시합니다.
+- 응답에 인증키나 인증 URL을 넣지 않습니다. `.env`는 Git 및 Vercel 업로드에서 제외하며, 배포 키는 Vercel 환경변수로만 등록합니다. 요청자의 URL·키·조회 ID는 받지 않습니다.
+
+정적 페이지는 `https://busan-slowwave.vercel.app/api/report-resources`로 요청하므로 `file://`로 열어도 인터넷 연결 시 작동합니다. CORS는 포트폴리오 GitHub Pages, 기존 Vercel 도메인, 로컬 미리보기와 파일 출처만 허용합니다.
+
 ## API 구현 근거
 
 첨부 웰니스 v4.1 매뉴얼: `WellnessTursmService/areaBasedList`, `lDongRegnCd=26`, `langDivCd=KOR`, `MobileOS=ETC`, `MobileApp=BusanSlowwave`, `_type=json`. `contentId`, `baseAddr`, `mapX`, `mapY`, `wellnessThemaCd` 필드를 사용합니다. 부산축제는 `FestivalService/getFestivalKr`, `ServiceKey`, `resultType=json`과 `UC_SEQ`, `GUGUN_NM`, `LAT`, `LNG`, `USAGE_DAY_WEEK_AND_TIME` 등을 사용합니다. 두 서비스의 성공코드 및 응답 구조 차이를 처리하고 페이지별 조회합니다.

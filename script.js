@@ -119,6 +119,7 @@ const tourPopup = document.querySelector('#tour-popup');
 
 if (tourPopup) {
   const tourData = {
+    ...window.REPORT_TOURS,
     moca: {
       name: '부산현대미술관',
       type: '문화·예술',
@@ -131,8 +132,8 @@ if (tourPopup) {
         ['assets/home/moca-poster-02.jpg', '부산현대미술관 코뿔소와 유니콘 전시 포스터', 'crop-left']
       ],
       programs: [
-        { name: '함께 미술관', audience: '어린이·가족', description: '진행자와 함께 전시를 대화식으로 감상하며 작품에 관한 질문과 생각을 나누는 전시 설명 프로그램입니다.', detail: '전시 연계 · 사전 예약' },
-        { name: '부산모카 꼼지락 〈움직여 볼까?〉', audience: '6–7세 어린이 단체', description: '작품을 감상한 뒤 보이지 않는 움직임을 상상하고 몸으로 표현하며 감각과 창의성을 확장하는 체험입니다.', detail: '전시실·창작실 · 무료' }
+        { name: '동시대 미술 전시 감상', audience: '관람객', description: '전시실에서 뉴미디어를 포함한 다양한 매체의 동시대 미술을 감상합니다.', detail: '관람 제안 · 전시별 일정은 공식 홈페이지 확인' },
+        { name: '어린이예술도서관', audience: '어린이·가족', description: '책과 예술이 만나는 공간을 이용하며 전시 감상과 다른 방식으로 예술을 접합니다.', detail: '이용·예약 조건은 공식 안내 확인' }
       ],
       reviews: [
         { title: '부산현대미술관에서 만난 세 전시 관람 후기', author: '부산광역시', url: 'https://blog.naver.com/cooolbusan/224328255685' },
@@ -159,8 +160,8 @@ if (tourPopup) {
         ['assets/home/bma-poster-02.png', '부산시립미술관 무빙 온 아시아 전시 포스터']
       ],
       programs: [
-        { name: '내일의 미술관: 상상이 만드는 공간', audience: '초등학생', description: '어린이의 상상력을 바탕으로 미래의 미술관과 새로운 예술 공간을 탐색하는 창의 교육 프로그램입니다.', detail: '2026. 5. 1.–6. 1. · 사전 접수' },
-        { name: '점과 시간 사이의 무한한 층위', audience: '시민 관람객', description: '작가들의 작품을 통해 점과 시간, 기억이 겹쳐지는 방식을 살펴보는 전시 연계 예술 프로그램입니다.', detail: '2026. 3. 14.–4. 27. · 도모헌 연계' }
+        { name: '본관 전시 감상', audience: '관람객', description: '리노베이션을 마치고 다시 문을 연 본관에서 전시를 감상합니다. 전시 구성과 도슨트 운영은 공식 안내를 확인해 주세요.', detail: '본관 정상 운영 · 공식 홈페이지 2026.10.29 확인' },
+        { name: '이우환공간 감상', audience: '관람객', description: '이우환공간에서 작품과 공간의 관계를 천천히 살펴봅니다.', detail: '별관 정상 운영 · 운영·입장 조건은 공식 안내 확인' }
       ],
       reviews: [
         { title: '리노베이션 중 별관 이우환공간 관람 후기', author: '혜천', url: 'https://blog.naver.com/hyechon49/224324132060' },
@@ -201,15 +202,32 @@ if (tourPopup) {
   const closeButton = tourPopup.querySelector('.win95-close');
   const titlebar = tourPopup.querySelector('.win95-titlebar');
   let activeTour = tourData.moca;
+  const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  window.addEventListener('report:resource', ({ detail }) => {
+    const tour = tourData[detail.key];
+    if (!tour) return;
+    if (detail.description) tour.description = detail.description.split(/(?<=[.!?])\s+/u).slice(0, 2).join(' ');
+    tour.apiUpdatedAt = detail.modifiedAt;
+    tour.apiSource = detail.source === 'wellness' ? '한국관광공사_웰니스관광정보' : '한국관광공사_국문 관광정보 서비스_GW';
+    tour.apiSourceUrl = detail.source === 'wellness' ? 'https://www.data.go.kr/data/15144030/openapi.do' : 'https://www.data.go.kr/data/15101578/openapi.do';
+    if (detail.image) {
+      const license = { Type1: '공공누리 제1유형', Type3: '공공누리 제3유형' }[detail.copyright] || '이용 조건은 API 원문 확인';
+      const photo = [detail.image, `${tour.name} · 한국관광공사 제공 · ${license}`];
+      if (window.REPORT_TOURS?.[detail.key]) tour.images = [photo];
+      else tour.images[0] = photo;
+    }
+    if (tourPopup.open && activeTour === tour && popupStatus.textContent === '홈') renderHome();
+  });
 
   const renderHome = () => {
-    const gallery = activeTour.images.map(([src, alt, imageClass = '']) => `<img class="${imageClass}" src="${src}" alt="${alt}" loading="lazy">`).join('');
+    const gallery = activeTour.images.map(([src, alt, imageClass = '']) => `<img class="${escapeHTML(imageClass)}" src="${escapeHTML(src)}" alt="${escapeHTML(alt)}" loading="lazy">`).join('');
+    const source = activeTour.apiSource ? `<p class="win95-data-source">출처: <a href="${activeTour.apiSourceUrl}" target="_blank" rel="noopener noreferrer">${escapeHTML(activeTour.apiSource)}</a> · 자료 수정일 ${escapeHTML(activeTour.apiUpdatedAt?.slice(0,8))}${activeTour === tourData.forest ? ' · 공원 전체 정보이며 치유의 숲 세부 운영은 공식 안내 확인' : ''}</p>` : '<p class="win95-data-source">공식 홈페이지 기준 편집 · 확인일 2026.10.29</p>';
     popupContent.innerHTML = `
-      <h2>${activeTour.name}</h2>
-      <p class="win95-intro">${activeTour.description}</p>
+      <h2>${escapeHTML(activeTour.name)}</h2>
+      <p class="win95-intro">${escapeHTML(activeTour.description)}</p>
       <div class="win95-type-row"><span class="win95-tag-icon" aria-hidden="true"></span><strong class="win95-type-label">${activeTour.type}</strong></div>
-      <div class="win95-meta"><span>${activeTour.tags.join(' ')}</span><span>조사일: 2026-08-27</span></div>
-      <div class="win95-gallery">${gallery}</div>`;
+      <div class="win95-meta"><span>${activeTour.tags.join(' ')}</span><span>편집 기준: 2026.10.29</span></div>
+      <div class="win95-gallery${activeTour.images.length === 1 ? ' win95-gallery--single' : ''}">${gallery}</div>${source}`;
   };
 
   const renderPrograms = () => {
@@ -226,6 +244,10 @@ if (tourPopup) {
   };
 
   const renderReviews = () => {
+    if (!activeTour.reviews.length) {
+      popupContent.innerHTML = `<h2>${activeTour.name} — 방문자 후기</h2><p>방문자 후기는 준비 중입니다. 원문을 확인한 후 추가하겠습니다.</p>`;
+      return;
+    }
     const reviews = activeTour.reviews.map((review, index) => `
       <a class="win95-review-card" href="${review.url}" target="_blank" rel="noopener noreferrer">
         <span class="win95-review-icon" aria-hidden="true"></span>
@@ -234,7 +256,7 @@ if (tourPopup) {
       </a>`).join('');
     popupContent.innerHTML = `
       <h2>${activeTour.name} — 방문자 후기</h2>
-      <div class="win95-meta"><span>검색일: 2026-08-27</span></div>
+      <div class="win95-meta"><span>이전 수집 후기 · 방문 당시의 정보이며 현재 운영과 다를 수 있습니다.</span></div>
       <div class="win95-review-list">${reviews}</div>`;
   };
 

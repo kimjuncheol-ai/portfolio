@@ -1,6 +1,7 @@
 import 'jsr:@supabase/functions-js/edge-runtime.d.ts'
 import { createClient } from 'npm:@supabase/supabase-js@2'
 import { corsHeaders, json } from '../_shared/cors.ts'
+import { lexicalScore } from '../_shared/faq-score.ts'
 
 type Match = { page_path: string; source_url: string; page_title: string; content: string; similarity: number }
 type Faq = { question: string; answer: string; keywords?: string[]; source_paths: string[]; similarity?: number }
@@ -10,12 +11,6 @@ const supabaseUrl = Deno.env.get('SUPABASE_URL')
 const siteUrl = (Deno.env.get('SITE_URL') || '').replace(/\/$/, '')
 const sourceFromPath = (path: string) => ({ url: `${siteUrl}/${path}`, title: path.replace('.html', '') || 'home' })
 const normalize = (value: string) => value.toLowerCase().replace(/[^0-9a-z가-힣]+/g, ' ').trim()
-
-const lexicalScore = (question: string, faq: Faq) => {
-  const target = normalize(question)
-  const terms = [faq.question, ...(faq.keywords || [])].flatMap((value) => normalize(value).split(' ')).filter((term) => term.length >= 2)
-  return new Set(terms.filter((term) => target.includes(term))).size
-}
 
 const makeExtractiveAnswer = (question: string, matches: Match[]) => {
   const terms = normalize(question).split(' ').filter((term) => term.length >= 2)

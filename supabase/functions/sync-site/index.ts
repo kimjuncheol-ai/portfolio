@@ -7,15 +7,6 @@ const supabaseUrl = Deno.env.get('SUPABASE_URL')
 const siteUrl = (Deno.env.get('SITE_URL') || '').replace(/\/$/, '')
 const approvedPages = ['index.html', 'about.html', 'report.html', 'contents.html', 'sns.html', 'final.html']
 
-const jwtRole = (token: string) => {
-  try {
-    const payload = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')
-    return JSON.parse(atob(payload)).role as string | undefined
-  } catch {
-    return undefined
-  }
-}
-
 const decodeHtml = (value: string) => value
   .replace(/&nbsp;/gi, ' ')
   .replace(/&amp;/gi, '&')
@@ -69,7 +60,7 @@ Deno.serve(async (request) => {
     const token = request.headers.get('Authorization')?.replace(/^Bearer\s+/i, '')
     if (!token) return json({ error: 'Authentication required.' }, 401)
     const supabase = createClient(supabaseUrl, serviceKey, { auth: { persistSession: false } })
-    if (token !== serviceKey && jwtRole(token) !== 'service_role') {
+    if (token !== serviceKey) {
       const { data: userData, error: userError } = await supabase.auth.getUser(token)
       if (userError || !userData.user) return json({ error: 'Invalid session.' }, 401)
       const { data: admin } = await supabase.from('site_admins').select('user_id').eq('user_id', userData.user.id).maybeSingle()

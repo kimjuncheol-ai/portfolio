@@ -840,7 +840,7 @@ a:focus-visible {
 @media (min-width: 1101px) {
   .resource-card dl {
     display: grid;
-    grid-template-rows: 3rem 7.4rem 3rem 6.4rem 3rem;
+    grid-template-rows: auto;
   }
 
   .resource-card dl > div {
@@ -878,6 +878,48 @@ a:focus-visible {
   line-height: 1.65;
   word-break: keep-all;
 }
+
+.resource-card { display: grid; grid-template-rows: auto auto 1fr auto; }
+.resource-card__source { display: flex; flex-direction: column; gap: .25rem; padding: .7rem .65rem; border-top: 1px dashed #167522; color: #9fbea3; font-size: .68rem; line-height: 1.6; overflow-wrap: anywhere; }
+.resource-card__source a { color: #a6f5af; text-decoration: none; }
+.resource-card__source a:hover { text-decoration: underline; }
+@supports (grid-template-rows: subgrid) {
+  @media (min-width: 701px) {
+    .resource-card { grid-row: span 8; grid-template-rows: subgrid; row-gap: 0; }
+    .resource-card dl { display: contents; }
+    .resource-card dl > div { margin-inline: .65rem; }
+  }
+}
+.resource-api, .resource-planned { margin-top: clamp(2rem, 4vw, 3.5rem); color: #d7ffdc; }
+.resource-api { border: 1px solid #167522; padding: clamp(1rem, 2vw, 1.5rem); }
+.resource-api h2, .resource-planned h2 { margin: 0; color: var(--green); font-size: 1rem; font-weight: 400; }
+.resource-api__headline { display: flex; align-items: baseline; gap: .75rem; margin-top: 1rem; }
+.resource-api__headline p { margin: 0; line-height: 1.8; }
+.api-led { --led: #e9bd58; flex: 0 0 auto; display: inline-block; width: .55rem; height: .55rem; border-radius: 50%; background: var(--led); box-shadow: 0 0 .6rem var(--led); animation: api-pulse 2s ease-in-out infinite; }
+[data-state="live"] > .api-led, [data-state="live"] > .resource-api__headline .api-led { --led: #00ff20; }
+[data-state="offline"] > .api-led, [data-state="offline"] > .resource-api__headline .api-led { --led: #ff7770; animation: none; }
+.resource-api__sources { display: flex; flex-wrap: wrap; gap: .7rem 1.5rem; margin-top: 1rem; }
+.resource-api__sources a { display: inline-flex; align-items: center; gap: .55rem; color: #b5ffbf; text-underline-offset: .2em; line-height: 1.7; }
+.resource-api__sources .api-led { width: .4rem; height: .4rem; }
+.resource-api__scope { color: #a2bea6; max-width: 100ch; line-height: 1.8; font-size: .75rem; margin: 1rem 0 0; }
+.resource-api__meta { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .8rem; margin-top: 1.25rem; color: #a2bea6; font-size: .75rem; }
+.resource-api button { border: 1px solid #167522; padding: .5rem .75rem; background: transparent; color: var(--green); font: inherit; }
+.resource-api button:hover, .resource-api button:focus-visible { border-color: var(--green); outline: 1px solid var(--green); outline-offset: 2px; }
+.resource-api button:disabled { opacity: .5; }
+.resource-planned__heading { display: flex; align-items: baseline; flex-wrap: wrap; justify-content: space-between; gap: .6rem; }
+.resource-planned__heading > span { font-size: .75rem; color: #a2bea6; }
+.resource-planned > p { margin: 1rem 0; color: #a2bea6; line-height: 1.8; }
+.resource-planned ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 1.5rem; list-style: none; counter-reset: destination; padding: 0; margin: 0; }
+.resource-planned li { position: relative; padding: 1rem 0 1rem 2.3rem; border-top: 1px dashed #167522; display: flex; flex-direction: column; gap: .3rem; line-height: 1.65; min-width: 0; }
+.resource-planned li::before { counter-increment: destination; content: counter(destination, decimal-leading-zero); position: absolute; left: 0; color: #65ff78; }
+.resource-planned li strong { color: #d7ffdc; font-weight: 400; }
+.resource-planned li span, .resource-planned li small { color: #a2bea6; font-size: .72rem; }
+.win95-gallery.win95-gallery--single { grid-template-columns: 1fr; }
+.win95-gallery.win95-gallery--single img { width: 100%; max-height: 23rem; height: auto; aspect-ratio: auto; object-fit: contain; }
+.win95-data-source { font-size: .8em; line-height: 1.7; }
+@keyframes api-pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; box-shadow: 0 0 .15rem var(--led); } }
+@media (max-width: 1100px) { .resource-planned ol { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px) { .resource-planned ol { grid-template-columns: 1fr; } .resource-api__sources { flex-direction: column; } }
 
 .map-link {
   color: inherit;
