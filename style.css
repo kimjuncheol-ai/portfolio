@@ -257,7 +257,7 @@ a:focus-visible {
 .archive-section .practice-card > footer { font-size: .75rem; }
 .practice-card > footer a { flex-shrink: 0; text-decoration: none; color: var(--green); padding-block: .2rem; }
 .story-film-grid, .action-film-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 2rem); padding-top: 1.5rem; align-items: start; }
-.story-film-grid { grid-template-columns: minmax(0, 3.15fr) minmax(0, 1fr); }
+.story-film-grid { grid-template-columns: minmax(0, 3.15fr) repeat(2, minmax(0, 1fr)); }
 .action-reference-heading { margin-block: 2rem 1rem; }
 .action-reference-heading h3 { margin: 0 0 .6rem; font-size: 1.05rem; font-weight: 400; color: #e5ffe8; }
 .action-reference-heading p { color: #a7dfad; font-size: .85rem; line-height: 1.8; }
@@ -284,6 +284,9 @@ a:focus-visible {
   .ppoo-gallery__sheet { grid-column: 1 / -1; }
   .reference-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .reference-gallery > :last-child { grid-column: 1 / -1; }
+  .story-film-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .story-film-grid > :first-child { grid-column: 1 / -1; }
+  .story-film-grid > .practice-card:last-child { grid-column: auto; }
 }
 @media (max-width: 700px) {
   .archive-index { gap: .25rem; font-size: .75rem; }
@@ -548,15 +551,59 @@ a:focus-visible {
   filter: brightness(1.22) contrast(1.06);
 }
 
-.channel-feature__copy {
+.channel-feature > .channel-feature__copy {
   grid-column: 2;
   display: grid;
   gap: 0.75rem;
+  font-size: inherit;
 }
+
+.channel-feature__copy p { grid-column: auto; max-width: 46rem; }
 
 .channel-feature__copy > div { display: flex; flex-wrap: wrap; gap: 0.45rem 1rem; color: #62a56a; font-size: 0.66rem; }
 .channel-feature__copy h3 { margin: 0; color: #e4ffe7; font-size: clamp(0.9rem, 1.4vw, 1.15rem); font-weight: 400; }
 .channel-feature__copy p { margin: 0; color: #8dcb94; line-height: 1.65; word-break: keep-all; }
+
+/* Release log and card news series reuse the console borders and archive figures. */
+.channel-log { margin-top: clamp(0.75rem, 1.5vw, 1.3rem); border: 1px solid #167522; background: #030503; }
+.channel-log > header { display: flex; justify-content: space-between; gap: 1rem; padding: 0.5rem 0.65rem; border-bottom: 1px dashed #167522; color: #62a56a; font-size: 0.66rem; }
+.channel-log h3 { margin: 0; color: #9eeaa7; font-size: inherit; font-weight: 400; }
+.channel-log ol { margin: 0; padding: 0.35rem 0; list-style: none; }
+.channel-log li { display: grid; grid-template-columns: 6.5rem 3.5rem minmax(0, 1fr); gap: 0.25rem 1rem; align-items: baseline; padding: 0.45rem 0.65rem; line-height: 1.6; }
+.channel-log time { color: #62a56a; }
+.channel-log li > span { color: #72bf7a; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.66rem; }
+.channel-log a { color: #d5f2d9; overflow-wrap: anywhere; word-break: keep-all; }
+.channel-log a:hover, .channel-log a:focus-visible { color: #fff; }
+
+.cardnews-series { padding-block: 1.5rem 2rem; border-bottom: 1px dashed #167522; scroll-margin-top: 8rem; }
+.cardnews-series__head { display: grid; grid-template-columns: minmax(10rem, .65fr) minmax(0, 1fr); gap: .75rem 3rem; align-items: start; margin-bottom: 1.4rem; }
+.cardnews-series__head .project-entry__kind { margin-bottom: .6rem; }
+.cardnews-series h3 { margin: 0; color: #e5ffe8; font-size: clamp(1.1rem, 1.8vw, 1.5rem); font-weight: 400; line-height: 1.45; text-wrap: balance; word-break: keep-all; }
+.cardnews-series__head > div:last-child > p { margin: 0 0 1rem; color: #a7dfad; font-size: .9rem; line-height: 1.85; word-break: keep-all; }
+.cardnews-series__head .project-actions { font-size: .82rem; }
+.cardnews-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(.75rem, 1.5vw, 1.25rem); margin: 0; padding: 0; list-style: none; }
+.cardnews-strip img { aspect-ratio: 4 / 5; }
+.cardnews-strip .archive-figure figcaption { padding-block: .5rem 0; font-size: .72rem; }
+@media (min-width: 1700px) {
+  .cardnews-strip { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .channel-log li { grid-template-columns: auto minmax(0, 1fr); }
+  .channel-log li > a { grid-column: 1 / -1; }
+  .cardnews-series__head { grid-template-columns: minmax(0, 1fr); gap: .5rem; }
+  .cardnews-strip {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: min(68%, 15rem);
+    contain: inline-size;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    padding: .25rem .25rem .75rem;
+    scrollbar-color: #167522 transparent;
+  }
+  .cardnews-strip > li { scroll-snap-align: start; }
+}
 
 @media (min-width: 701px) and (max-width: 1050px) {
   .practice-grid,
