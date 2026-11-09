@@ -3,6 +3,7 @@ const fs=require('node:fs');
 const vm=require('node:vm');
 const assert=require('node:assert/strict');
 const filename='chatbot.js';
+const navigationOnly=process.argv.includes('--navigation-only');
 let js=fs.readFileSync(filename,'utf8');
 const pattern=/const fallbackKnowledge = (\[[\s\S]*?\n  \]);/;
 const matched=js.match(pattern);assert(matched,'Offline knowledge not found');
@@ -22,6 +23,8 @@ const replace=(slug,fields)=>{
  if(index<0)catalog.push({slug,...fields});else Object.assign(catalog[index],fields);
 };
 replace('contents',{answer:'Contents에는 프로젝트 5개와 로컬 제작 영상 16편이 있습니다. AI 영상 제작 연습 8편, AI 아이돌 3편, 엘라·부산 퍼포먼스·씨걸이 야외 스케치 3편, 액션 프리비즈 2편을 모았습니다. 뿌 초기 디자인과 부산 홍보 포스터도 볼 수 있습니다. 아르투어부산 프로젝트의 숏폼 19편 링크는 SNS의 전체 영상 모음으로 연결됩니다.'});
+replace('contents',{answer:catalog.find(e=>e.slug==='contents').answer+' 상단의 프로젝트 5개는 좌우 화살표나 스와이프로 넘겨 보고 각 카드의 실행·방문 링크로 연결할 수 있습니다.'});
+replace('tour-resources',{answer:catalog.find(e=>e.slug==='tour-resources').answer.replace(/ 카드를 좌우로[\s\S]*$/,'')+' 카드를 좌우로 넘겨 여섯 곳을 살펴보고, 픽셀 이미지를 누르면 해당 관광지의 상세 탐색기 팝업이 열립니다.'});
 replace('ella',{terms:['엘라','브이로그','부산 배경 퍼포먼스','스토리 필름','야외 스케치'],answer:'Contents의 스토리 필름에는 약 56초의 엘라의 부산 당일치기, 부산 배경 퍼포먼스, 씨걸이의 야외 스케치가 있습니다. 원본 화면비로 보고 크게 보기 버튼으로 소리와 함께 감상할 수 있습니다. 씨걸이의 전체 숏폼 19편과 최신작 THE BERET는 SNS의 숏폼 모음에 있습니다.',source:['contents.html#story-films','스토리 필름']});
 replace('bma',{answer:'부산시립미술관은 부산 미술과 국내외 현대미술, 이우환의 작품 세계를 소개하는 공립미술관입니다. Report의 [2] 카드에서 소개와 주소, 상세 팝업을 볼 수 있습니다. 최신 전시·운영 일정은 연결된 공식 홈페이지에서 확인해 주세요.'});
 catalog.find(e=>e.slug==='contents').terms=[...new Set([...catalog.find(e=>e.slug==='contents').terms,'프로젝트','작업 모음','로컬 영상'])];
@@ -33,6 +36,7 @@ replace('artour-shorts',{question:'최신 씨걸이 숏폼과 전체 영상은 �
 replace('artour-domoheon',{question:'도모헌 카드뉴스는 어떤 내용인가요?',terms:['도모헌','도모헌 카드뉴스','카페 모모스','소소풍라운지','소소풍 정원'],answer:'도모헌 카드뉴스는 2026년 11월 3일 공개한 8장 시리즈입니다. 옛 부산시장 관사에서 시민 문화공간으로 바뀐 도모헌을 카페 모모스, 소소풍라운지, 소소풍 정원과 함께 소개합니다. 방문 안내와 저장·공유 카드까지 좌우로 넘겨 보고, 각 카드를 누르면 원본을 볼 수 있습니다.',source:['sns.html#cardnews-domoheon','도모헌 카드뉴스']});
 replace('artour-f1963',{question:'F1963 카드뉴스는 어떤 내용인가요?',terms:['f1963','f1963 카드뉴스','테라로사','대나무 소리길'],answer:'F1963 카드뉴스는 2026년 10월 22일 공개한 8장 시리즈입니다. 테라로사 수영점에서 시작해 옛 와이어 공장의 건축, 전시, 예술도서관, 대나무 소리길로 이어지는 산책을 소개합니다. SNS에서 좌우로 넘기거나 카드 원본과 연결된 게시물을 볼 수 있습니다.',source:['sns.html#cardnews-f1963','F1963 카드뉴스']});
 replace('media-navigation',{question:'영상과 카드뉴스는 어떻게 넘기고 크게 보나요?',terms:['슬라이드','좌우로','넘겨 보기','넘기는','스와이프','크게 보기','크게 보','영상 재생','영상 비율','영상 소리'],answer:'비슷한 영상·카드뉴스·이미지는 한 줄로 모았습니다. PC에서는 좌우 화살표나 가로 스크롤, 모바일에서는 스와이프로 넘길 수 있습니다. 목록에 키보드 초점을 둔 뒤 좌우 방향키도 사용할 수 있습니다. Contents의 영상은 원본 비율을 유지하고 크게 보기에서 소리를 켤 수 있으며, SNS 숏폼은 연결된 채널에서 전체 영상을 재생합니다.',source:['contents.html#ai-practice','영상 모음 사용 방법']});
+replace('media-navigation',{question:'프로젝트·관광지·채널·영상을 어떻게 넘기고 열어 보나요?',terms:['슬라이드','좌우로','넘겨 보기','넘기는','스와이프','크게 보기','크게 보','영상 재생','영상 비율','영상 소리','프로젝트 넘기','관광지 넘기','채널 넘기','카드 넘기'],answer:'Contents의 프로젝트 5개, Report의 관광지 6곳, SNS의 채널 5개와 비슷한 영상·카드뉴스·이미지는 한 줄로 모았습니다. PC에서는 좌우 화살표나 가로 스크롤, 모바일에서는 스와이프로 넘길 수 있습니다. 목록에 키보드 초점을 두면 좌우 방향키와 Home·End 키도 사용할 수 있고, 목록 위 숫자로 현재 보이는 항목을 확인할 수 있습니다. 관광지의 픽셀 이미지는 상세 팝업을 열고, 프로젝트와 SNS 채널은 방문 링크로 연결됩니다. Contents 영상은 원본 비율을 유지하며 크게 보기에서 소리를 켤 수 있습니다.',source:['contents.html#projects','가로 목록 사용 방법']});
 replace('final-project',{question:'final_project 페이지에는 어떤 내용이 있나요?',terms:['final','final_project','최종 프로젝트','완성 프로젝트'],answer:'현재 final_project 페이지에는 제목만 마련되어 있습니다. 공개된 프로젝트 5개와 영상 제작 작업은 Contents 페이지에서 볼 수 있습니다.',source:['final.html','final_project']});
 const sns=fs.readFileSync('sns.html','utf8');
 const graph=JSON.parse(sns.match(/<script id="page-structured-data" type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
@@ -59,12 +63,13 @@ js=js.replace('(현재 RAG 서버 연결이 원활하지 않아 사이트 기본
 fs.writeFileSync(filename,js);
 const quote=s=>"'"+s.replaceAll("'","''")+"'";
 const sqlArray=a=>'array['+a.map(quote).join(',')+']';
-const rows=catalog.map(e=>'('+[quote(e.slug),quote(e.question),quote(e.answer),sqlArray(e.terms),sqlArray([e.source[0]]),'null','true','now()'].join(',')+')');
+const migrationCatalog=navigationOnly?catalog.filter(e=>['contents','tour-resources','media-navigation'].includes(e.slug)):catalog;
+const rows=migrationCatalog.map(e=>'('+[quote(e.slug),quote(e.question),quote(e.answer),sqlArray(e.terms),sqlArray([e.source[0]]),'null','true','now()'].join(',')+')');
 const sql='-- Site-only knowledge, synchronized with chatbot.js. No credentials.\nbegin;\ninsert into public.site_faqs (slug,question,answer,keywords,source_paths,embedding,active,updated_at) values\n'+rows.join(',\n')+'\non conflict (slug) do update set question=excluded.question,answer=excluded.answer,keywords=excluded.keywords,source_paths=excluded.source_paths,embedding=null,updated_at=now();\ncommit;\n';
-fs.writeFileSync('supabase/migrations/202611090001_refresh_artour_chatbot.sql',sql);
+fs.writeFileSync('supabase/migrations/'+(navigationOnly?'202611090002_compact_navigation_chatbot.sql':'202611090001_refresh_artour_chatbot.sql'),sql);
 for(const page of ['index.html','about.html','report.html','contents.html','sns.html','final.html']){
  const original=fs.readFileSync(page,'utf8');
- const revised=original.replace(/src="chatbot\.js(?:\?[^"]*)?"/,'src="chatbot.js?v=20261109-knowledge"');
+ const revised=original.replace(/src="chatbot\.js(?:\?[^"]*)?"/,'src="chatbot.js?v='+(navigationOnly?'20261109-navigation':'20261109-knowledge')+'"');
  if(original!==revised)fs.writeFileSync(page,revised);
 }
 console.log(JSON.stringify({scenarios:catalog.length,films:films.length}));

@@ -1,0 +1,8 @@
+-- Site-only knowledge, synchronized with chatbot.js. No credentials.
+begin;
+insert into public.site_faqs (slug,question,answer,keywords,source_paths,embedding,active,updated_at) values
+('tour-resources','선정 관광 자원을 알려주세요.','Report의 부산 관광 자원은 총 여섯 곳입니다. [1] 부산현대미술관, [2] 부산시립미술관, [3] 뮤지엄 원, [4] 아르떼뮤지엄 부산, [5] 허심청, [6] 부산어린이대공원 치유의 숲 순서로, 예술 감상에서 온천·자연 속 휴식으로 이어지도록 배치했습니다. 카드를 좌우로 넘겨 여섯 곳을 살펴보고, 픽셀 이미지를 누르면 해당 관광지의 상세 탐색기 팝업이 열립니다.',array['관광','자원','추천','미술관','report','몇 곳','여섯 곳','6곳'],array['report.html'],null,true,now()),
+('contents','Contents에는 어떤 작업이 있나요?','Contents에는 프로젝트 5개와 로컬 제작 영상 16편이 있습니다. AI 영상 제작 연습 8편, AI 아이돌 3편, 엘라·부산 퍼포먼스·씨걸이 야외 스케치 3편, 액션 프리비즈 2편을 모았습니다. 뿌 초기 디자인과 부산 홍보 포스터도 볼 수 있습니다. 아르투어부산 프로젝트의 숏폼 19편 링크는 SNS의 전체 영상 모음으로 연결됩니다. 상단의 프로젝트 5개는 좌우 화살표나 스와이프로 넘겨 보고 각 카드의 실행·방문 링크로 연결할 수 있습니다.',array['콘텐츠','contents','ai 제작','제작 연습','영상 연습','모션 스터디','프로젝트','작업 모음','로컬 영상'],array['contents.html'],null,true,now()),
+('media-navigation','프로젝트·관광지·채널·영상을 어떻게 넘기고 열어 보나요?','Contents의 프로젝트 5개, Report의 관광지 6곳, SNS의 채널 5개와 비슷한 영상·카드뉴스·이미지는 한 줄로 모았습니다. PC에서는 좌우 화살표나 가로 스크롤, 모바일에서는 스와이프로 넘길 수 있습니다. 목록에 키보드 초점을 두면 좌우 방향키와 Home·End 키도 사용할 수 있고, 목록 위 숫자로 현재 보이는 항목을 확인할 수 있습니다. 관광지의 픽셀 이미지는 상세 팝업을 열고, 프로젝트와 SNS 채널은 방문 링크로 연결됩니다. Contents 영상은 원본 비율을 유지하며 크게 보기에서 소리를 켤 수 있습니다.',array['슬라이드','좌우로','넘겨 보기','넘기는','스와이프','크게 보기','크게 보','영상 재생','영상 비율','영상 소리','프로젝트 넘기','관광지 넘기','채널 넘기','카드 넘기'],array['contents.html#projects'],null,true,now())
+on conflict (slug) do update set question=excluded.question,answer=excluded.answer,keywords=excluded.keywords,source_paths=excluded.source_paths,embedding=null,updated_at=now();
+commit;

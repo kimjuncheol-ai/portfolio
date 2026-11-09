@@ -362,7 +362,7 @@ if (tourPopup) {
 // Group related works in a single row, with native touch/trackpad scrolling.
 (() => {
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  const selectors = '.video-gallery, .cardnews-strip, .shorts-gallery, .channel-grid, .reference-gallery, .ppoo-gallery, .poster-gallery, .character-variation-gallery';
+  const selectors = '.project-list, .resource-grid, .video-gallery, .cardnews-strip, .shorts-gallery, .channel-grid, .reference-gallery, .ppoo-gallery, .poster-gallery, .character-variation-gallery';
   document.querySelectorAll(selectors).forEach((rail, index) => {
     const cards = [...rail.children];
     if (cards.length < 2) return;
