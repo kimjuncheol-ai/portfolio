@@ -138,12 +138,32 @@ a:focus-visible {
   word-break: keep-all;
 }
 
-.practice-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(0.75rem, 1.5vw, 1.3rem);
+/* Video archive: justified rows keep every frame at its native ratio and every card in a row at the same height. */
+.video-gallery {
+  --row: clamp(9.5rem, 19.5vw, 21rem);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(0.75rem, 1.5vw, 1.25rem);
   padding-top: clamp(1rem, 2vw, 1.5rem);
 }
+.video-gallery > .practice-card {
+  flex: calc(var(--video-ratio, 16 / 9)) 1 calc(var(--row) * (var(--video-ratio, 16 / 9)));
+  max-width: calc(var(--row) * (var(--video-ratio, 16 / 9)) * 1.5);
+}
+.video-gallery > .practice-card { container-type: inline-size; }
+.video-gallery .practice-card > header strong { font-size: .85rem; }
+.video-gallery .practice-card > footer > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* Narrow portrait cards keep the title and the enlarge action readable. */
+@container (max-width: 15rem) {
+  .video-gallery .practice-card > header > span { display: none; }
+  .video-gallery .practice-card > header strong { font-size: .78rem; }
+  .video-gallery .practice-card > footer a { font-size: 0; }
+  .video-gallery .practice-card > footer a::after { content: "크게 ↗"; font-size: .72rem; }
+}
+.video-gallery video:not([data-playing]) { cursor: pointer; }
+@media (min-width: 1700px) { .video-gallery { --row: 22rem; } }
+@media (max-width: 700px) { .video-gallery { --row: 13.5rem; gap: .75rem; } }
 
 /* Selected projects share the terminal archive's spacing and colors. */
 .project-session { margin-top: clamp(2rem, 4vw, 3.5rem); }
@@ -247,17 +267,8 @@ a:focus-visible {
 .ppoo-gallery { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr)); gap: 1.25rem; align-items: center; }
 .visual-case > .project-actions { margin-top: 1rem; font-size: .82rem; }
 .poster-gallery { display: grid; grid-template-columns: minmax(0, .68fr) minmax(0, 1.45fr); gap: clamp(1rem, 2vw, 2rem); align-items: start; }
-.site-main--collection .archive-video-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.archive-video-grid { align-items: start; }
-.archive-video-grid.has-masonry { grid-auto-rows: 1px; row-gap: 12px; grid-auto-flow: row dense; }
-.archive-video-grid.has-masonry > .practice-card { grid-row-end: span var(--card-rows, 1); align-self: start; }
-.archive-video-grid .practice-card > header strong,
-.story-film-grid .practice-card > header strong,
-.action-film-grid .practice-card > header strong { font-size: .85rem; }
 .archive-section .practice-card > footer { font-size: .75rem; }
 .practice-card > footer a { flex-shrink: 0; text-decoration: none; color: var(--green); padding-block: .2rem; }
-.story-film-grid, .action-film-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 2rem); padding-top: 1.5rem; align-items: start; }
-.story-film-grid { grid-template-columns: minmax(0, 3.15fr) repeat(2, minmax(0, 1fr)); }
 .action-reference-heading { margin-block: 2rem 1rem; }
 .action-reference-heading h3 { margin: 0 0 .6rem; font-size: 1.05rem; font-weight: 400; color: #e5ffe8; }
 .action-reference-heading p { color: #a7dfad; font-size: .85rem; line-height: 1.8; }
@@ -275,25 +286,18 @@ a:focus-visible {
 .character-variation-gallery .archive-figure > a { padding: .75rem; }
 @media (min-width: 1700px) {
   .site-main--collection .project-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .site-main--collection .archive-video-grid:not(.archive-video-grid--idol) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 @media (min-width: 701px) and (max-width: 1050px) {
-  .site-main--collection .archive-video-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .site-main--collection .archive-video-grid .practice-card:last-child { grid-column: auto; }
   .ppoo-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ppoo-gallery__sheet { grid-column: 1 / -1; }
   .reference-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .reference-gallery > :last-child { grid-column: 1 / -1; }
-  .story-film-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .story-film-grid > :first-child { grid-column: 1 / -1; }
-  .story-film-grid > .practice-card:last-child { grid-column: auto; }
 }
 @media (max-width: 700px) {
   .archive-index { gap: .25rem; font-size: .75rem; }
   .archive-index a { min-height: 2.75rem; padding-inline: .6rem; }
-  .archive-case-heading, .ppoo-gallery, .poster-gallery, .story-film-grid, .action-film-grid,
-  .reference-gallery, .character-profile, .character-variation-gallery,
-  .site-main--collection .archive-video-grid { grid-template-columns: minmax(0, 1fr); }
+  .archive-case-heading, .ppoo-gallery, .poster-gallery,
+  .reference-gallery, .character-profile, .character-variation-gallery { grid-template-columns: minmax(0, 1fr); }
   .archive-case-heading { gap: .75rem; }
   .archive-case-heading > p:first-child { grid-row: auto; }
   .archive-case-heading > p:last-child { font-size: .88rem; }
@@ -378,27 +382,36 @@ a:focus-visible {
   max-height: 100%;
   object-fit: contain;
 }
-@media (min-width: 701px) {
-  .site-main--collection .archive-video-grid--idol {
-    max-width: 1080px;
-    margin-inline: auto;
-    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-    grid-template-areas: "real portrait" "stage portrait";
-    align-items: start;
-  }
-  .archive-video-grid--idol .practice-card:nth-child(1) { grid-area: real; }
-  .archive-video-grid--idol .practice-card:nth-child(2) { grid-area: stage; }
-  .archive-video-grid--idol .practice-card:nth-child(3) { grid-area: portrait; }
-}
-@media (max-width: 700px) {
-  .site-main--collection .archive-video-grid .practice-card__screen { height: auto; }
-  .site-main--collection .story-film-grid .practice-card:last-child { width: min(100%, 25rem); justify-self: center; }
-}
 
 .practice-card > footer {
   border-top: 1px solid #167522;
   color: #73c57d;
   font-size: 0.66rem;
+}
+
+/* Larger in-page player for the video archive. */
+.video-viewer {
+  --viewer-ratio: 16 / 9;
+  max-width: 96vw;
+  max-height: 96dvh;
+  padding: 0;
+  border: 1px solid var(--green);
+  background: #030503;
+  color: var(--green);
+  box-shadow: 0 0 0 2px #001803, 0 0 2.5rem rgba(0, 255, 32, 0.18);
+}
+.video-viewer::backdrop { background: rgba(0, 0, 0, 0.84); }
+.video-viewer > header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.5rem 0.65rem; background: var(--green); color: #001803; font-size: 0.85rem; }
+.video-viewer > header strong { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 400; }
+.video-viewer > header button { flex-shrink: 0; min-height: 2.25rem; padding: 0.2rem 0.65rem; border: 1px solid #001803; background: transparent; color: inherit; }
+.video-viewer > header button:hover,
+.video-viewer > header button:focus-visible { background: #001803; color: var(--green); outline: none; }
+.video-viewer video {
+  display: block;
+  width: min(92vw, calc((92dvh - 3.25rem) * (var(--viewer-ratio))));
+  height: auto;
+  aspect-ratio: var(--viewer-ratio);
+  background: #000;
 }
 
 /* SNS / Artour Busan channel console */
@@ -606,9 +619,7 @@ a:focus-visible {
 }
 
 @media (min-width: 701px) and (max-width: 1050px) {
-  .practice-grid,
   .channel-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .practice-card:last-child,
   .channel-card:last-child { grid-column: 1 / -1; }
 }
 
@@ -617,7 +628,6 @@ a:focus-visible {
   .channel-profile,
   .channel-feature { grid-template-columns: 1fr; }
   .collection-intro > p:first-child { grid-row: auto; }
-  .practice-grid,
   .channel-grid { grid-template-columns: 1fr; }
   .channel-profile__mark { min-height: 9rem; }
   .channel-feature p,

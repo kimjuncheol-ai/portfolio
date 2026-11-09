@@ -359,35 +359,81 @@ if (tourPopup) {
   });
 }
 
-// Fit native-ratio video cards into a compact grid without cropping their frames.
+// Video archive: muted previews play only while on screen, and each card can open a larger player with sound.
 (() => {
-  const grids = document.querySelectorAll('.archive-video-grid:not(.archive-video-grid--idol)');
-  grids.forEach((grid) => {
-    let queued = false;
-    const arrange = () => {
-      queued = false;
-      const cards = [...grid.children];
-      const singleColumn = window.matchMedia('(max-width: 700px)').matches;
-      grid.classList.toggle('has-masonry', !singleColumn);
-      if (singleColumn) return;
-      const styles = getComputedStyle(grid);
-      const row = parseFloat(styles.gridAutoRows);
-      const gap = parseFloat(styles.rowGap);
-      cards.forEach((card) => {
-        const rows = Math.ceil((card.getBoundingClientRect().height + gap) / (row + gap));
-        card.style.setProperty('--card-rows', rows);
+  const previews = [...document.querySelectorAll('.video-gallery video')];
+  if (!previews.length) return;
+
+  const autoPaused = new WeakSet();
+  const userPaused = new WeakSet();
+  const pauseQuietly = (video) => {
+    if (video.paused) return;
+    autoPaused.add(video);
+    video.pause();
+  };
+
+  previews.forEach((video) => {
+    video.addEventListener('play', () => {
+      userPaused.delete(video);
+      video.dataset.playing = '';
+    });
+    video.addEventListener('pause', () => {
+      delete video.dataset.playing;
+      if (autoPaused.has(video)) autoPaused.delete(video);
+      else userPaused.add(video);
+    });
+  });
+
+  const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.connection?.saveData;
+  if (!calm && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(({ target: video, isIntersecting }) => {
+        if (!isIntersecting) pauseQuietly(video);
+        else if (video.paused && !userPaused.has(video)) video.play().catch(() => {});
       });
-    };
-    const schedule = () => {
-      if (queued) return;
-      queued = true;
-      requestAnimationFrame(arrange);
-    };
-    const observer = new ResizeObserver(schedule);
-    observer.observe(grid);
-    [...grid.children].forEach((card) => observer.observe(card));
-    document.fonts.ready.then(schedule);
-    window.addEventListener('resize', schedule, { passive: true });
-    arrange();
+    }, { threshold: 0.6 });
+    previews.forEach((video) => observer.observe(video));
+  }
+
+  const openers = document.querySelectorAll('[data-video-open]');
+  if (!openers.length || typeof HTMLDialogElement !== 'function') return;
+
+  const viewer = document.createElement('dialog');
+  viewer.className = 'video-viewer';
+  viewer.setAttribute('aria-labelledby', 'video-viewer-title');
+  viewer.innerHTML = '<header><strong id="video-viewer-title"></strong><button type="button">close ×</button></header><video controls playsinline preload="metadata"></video>';
+  document.body.append(viewer);
+  const viewerTitle = viewer.querySelector('strong');
+  const player = viewer.querySelector('video');
+  let opener = null;
+  let resumePreview = null;
+
+  openers.forEach((link) => link.addEventListener('click', (event) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey) return;
+    event.preventDefault();
+    const card = link.closest('.practice-card');
+    const preview = card?.querySelector('video');
+    resumePreview = preview && !preview.paused ? preview : null;
+    if (preview) pauseQuietly(preview);
+    opener = link;
+    viewerTitle.textContent = card?.querySelector('header strong')?.textContent || '';
+    viewer.style.setProperty('--viewer-ratio', card ? getComputedStyle(card).getPropertyValue('--video-ratio') || '16 / 9' : '16 / 9');
+    player.poster = preview?.getAttribute('poster') || '';
+    player.src = link.getAttribute('href');
+    viewer.showModal();
+    player.play().catch(() => {});
+  }));
+
+  viewer.querySelector('button').addEventListener('click', () => viewer.close());
+  viewer.addEventListener('click', (event) => {
+    if (event.target === viewer) viewer.close();
+  });
+  viewer.addEventListener('close', () => {
+    player.pause();
+    player.removeAttribute('src');
+    player.load();
+    resumePreview?.play().catch(() => {});
+    resumePreview = null;
+    opener?.focus();
   });
 })();
