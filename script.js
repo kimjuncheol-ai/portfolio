@@ -359,6 +359,72 @@ if (tourPopup) {
   });
 }
 
+// Group related works in a single row, with native touch/trackpad scrolling.
+(() => {
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const selectors = '.video-gallery, .cardnews-strip, .shorts-gallery, .channel-grid, .reference-gallery, .ppoo-gallery, .poster-gallery, .character-variation-gallery';
+  document.querySelectorAll(selectors).forEach((rail, index) => {
+    const cards = [...rail.children];
+    if (cards.length < 2) return;
+    const section = rail.closest('article.cardnews-series, section');
+    const title = rail.getAttribute('aria-label') || section?.querySelector('h3, h2')?.textContent || '작품 모음';
+    rail.id ||= `media-rail-${index + 1}`;
+    rail.classList.add('media-rail');
+    rail.tabIndex = 0;
+    // Preserve ordered-list semantics for numbered card news.
+    if (!rail.matches('ol, ul')) rail.setAttribute('role', 'group');
+    rail.setAttribute('aria-label', `${title} · 좌우 방향키로 탐색`);
+    const controls = document.createElement('div');
+    controls.className = 'media-rail-controls';
+    controls.innerHTML = '<span class="media-rail-hint">좌우로 넘겨 보기</span><span class="media-rail-position" aria-live="polite" aria-atomic="true"></span><button type="button">←</button><button type="button">→</button>';
+    const [previous, next] = controls.querySelectorAll('button');
+    previous.setAttribute('aria-label', `${title} 이전 항목`);
+    next.setAttribute('aria-label', `${title} 다음 항목`);
+    [previous, next].forEach(button => button.setAttribute('aria-controls', rail.id));
+    rail.before(controls);
+    const start = card => card.getBoundingClientRect().left - rail.getBoundingClientRect().left + rail.scrollLeft;
+    const update = () => {
+      const max = rail.scrollWidth - rail.clientWidth;
+      const first = cards.findIndex(card => start(card) + card.offsetWidth > rail.scrollLeft + 8);
+      const visible = cards.filter(card => start(card) < rail.scrollLeft + rail.clientWidth - 8 && start(card) + card.offsetWidth > rail.scrollLeft + 8);
+      const last = first + visible.length;
+      const label = visible.length > 1 ? `${first + 1}–${last} / ${cards.length}` : `${first + 1} / ${cards.length}`;
+      const position = controls.querySelector('.media-rail-position');
+      if (position.textContent !== label) position.textContent = label;
+      previous.disabled = rail.scrollLeft < 2;
+      next.disabled = max < 2 || rail.scrollLeft >= max - 2;
+      controls.hidden = max < 2;
+    };
+    const move = direction => {
+      const current = rail.scrollLeft;
+      const target = direction > 0
+        ? cards.find(card => start(card) > current + 8)
+        : [...cards].reverse().find(card => start(card) < current - 8);
+      rail.scrollTo({ left: target ? start(target) : direction > 0 ? rail.scrollWidth : 0, behavior: reduceMotion.matches ? 'instant' : 'smooth' });
+    };
+    previous.addEventListener('click', () => move(-1));
+    next.addEventListener('click', () => move(1));
+    rail.addEventListener('keydown', event => {
+      if (event.target !== rail) return; // Keep video controls' arrow keys working.
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault();
+        move(event.key === 'ArrowRight' ? 1 : -1);
+      } else if (event.key === 'Home' || event.key === 'End') {
+        event.preventDefault();
+        rail.scrollTo({ left: event.key === 'Home' ? 0 : rail.scrollWidth, behavior: 'instant' });
+      }
+    });
+    let frame = 0;
+    rail.addEventListener('scroll', () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(update);
+    }, { passive: true });
+    if ('ResizeObserver' in window) new ResizeObserver(update).observe(rail);
+    else window.addEventListener('resize', update);
+    update();
+  });
+})();
+
 // Video archive: muted previews play only while on screen, and each card can open a larger player with sound.
 (() => {
   const previews = [...document.querySelectorAll('.video-gallery video')];

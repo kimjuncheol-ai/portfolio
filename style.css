@@ -644,6 +644,73 @@ a:focus-visible {
   .channel-card:nth-child(5) { grid-column: span 1; }
 }
 
+/* Related media stay in one row. These rules do not affect the shared navigation. */
+.media-rail.media-rail {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: clamp(.85rem, 1.5vw, 1.25rem);
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: .25rem;
+  scrollbar-color: #167522 #030503;
+  scrollbar-width: thin;
+  padding: .3rem .25rem 1rem;
+  contain: inline-size;
+}
+.media-rail > * { flex: 0 0 auto; scroll-snap-align: start; min-width: 0; }
+.video-gallery.media-rail > .practice-card {
+  flex: 0 0 auto;
+  width: clamp(14rem, calc(18rem * var(--video-ratio, 16 / 9)), 38rem);
+  max-width: calc(100% - 2.5rem);
+}
+.cardnews-strip.media-rail > li { width: clamp(15rem, 24vw, 21rem); max-width: calc(100% - 2.5rem); }
+.channel-grid.media-rail > .channel-card { width: clamp(16rem, 25vw, 22rem); max-width: calc(100% - 2.5rem); }
+.media-rail:is(.reference-gallery, .ppoo-gallery, .poster-gallery, .character-variation-gallery) > * {
+  width: clamp(19rem, 40vw, 38rem);
+  max-width: calc(100% - 2.5rem);
+}
+.media-rail:is(.reference-gallery, .ppoo-gallery, .poster-gallery, .character-variation-gallery) img { height: auto; max-height: 25rem; object-fit: contain; }
+.media-rail-controls { display: flex; align-items: center; gap: .6rem; margin: .75rem 0 .35rem; color: #9fcea6; font-size: .76rem; }
+.media-rail-controls[hidden] { display: none; }
+.media-rail-hint { margin-right: auto; }
+.media-rail-position { font-variant-numeric: tabular-nums; min-width: 6rem; text-align: right; }
+.media-rail-controls button { width: 2.75rem; height: 2.75rem; border: 1px solid #268237; border-radius: 0; background: #031307; color: var(--green); font-size: 1.15rem; }
+.media-rail-controls button:hover:not(:disabled) { background: var(--green); color: #001803; }
+.media-rail-controls button:disabled { color: #66866c; border-color: #284c2e; cursor: default; }
+.media-rail:focus-visible, .media-rail-controls button:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+.shorts-gallery { margin: 0; padding: 0; list-style: none; }
+.shorts-gallery > li { width: clamp(15rem, 22vw, 18rem); max-width: calc(100% - 2.5rem); }
+.short-card { border: 1px solid #20582a; background: #030503; }
+.short-card__preview { display: block; position: relative; background: #000; }
+.short-card__preview img { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; object-fit: cover; }
+.short-card__preview > span { position: absolute; right: .6rem; bottom: .6rem; padding: .35rem .55rem; background: #001803; border: 1px solid #268237; font-size: .72rem; }
+.short-card__copy { padding: .85rem; }
+.short-card__copy > p { margin: 0 0 .55rem; color: #86bc8e; font-size: .72rem; }
+.short-card h3 { margin: 0 0 .8rem; font-size: .95rem; line-height: 1.65; font-weight: 400; color: #e5ffe8; word-break: keep-all; }
+.short-card .project-actions { gap: .4rem 1rem; font-size: .75rem; }
+.short-card__preview:hover img { filter: brightness(1.15); }
+.short-card a:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+.channel-feature__copy .project-actions { font-size: .75rem; }
+.channel-feature.channel-feature--compact { display: block; }
+.channel-feature--compact .channel-feature__copy p { max-width: 68rem; }
+.channel-feature--compact .channel-feature__watch { display: inline-block; margin-top: 1rem; }
+.channel-log > summary { padding: .8rem; color: #9eeaa7; font-size: .76rem; cursor: pointer; }
+.channel-log > summary > span { margin-left: 1rem; color: #86bc8e; }
+.channel-log[open] > summary { border-bottom: 1px dashed #167522; }
+.channel-log > summary:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+.channel-console ~ .channel-story-section { margin-top: clamp(2rem, 4vw, 3rem); }
+@media (max-width: 700px) {
+  .video-gallery.media-rail > .practice-card { width: clamp(14rem, calc(14rem * var(--video-ratio, 16 / 9)), 25rem); }
+  .media-rail-controls { font-size: .68rem; gap: .4rem; }
+  .media-rail-position { min-width: 4.75rem; }
+  .channel-story-section, .archive-section { margin-top: 3rem; }
+}
+
 .site-footer {
   min-height: clamp(4.4rem, 8vw, 6.4rem);
   padding-inline: var(--pad);
