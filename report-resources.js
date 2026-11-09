@@ -50,6 +50,23 @@ window.REPORT_TOURS = {
     const first = String(value || '').match(/^.*?[.!?](?:\s|$)/u)?.[0]?.trim();
     return first && first.length <= 70 ? first : '';
   };
+  // Keep search metadata aligned with the exact API text displayed on the card.
+  const syncStructuredResource = (card, key) => {
+    const script = document.getElementById('page-structured-data');
+    if (!script) return;
+    try {
+      const data = JSON.parse(script.textContent);
+      const resource = data['@graph']?.find(node => node['@id']?.endsWith(`#resource-${key}`));
+      if (!resource) return;
+      const address = card.querySelector('[data-api-address]');
+      resource.description = card.querySelector('[data-api-intro]').textContent;
+      resource.address.streetAddress = address.textContent;
+      resource.hasMap = address.href;
+      script.textContent = JSON.stringify(data).replaceAll('<', '\\u003c');
+    } catch {
+      // Metadata must never prevent the existing API presentation from working.
+    }
+  };
   const refresh = async () => {
     if (busy) return;
     busy = true;
@@ -70,6 +87,7 @@ window.REPORT_TOURS = {
         address.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.address)}`;
         const intro = summary(item.description);
         if (intro) card.querySelector('[data-api-intro]').textContent = intro;
+        syncStructuredResource(card, item.key);
         const stamp = card.querySelector('[data-api-stamp]');
         stamp.textContent = `API 갱신 · ${item.modifiedAt?.slice(0,4)}.${item.modifiedAt?.slice(4,6)}.${item.modifiedAt?.slice(6,8)} 자료`;
         const image = safeImage(item.image);
