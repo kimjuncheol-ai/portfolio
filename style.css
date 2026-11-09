@@ -246,9 +246,24 @@ a:focus-visible {
 .archive-section, .channel-story-section { margin-top: clamp(3.5rem, 7vw, 6rem); scroll-margin-top: 8rem; }
 #projects, .visual-case { scroll-margin-top: 8rem; }
 .archive-section .collection-intro h2 { font-size: clamp(1.45rem, 2.6vw, 2.5rem); line-height: 1.35; }
-#action-previz-title { min-width: 0; max-width: 100%; white-space: nowrap; text-wrap: nowrap; }
+#action-previz-title { min-width: 0; max-width: 100%; font-size: clamp(1.2rem, 2.1vw, 1.8rem); white-space: nowrap; text-wrap: nowrap; }
+.action-previz-layout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto auto auto; column-gap: clamp(1.5rem, 3vw, 3rem); align-items: start; }
+.action-previz-panel { min-width: 0; }
+#action-previz .collection-intro,
+#action-previz .action-reference-heading { display: block; margin: 0; padding: 1.5rem 0; border-bottom: 1px dashed #167522; }
+#action-previz .collection-intro > p:first-child,
+#action-previz .action-previz-eyebrow { margin: 0 0 .9rem; color: #5ebd69; font-size: .75rem; line-height: 1.8; letter-spacing: .08em; }
+#action-previz .action-reference-heading h3 { margin: 0; font-size: clamp(1.2rem, 2.1vw, 1.8rem); line-height: 1.35; }
+#action-previz .collection-intro > p:last-child,
+#action-previz .action-reference-heading > p:last-child { margin: .9rem 0 0; color: #a7dfad; font-size: .9rem; line-height: 1.85; word-break: keep-all; }
+@supports (grid-template-rows: subgrid) {
+  .action-previz-panel { display: grid; grid-row: span 3; grid-template-rows: subgrid; row-gap: 0; }
+}
+@media (max-width: 999px) {
+  .action-previz-layout { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; row-gap: 1.5rem; }
+  .action-previz-panel { display: block; grid-row: auto; }
+}
 @media (max-width: 700px) {
-  #action-previz .collection-intro { grid-template-columns: minmax(0, 1fr); }
   #action-previz-title { font-size: clamp(.9rem, 5vw, 1.45rem); }
 }
 .archive-case-heading {
