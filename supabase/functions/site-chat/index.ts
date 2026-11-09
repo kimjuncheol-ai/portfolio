@@ -9,7 +9,14 @@ type Faq = { question: string; answer: string; keywords?: string[]; source_paths
 const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')
 const supabaseUrl = Deno.env.get('SUPABASE_URL')
 const siteUrl = (Deno.env.get('SITE_URL') || '').replace(/\/$/, '')
-const sourceFromPath = (path: string) => ({ url: `${siteUrl}/${path}`, title: path.replace('.html', '') || 'home' })
+const approvedPages = ['index.html', 'about.html', 'report.html', 'contents.html', 'sns.html', 'final.html']
+const sourceLabels: Record<string, string> = {
+  'index.html': '김준철 소개', 'about.html': '딸깍상사', 'report.html': '부산 관광 자원',
+  'contents.html': 'AI 제작 작업', 'sns.html': '아르투어부산', 'final.html': 'final_project',
+  'sns.html#artour-shorts': '씨걸이 숏폼 19편', 'sns.html#artour-cardnews': '아르투어부산 카드뉴스',
+  'sns.html#cardnews-domoheon': '도모헌 카드뉴스', 'sns.html#cardnews-f1963': 'F1963 카드뉴스',
+}
+const sourceFromPath = (path: string) => ({ url: `${siteUrl}/${path}`, title: sourceLabels[path] || sourceLabels[path.split('#')[0]] || '사이트 안내' })
 const normalize = (value: string) => value.toLowerCase().replace(/[^0-9a-z가-힣]+/g, ' ').trim()
 
 const makeExtractiveAnswer = (question: string, matches: Match[]) => {
@@ -48,23 +55,35 @@ Deno.serve(async (request) => {
     await supabase.from('site_chat_sessions').delete().lt('last_seen_at', new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString())
     const model = new Supabase.ai.Session('gte-small')
     const embedding = await model.run(message, { mean_pool: true, normalize: true })
-    const [{ data: semanticFaqs }, { data: lexicalFaqs }, { data: documents, error: documentError }] = await Promise.all([
+    const [{ data: semanticFaqs }, { data: lexicalFaqs }, { data: documents, error: documentError }, { data: siteDocuments, error: siteDocumentError }] = await Promise.all([
       supabase.rpc('match_site_faqs', { query_embedding: embedding, match_threshold: 0.72, match_count: 3 }),
       supabase.from('site_faqs').select('question,answer,keywords,source_paths').eq('active', true),
       supabase.rpc('match_site_documents', { query_embedding: embedding, match_threshold: 0.46, match_count: 6 }),
+      supabase.from('site_documents').select('page_path,source_url,page_title,content').eq('active', true).in('page_path', approvedPages).limit(200),
     ])
     if (documentError) throw documentError
+    if (siteDocumentError) throw siteDocumentError
     const semantic = (semanticFaqs || []) as Faq[]
     const lexical = ((lexicalFaqs || []) as Faq[]).map((faq) => ({ faq, score: lexicalScore(message, faq) })).sort((a, b) => b.score - a.score)
     const chosenFaq = lexical[0]?.score > 0 ? lexical[0].faq : null
-    const matches = (documents || []) as Match[]
     const questionTerms = normalize(message).split(' ').filter((term) => term.length >= 2)
+    // The free embedding model can miss Korean phrases. Exact text matches
+    // supplement vector retrieval, using only the approved public site pages.
+    const textMatches = ((siteDocuments || []) as Match[])
+      .map((match) => ({ ...match, similarity: 0, textScore: questionTerms.reduce((score, term) => score + (normalize(match.content).includes(term) ? term.length : 0), 0) }))
+      .filter((match) => match.textScore > 0)
+      .sort((a, b) => b.textScore - a.textScore)
+      .slice(0, 6)
+    const matches = [...new Map([
+      ...textMatches,
+      ...((documents || []) as Match[]).filter((match) => approvedPages.includes(match.page_path)),
+    ].map((match) => [`${match.page_path}:${match.content}`, match])).values()].slice(0, 6)
     const hasDocumentKeyword = matches.some((match) => questionTerms.some((term) => normalize(match.content).includes(term)))
 
     let answer: string
     let sources: { url: string; title: string }[]
     if (/^(안녕|안녕하세요|hello|hi|반가워)/i.test(message)) {
-      answer = '안녕하세요. 김준철의 포트폴리오 안내 AI입니다. 김준철 소개, 선정 관광 자원, 체험 프로그램, 딸깍상사에 관해 물어보세요.'
+      answer = '안녕하세요. 김준철의 포트폴리오 안내 AI입니다. 김준철 소개, 부산 관광 자원, AI 제작 작업과 아르투어부산 콘텐츠에 관해 물어보세요.'
       sources = []
     } else if (chosenFaq) {
       answer = chosenFaq.answer
@@ -73,7 +92,7 @@ Deno.serve(async (request) => {
       answer = makeExtractiveAnswer(message, matches)
       sources = [...new Map(matches.map((match) => [match.page_path, { url: match.source_url, title: match.page_title }])).values()].slice(0, 4)
     } else {
-      answer = '이 사이트에서 확인되지 않는 내용입니다. 김준철 소개, 선정 관광 자원, 체험 프로그램, 딸깍상사에 관해 질문해 주세요.'
+      answer = '이 사이트에서 확인되지 않는 내용입니다. 김준철 소개, 부산 관광 자원, AI 제작 작업이나 아르투어부산 콘텐츠에 관해 질문해 주세요.'
       sources = []
     }
     await supabase.from('site_chat_sessions').upsert({ id: sessionId, entry_page: page, last_seen_at: new Date().toISOString(), consent_version: 'v1', consent_at: new Date().toISOString() }, { onConflict: 'id' })
