@@ -16,7 +16,7 @@ window.REPORT_TOURS = {
     description: '부산 영도에서 빛·소리·향을 함께 경험하는 몰입형 미디어아트 전시 공간입니다. 자연과 부산의 풍경을 재해석한 작품 사이를 걸으며 감각에 집중하는 시간을 보낼 수 있습니다.',
     tags: ['#영도', '#몰입형전시', '#미디어아트'],
     programsUrl: 'https://kr.artemuseum.com/BUSAN',
-    images: [['assets/report/arte.png', 'GARDEN STARRY BUSAN · 아르떼뮤지엄 부산 공식 홈페이지']],
+    images: [['assets/report/arte.webp', 'GARDEN STARRY BUSAN · 아르떼뮤지엄 부산 공식 홈페이지']],
     programs: [
       { name: '몰입형 미디어아트 감상', audience: '관람객', description: '빛과 소리로 확장되는 작품 사이를 걸으며 공간 전체를 감상합니다.', detail: '상설 전시 · 운영·티켓 정보는 공식 홈페이지 확인' },
       { name: '부산을 담은 GARDEN 감상', audience: '관람객', description: '부산의 매력을 다이내믹·버라이어티·드림의 세 가지 콘셉트로 표현한 미디어아트를 만납니다.', detail: 'GARDEN STARRY BUSAN · 작품 구성 변경 가능' }

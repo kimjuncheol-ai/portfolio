@@ -225,7 +225,6 @@ a:focus-visible {
 }
 
 /* Content-only archive grid; shared site header and navigation are unchanged. */
-.site-main.site-main--collection { padding-top: clamp(1.75rem, 3vw, 3rem); }
 .site-main--collection .collection-intro h2,
 .archive-case-heading h2, .archive-case-heading h3,
 .project-entry h3 { text-wrap: balance; word-break: keep-all; }
@@ -247,6 +246,10 @@ a:focus-visible {
 .archive-index a[aria-selected="true"] { color: #001803; background: var(--green); }
 .archive-index a[aria-selected="true"]::before { content: "> "; }
 [role="tabpanel"][hidden] { display: none !important; }
+/* Every tab panel starts the same distance below the tab bar, matching 01 프로젝트. */
+.content-session[role="tabpanel"],
+.channel-story-section[role="tabpanel"] { margin-top: 1.5rem; }
+.content-session[role="tabpanel"] .collection-intro { padding-block: 1.25rem; gap: .65rem 3rem; }
 .archive-index--sns { margin-top: clamp(2.5rem, 5vw, 4rem); }
 .archive-section, .channel-story-section { margin-top: clamp(3.5rem, 7vw, 6rem); scroll-margin-top: 8rem; }
 #projects, .visual-case { scroll-margin-top: 8rem; }
@@ -633,6 +636,16 @@ a:focus-visible {
 .sns-dash td small { display: block; color: #6fae77; font-size: .62rem; }
 .sns-dash td.sns-dash__top { min-width: 14rem; white-space: normal; word-break: keep-all; }
 .sns-dash td.sns-dash__top span { color: #68c574; }
+.sns-dash__trend { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; margin: 0; border-top: 1px dashed #167522; }
+.sns-dash__trend figcaption { grid-column: 1 / -1; padding: .6rem .75rem 0; color: #68c574; font-size: .7rem; }
+.sns-dash__trend > div { padding: .5rem .75rem .9rem; }
+.sns-dash__trend > div + div { border-left: 1px dashed #167522; }
+.sns-dash__trend p { display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem .75rem; margin: 0 0 .4rem; font-size: .72rem; color: #b2dcb7; }
+.sns-dash__trend strong { color: #e5ffe8; font-size: 1.1rem; font-weight: 400; font-variant-numeric: tabular-nums; }
+.sns-dash__trend small { color: #68c574; }
+.sns-dash__trend svg { display: block; width: 100%; height: 3.5rem; overflow: visible; background: linear-gradient(#0b1a0d 1px, transparent 1px) 0 0 / 100% 25%; }
+.sns-dash__trend polyline { fill: none; stroke: var(--green); stroke-width: 2; }
+@media (max-width: 700px) { .sns-dash__trend { grid-template-columns: minmax(0, 1fr); } .sns-dash__trend > div + div { border-left: 0; border-top: 1px dashed #167522; } }
 .sns-dash__note { margin: 0; padding: .6rem .75rem; border-top: 1px dashed #167522; color: #79b782; font-size: .66rem; line-height: 1.7; word-break: keep-all; }
 @media (max-width: 900px) {
   .sns-dash__kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -2015,3 +2028,12 @@ a:focus-visible {
   .rag-panel-heading { align-items: stretch; flex-direction: column; }
   .rag-conversation__message { grid-template-columns: 1fr; gap: 0.25rem; }
 }
+
+/* Site-wide vertical rhythm: one spacing scale for every page. */
+:root {
+  --space-section: clamp(2rem, 4vw, 3.5rem);
+  --space-tab: 1.5rem;
+}
+body .site-main > * + * { margin-top: var(--space-section); }
+body .site-main > [data-section-tabs] ~ [role="tabpanel"] { margin-top: var(--space-tab); }
+body .site-main > .terminal-prompt { margin-top: 1rem; }

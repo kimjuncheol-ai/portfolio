@@ -268,7 +268,7 @@
       "followers": 1,
       "followersLabel": "팔로워",
       "following": 1,
-      "posts": null,
+      "posts": 24,
       "totals": {
         "views": 276,
         "interactions": 1,
@@ -298,107 +298,262 @@
       },
       "items": [
         {
-          "date": "2026-10-22",
-          "type": "릴스",
-          "title": "부산의 색과 빛을 따라 여행하던 갈매기. 마지막에 갑자기 진지해집니다",
+          "date": "2026-11-17 15:49",
+          "type": "게시물(이미지)",
+          "title": "망치 소리 나던 골목, 들어가 봐도 될까요? (깡깡이예술마을)",
           "url": null,
-          "views": 92,
-          "likes": 0,
-          "comments": 0,
+          "views": 5,
+          "likes": null,
+          "comments": null,
           "shares": null
         },
         {
-          "date": "2026-11-06",
-          "type": "릴스",
-          "title": "와이어 공장에서 커피 마시는 씨걸이? (F1963)",
+          "date": "2026-11-17 12:29",
+          "type": "게시물(이미지)",
+          "title": "은행 금고 문, 열어봐도 될까요? (부산근현대역사관)",
           "url": null,
-          "views": 37,
-          "likes": 0,
-          "comments": 0,
+          "views": 6,
+          "likes": null,
+          "comments": null,
           "shares": null
         },
         {
-          "date": "2026-11-03",
-          "type": "릴스",
-          "title": "바다를 그리던 씨걸이, 바람 한 번에 진지해졌습니다",
-          "url": null,
-          "views": 28,
-          "likes": 0,
-          "comments": 0,
-          "shares": null
-        },
-        {
-          "date": "2026-11-06",
-          "type": "릴스",
-          "title": "옥상에서 그림 그리던 씨걸이가 캔버스를 놓친 순간",
-          "url": null,
-          "views": 15,
-          "likes": 0,
-          "comments": 0,
-          "shares": null
-        },
-        {
-          "date": "2026-11-06",
-          "type": "릴스",
-          "title": "새우깡 대신 붓을 훔친 씨걸이",
-          "url": null,
-          "views": 15,
-          "likes": 0,
-          "comments": 0,
-          "shares": null
-        },
-        {
-          "date": "2026-11-06",
-          "type": "릴스",
-          "title": "노을 앞에서 갑자기 춤추기 시작한 씨걸이",
-          "url": null,
-          "views": 15,
-          "likes": 0,
-          "comments": 0,
-          "shares": null
-        },
-        {
-          "date": "2026-11-06",
-          "type": "릴스",
-          "title": "도모헌 정원에서 하루를 보낸 씨걸이",
-          "url": null,
-          "views": 13,
-          "likes": 0,
-          "comments": 0,
-          "shares": null
-        },
-        {
-          "date": "2026-11-06",
-          "type": "릴스",
-          "title": "미술관에서 작품인 척하던 씨걸이의 최후",
-          "url": null,
-          "views": 11,
-          "likes": 0,
-          "comments": 0,
-          "shares": null
-        },
-        {
-          "date": "2026-11-06",
+          "date": "2026-11-06 14:01",
           "type": "릴스",
           "title": "작전명 아르투어부산, 씨걸이 액션 예고편 〈THE BERET〉",
           "url": null,
           "views": 9,
-          "likes": 0,
-          "comments": 0,
+          "likes": null,
+          "comments": null,
           "shares": null
         },
         {
-          "date": "2026-11-03",
+          "date": "2026-11-06 13:54",
+          "type": "릴스",
+          "title": "씨걸이의 부산 예술여행 하루 코스",
+          "url": null,
+          "views": 2,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06 13:53",
+          "type": "릴스",
+          "title": "그림 속으로 뛰어든 씨걸이",
+          "url": null,
+          "views": 2,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06 13:43",
+          "type": "릴스",
+          "title": "영화의전당 런웨이에 선 씨걸이, 비트마다 변신",
+          "url": null,
+          "views": 1,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06 12:53",
+          "type": "릴스",
+          "title": "야생의 씨걸이, 미술관에 가다",
+          "url": null,
+          "views": null,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06 12:52",
+          "type": "릴스",
+          "title": "사진미술관에서 영감 받은 씨걸이의 부산 스냅",
+          "url": null,
+          "views": null,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06 12:52",
+          "type": "릴스",
+          "title": "지하철 문이 열릴 때마다 변하는 씨걸이",
+          "url": null,
+          "views": null,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06 12:51",
+          "type": "릴스",
+          "title": "씨걸이 vs 비둘기, 영도 벽화 스피드 배틀",
+          "url": null,
+          "views": null,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06 12:50",
+          "type": "릴스",
+          "title": "자갈치 새벽 경매에서 씨걸이가 낙찰받은 것",
+          "url": null,
+          "views": null,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06 12:49",
+          "type": "릴스",
+          "title": "씨걸이 시점으로 부산 예술지도를 날아 봤다",
+          "url": null,
+          "views": null,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06 11:42",
+          "type": "릴스",
+          "title": "씨걸이의 어린 시절, 광안리에서 처음 붓을 든 날",
+          "url": null,
+          "views": null,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06 11:41",
+          "type": "릴스",
+          "title": "도모헌 정원에서 하루를 보낸 씨걸이",
+          "url": null,
+          "views": 13,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06 11:40",
+          "type": "릴스",
+          "title": "미술관에서 작품인 척하던 씨걸이의 최후",
+          "url": null,
+          "views": 11,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06 11:40",
+          "type": "릴스",
+          "title": "와이어 공장에서 커피 마시는 씨걸이? (F1963)",
+          "url": null,
+          "views": 37,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06 11:39",
+          "type": "릴스",
+          "title": "옥상에서 그림 그리던 씨걸이가 캔버스를 놓친 순간",
+          "url": null,
+          "views": 15,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06 11:37",
+          "type": "릴스",
+          "title": "새우깡 대신 붓을 훔친 씨걸이",
+          "url": null,
+          "views": 15,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06 11:34",
+          "type": "릴스",
+          "title": "노을 앞에서 갑자기 춤추기 시작한 씨걸이",
+          "url": null,
+          "views": 15,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-11-03 17:11",
+          "type": "릴스",
+          "title": "바다를 그리던 씨걸이, 바람 한 번에 진지해졌습니다",
+          "url": null,
+          "views": 28,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-11-03 16:06",
           "type": "게시물(이미지)",
           "title": "여긴 정말, 들어가도 되는 곳? (도모헌)",
           "url": null,
           "views": 9,
-          "likes": 1,
-          "comments": 0,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-10-22 13:49",
+          "type": "릴스",
+          "title": "부산의 색과 빛을 따라 여행하던 갈매기. 마지막에 갑자기 진지해집니다",
+          "url": null,
+          "views": 92,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-10-22 13:33",
+          "type": "게시물(이미지)",
+          "title": "커피만 마시고 나오기엔 아까운 곳, 부산 F1963.",
+          "url": null,
+          "views": null,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-10-14 10:09",
+          "type": "게시물(이미지)",
+          "title": "안녕하세요, 아르투어 부산입니다. (첫 인사)",
+          "url": null,
+          "views": null,
+          "likes": null,
+          "comments": null,
           "shares": null
         }
       ],
-      "notes": "페이지 좋아요 수는 별도 표시 없이 팔로워 1명으로만 표시. 도달(reach)은 표시되지 않음(조회만 제공). 게시물별 데이터는 콘텐츠 라이브러리(10/1~11/17, 조회순)에서 지연 로딩된 상위 10개만 수집(전체 게시물 수·나머지 항목 미수집). 11/17 게시 2건 조회 5, 6. 28일 참여 합계 1건(공감 1, 댓글 0, 공유 0). 게시물별 공유 수 미표시."
+      "notes": "페이지 좋아요 수는 별도 표시 없이 팔로워 1명으로만 표시. 도달(reach)은 표시되지 않음(조회만 제공). 게시물별 데이터는 콘텐츠 라이브러리(10/1~11/17, 조회순)에서 지연 로딩된 상위 10개만 수집(전체 게시물 수·나머지 항목 미수집). 11/17 게시 2건 조회 5, 6. 28일 참여 합계 1건(공감 1, 댓글 0, 공유 0). 게시물별 공유 수 미표시. [추가] 게시물 수 24개 확정(커버 사진 업데이트 3행 제외). items는 24개 전체 목록이며 조회수는 이전 수집분만 채움(나머지 null).",
+      "excluded_non_posts": [
+        {
+          "date": "2026-10-14 14:02",
+          "type": "커버 사진 업데이트(피드에서 확인)"
+        },
+        {
+          "date": "2026-10-14 14:04",
+          "type": "텍스트 없는 항목, 커버/프로필 사진 업데이트로 추정(피드 확인 불가)"
+        },
+        {
+          "date": "2026-10-14 15:01",
+          "type": "커버 사진 업데이트(피드에서 확인)"
+        }
+      ],
+      "posts_count_method": "프로페셔널 대시보드 콘텐츠 라이브러리(2026-01-01~11-17, 날짜순)를 더 이상 항목이 늘지 않을 때까지 스크롤: 총 27행(페이지당 50개 미만이라 전부 로딩). 텍스트 없는 10/14 14:02, 14:04, 15:01 3행은 커버 사진 업데이트로 보여 제외 => 24개(릴스 19, 이미지 게시물 5). 예약/임시 게시물 탭은 확인하지 않음."
     },
     {
       "key": "x",

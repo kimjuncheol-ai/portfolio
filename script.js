@@ -127,8 +127,8 @@ if (tourPopup) {
       tags: ['#현대미술', '#뉴미디어', '#을숙도', '#어린이예술도서관'],
       programsUrl: 'https://www.busan.go.kr/moca/education05',
       images: [
-        ['assets/home/moca-exterior.png', '부산현대미술관 전경'],
-        ['assets/home/moca-poster-01.jpg', '부산현대미술관 기관의 순환 전시 포스터', 'crop-left'],
+        ['assets/home/moca-exterior.webp', '부산현대미술관 전경'],
+        ['assets/home/moca-poster-01.webp', '부산현대미술관 기관의 순환 전시 포스터', 'crop-left'],
         ['assets/home/moca-poster-02.jpg', '부산현대미술관 코뿔소와 유니콘 전시 포스터', 'crop-left']
       ],
       programs: [
@@ -155,9 +155,9 @@ if (tourPopup) {
       tags: ['#부산미술', '#현대미술', '#이우환공간', '#공립미술관'],
       programsUrl: 'https://art.busan.go.kr/lecetuxre2/list.nm',
       images: [
-        ['assets/home/bma-exterior.png', '부산시립미술관 전경'],
+        ['assets/home/bma-exterior.webp', '부산시립미술관 전경'],
         ['assets/home/bma-poster-01.png', '부산시립미술관 이우환공간 전경'],
-        ['assets/home/bma-poster-02.png', '부산시립미술관 무빙 온 아시아 전시 포스터']
+        ['assets/home/bma-poster-02.webp', '부산시립미술관 무빙 온 아시아 전시 포스터']
       ],
       programs: [
         { name: '본관 전시 감상', audience: '관람객', description: '리노베이션을 마치고 다시 문을 연 본관에서 전시를 감상합니다. 전시 구성과 도슨트 운영은 공식 안내를 확인해 주세요.', detail: '본관 정상 운영 · 공식 홈페이지 2026.10.29 확인' },
@@ -177,7 +177,7 @@ if (tourPopup) {
       programsUrl: 'https://www.bisco.or.kr/bschildpark/sub/sub04/sub04_1/',
       images: [
         ['assets/home/forest-01.jpg', '부산어린이대공원 성지곡수원지'],
-        ['assets/home/forest-02.jpg', '부산어린이대공원 숲길과 나무 데크'],
+        ['assets/home/forest-02.webp', '부산어린이대공원 숲길과 나무 데크'],
         ['assets/home/forest-03.jpg', '부산어린이대공원 관광안내센터']
       ],
       programs: [
@@ -358,6 +358,49 @@ if (tourPopup) {
     if (event.target === tourPopup) tourPopup.close();
   });
 }
+
+// SNS dashboard: refresh from the daily-collected JSON and draw follower/view trends (static numbers stay if loading fails).
+(() => {
+  const dash = document.querySelector('#artour-dashboard');
+  if (!dash || !window.fetch) return;
+  const n = v => (v == null ? '—' : Number(v).toLocaleString('ko-KR'));
+  const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  Promise.all(['assets/data/sns-stats.json', 'assets/data/sns-history.json'].map(u => fetch(u, { cache: 'no-cache' }).then(r => (r.ok ? r.json() : Promise.reject(r.status)))))
+    .then(([stats, history]) => {
+      const ch = stats.channels;
+      const sum = key => ch.reduce((total, c) => total + (c[key] || 0), 0);
+      const top = ch.filter(c => c.top).sort((a, b) => b.top.views - a.top.views)[0];
+      dash.querySelector('header span').innerHTML = `기준 <time datetime="${esc(stats.asOf)}">${esc(stats.collectedAt)}</time>`;
+      const kpis = dash.querySelectorAll('.sns-dash__kpis > div');
+      kpis[0].querySelector('dd').textContent = n(sum('followers'));
+      kpis[1].querySelector('dd').textContent = n(sum('views'));
+      if (top) { kpis[2].querySelector('dd').textContent = n(top.top.views); kpis[2].querySelector('.sns-dash__sub').textContent = `${top.name} · ${top.top.title}`; }
+      kpis[3].querySelector('dd').textContent = n(sum('posts'));
+      kpis[3].querySelector('.sns-dash__sub').textContent = '5개 채널 합계';
+      const max = Math.max(1, ...ch.map(c => c.views || 0));
+      dash.querySelector('.sns-dash__chart ol').innerHTML = ch.map(c => `<li><span>${esc(c.name)}</span><span class="sns-dash__bar"><i style="--w: ${Math.max(0.6, (c.views || 0) / max * 100).toFixed(1)}%"></i></span><strong>${n(c.views)}</strong></li>`).join('');
+      dash.querySelector('tbody').innerHTML = ch.map(c => {
+        const topCell = c.top ? `${c.top.url ? `<a href="${esc(c.top.url)}" target="_blank" rel="noopener noreferrer">${esc(c.top.title)} ↗</a>` : esc(c.top.title)} <span>${n(c.top.views)}</span>` : '—';
+        const flag = c.status === 'ok' ? '' : ` <small>${c.status === 'stale' ? '이번 수집 실패 · 이전 값' : '일부 이전 값'}</small>`;
+        return `<tr><th scope="row">${esc(c.name)}${flag}</th><td>${n(c.followers)} <small>${esc(c.followersLabel)}</small></td><td>${n(c.posts)}</td><td>${n(c.views)} <small>${esc(c.viewsBasis)}</small></td><td>${n(c.likes)}</td><td class="sns-dash__top">${topCell}</td></tr>`;
+      }).join('');
+      // Trend: total followers and total views per collected day.
+      const days = history.map(h => ({ date: h.date, followers: Object.values(h.channels).reduce((t, c) => t + (c.followers || 0), 0), views: Object.values(h.channels).reduce((t, c) => t + (c.views || 0), 0) }));
+      const trend = dash.querySelector('.sns-dash__trend') || dash.querySelector('.sns-dash__grid').insertAdjacentElement('afterend', document.createElement('figure'));
+      trend.className = 'sns-dash__trend';
+      const line = (key, label) => {
+        const values = days.map(d => d[key]);
+        const lo = Math.min(...values), hi = Math.max(...values), span = hi - lo || 1;
+        const y = v => 36 - ((v - lo) / span) * 30;
+        const pts = values.length === 1 ? `0,${y(values[0])} 100,${y(values[0])}` : values.map((v, i) => `${(i / (values.length - 1)) * 100},${y(v)}`).join(' ');
+        const change = values.length > 1 ? values.at(-1) - values[0] : 0;
+        return `<div><p><span>${label}</span><strong>${n(values.at(-1))}</strong><small>${values.length > 1 ? `${change >= 0 ? '+' : ''}${n(change)} · ${days.length}일` : '기록 1일차'}</small></p><svg viewBox="0 0 100 40" preserveAspectRatio="none" role="img" aria-label="${label} 추이"><polyline points="${pts}" vector-effect="non-scaling-stroke"/></svg></div>`;
+      };
+      trend.innerHTML = `<figcaption>날짜별 추이 · ${esc(days[0]?.date)} ~ ${esc(days.at(-1)?.date)}</figcaption>${line('followers', '팔로워 합계')}${line('views', '조회수 합계')}`;
+      dash.querySelector('.sns-dash__note').textContent = '매일 Aside 브라우저로 각 채널 화면의 수치를 자동 수집해 갱신합니다(공식 API 미사용). 채널마다 조회수 기준(누적·최근 28일 등)이 달라 합계는 참고용이며, 화면에 표시되지 않은 값은 —로, 이번에 읽지 못한 값은 이전 값으로 표시합니다.';
+    })
+    .catch(() => {});
+})();
 
 // Long archives: the section index becomes tabs so one section shows at a time (all sections stay in the HTML without JavaScript).
 (() => {

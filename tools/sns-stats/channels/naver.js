@@ -1,0 +1,10 @@
+const pgN = await openTab("https://blog.naver.com/artour_busan");
+await pgN.waitForTimeout(4000);
+const tN = await pgN.evaluate(() => { const parts = [document.body.innerText]; document.querySelectorAll('iframe').forEach(f => { try { parts.push(f.contentDocument.body.innerText); } catch (e) {} }); return parts.join('\n'); });
+const nbN = tN.replace(/,/g, '').match(/이웃\s*(\d+)\s*명/);
+const postsN = tN.replace(/,/g, '').match(/전체보기\s*(\d+)\s*개의 글/);
+const todayN = tN.replace(/,/g, '').match(/TODAY\s*(\d+)/i);
+const totalN = tN.replace(/,/g, '').match(/TOTAL\s*(\d+)/i);
+const outN = { followers: nbN ? Number(nbN[1]) : null, posts: postsN ? Number(postsN[1]) : null, views: totalN ? Number(totalN[1]) : null, today: todayN ? Number(todayN[1]) : null };
+await closeTab(pgN);
+console.log('@@JSON' + JSON.stringify(outN));

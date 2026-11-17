@@ -1,0 +1,97 @@
+{
+  "asOf": "2026-11-17",
+  "collectedAt": "2026-11-17 17:41 KST",
+  "channels": [
+    {
+      "key": "instagram",
+      "name": "Instagram",
+      "url": "https://www.instagram.com/artour_busan/",
+      "followersLabel": "팔로워",
+      "viewsBasis": "릴스 누적",
+      "followers": 5,
+      "posts": 24,
+      "views": 10128,
+      "status": "stale",
+      "error": "skipped (skip.json)"
+    },
+    {
+      "key": "facebook",
+      "name": "Facebook",
+      "url": "https://www.facebook.com/profile.php?id=61595298063187",
+      "followersLabel": "팔로워",
+      "viewsBasis": "최근 28일",
+      "followers": 1,
+      "posts": 24,
+      "views": 276,
+      "top": {
+        "title": "부산의 색과 빛을 따라 여행하던 갈매기. 마지막에 갑자기 진지해집니다",
+        "views": 92,
+        "url": null
+      },
+      "status": "partial",
+      "kept": [
+        "posts",
+        "views"
+      ]
+    },
+    {
+      "key": "x",
+      "name": "X",
+      "url": "https://x.com/artour_busan",
+      "followersLabel": "팔로워",
+      "viewsBasis": "불러온 게시물 누적",
+      "followers": 1,
+      "posts": 28,
+      "views": 355,
+      "counted": 28,
+      "top": {
+        "title": "씨걸이 vs 비둘기, 영도 벽화 스피드 배틀",
+        "views": 23,
+        "url": "https://x.com/artour_busan/status/2118548724482011242"
+      },
+      "status": "partial",
+      "kept": [
+        "followers"
+      ]
+    },
+    {
+      "key": "youtube",
+      "name": "YouTube",
+      "url": "https://www.youtube.com/@artour_busan",
+      "followersLabel": "구독자",
+      "viewsBasis": "채널 누적",
+      "followers": 0,
+      "views": 152,
+      "posts": 19,
+      "top": {
+        "title": "미술관에서 작품인 척하던 씨걸이의 최후 #Shorts",
+        "views": 87,
+        "url": null
+      },
+      "status": "partial",
+      "kept": [
+        "followers"
+      ]
+    },
+    {
+      "key": "naver",
+      "name": "Naver Blog",
+      "url": "https://blog.naver.com/artour_busan",
+      "followersLabel": "이웃",
+      "viewsBasis": "블로그 누적",
+      "followers": 1,
+      "posts": 24,
+      "views": 28,
+      "today": null,
+      "top": {
+        "title": "부산 F1963, 커피만 마시고 나오기엔 아까운 곳｜전시·예술도서관·소리길",
+        "views": 8,
+        "url": null
+      },
+      "status": "partial",
+      "kept": [
+        "views"
+      ]
+    }
+  ]
+}
