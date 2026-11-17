@@ -1,0 +1,987 @@
+{
+  "asOf": "2026-11-17",
+  "collectedAt": "2026-11-17 17:30 KST (approx.)",
+  "channels": [
+    {
+      "key": "instagram",
+      "name": "Instagram",
+      "url": "https://www.instagram.com/artour_busan/",
+      "followers": 5,
+      "followersLabel": "팔로워",
+      "following": 7,
+      "posts": 24,
+      "totals": {
+        "views": 10128,
+        "likes": 88,
+        "comments": 0,
+        "reach": null
+      },
+      "period": "누적(게시물 24개 전체; 조회수는 릴스 탭 재생수 19개 합계)",
+      "items": [
+        {
+          "date": "2026-11-16",
+          "type": "게시물(이미지)",
+          "title": "망치 소리 나던 골목, 들어가 봐도 될까요? (깡깡이예술마을)",
+          "url": "https://www.instagram.com/artour_busan/p/Df1VJzHk9zH/",
+          "views": null,
+          "likes": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-16",
+          "type": "게시물(이미지)",
+          "title": "은행 금고 문, 열어봐도 될까요? (부산근현대역사관)",
+          "url": "https://www.instagram.com/artour_busan/p/Df1Uc1Qk0ak/",
+          "views": null,
+          "likes": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-05",
+          "type": "릴스",
+          "title": "작전명 아르투어부산, 씨걸이 액션 예고편 〈THE BERET〉",
+          "url": "https://www.instagram.com/artour_busan/reel/DfYzmPCi6qI/",
+          "views": 152,
+          "likes": 1,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-05",
+          "type": "릴스",
+          "title": "씨걸이의 부산 예술여행 하루 코스",
+          "url": "https://www.instagram.com/artour_busan/reel/DfYypUOiBuI/",
+          "views": 209,
+          "likes": 3,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-05",
+          "type": "릴스",
+          "title": "그림 속으로 뛰어든 씨걸이",
+          "url": "https://www.instagram.com/artour_busan/reel/DfYyggRiOJD/",
+          "views": 140,
+          "likes": 2,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-05",
+          "type": "릴스",
+          "title": "영화의전당 런웨이에 선 씨걸이, 비트마다 변신",
+          "url": "https://www.instagram.com/artour_busan/reel/DfYxhAvC03-/",
+          "views": 161,
+          "likes": 3,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-05",
+          "type": "릴스",
+          "title": "야생의 씨걸이, 미술관에 가다",
+          "url": "https://www.instagram.com/artour_busan/reel/DfYrV5OipDg/",
+          "views": 136,
+          "likes": 1,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-05",
+          "type": "릴스",
+          "title": "사진미술관에서 영감 받은 씨걸이의 부산 스냅",
+          "url": "https://www.instagram.com/artour_busan/reel/DfYrJy4CHx0/",
+          "views": 113,
+          "likes": 1,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-05",
+          "type": "릴스",
+          "title": "지하철 문이 열릴 때마다 변하는 씨걸이",
+          "url": "https://www.instagram.com/artour_busan/reel/DfYrAYzit5i/",
+          "views": 497,
+          "likes": 1,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-05",
+          "type": "릴스",
+          "title": "씨걸이 vs 비둘기, 영도 벽화 스피드 배틀",
+          "url": "https://www.instagram.com/artour_busan/reel/DfYq3J3CRIU/",
+          "views": 6705,
+          "likes": 47,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-05",
+          "type": "릴스",
+          "title": "자갈치 새벽 경매에서 씨걸이가 낙찰받은 것",
+          "url": "https://www.instagram.com/artour_busan/reel/DfYquMqiH_U/",
+          "views": 479,
+          "likes": 3,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-05",
+          "type": "릴스",
+          "title": "씨걸이 시점으로 부산 예술지도를 날아 봤다",
+          "url": "https://www.instagram.com/artour_busan/reel/DfYqlFiiNvI/",
+          "views": 124,
+          "likes": 1,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-05",
+          "type": "릴스",
+          "title": "씨걸이의 어린 시절, 광안리에서 처음 붓을 든 날",
+          "url": "https://www.instagram.com/artour_busan/reel/DfYk8yZCJKI/",
+          "views": 137,
+          "likes": 3,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-05",
+          "type": "릴스",
+          "title": "도모헌 정원에서 하루를 보낸 씨걸이",
+          "url": "https://www.instagram.com/artour_busan/reel/DfYkz2TiE4Z/",
+          "views": 138,
+          "likes": 1,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-05",
+          "type": "릴스",
+          "title": "미술관에서 작품인 척하던 씨걸이의 최후",
+          "url": "https://www.instagram.com/artour_busan/reel/DfYkqmoiEdd/",
+          "views": 135,
+          "likes": 1,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-05",
+          "type": "릴스",
+          "title": "와이어 공장에서 커피 마시는 씨걸이? (F1963)",
+          "url": "https://www.instagram.com/artour_busan/reel/DfYkhjmCjIW/",
+          "views": 202,
+          "likes": 3,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-05",
+          "type": "릴스",
+          "title": "옥상에서 그림 그리던 씨걸이가 캔버스를 놓친 순간",
+          "url": "https://www.instagram.com/artour_busan/reel/DfYkYNDCuK8/",
+          "views": 118,
+          "likes": 1,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-05",
+          "type": "릴스",
+          "title": "새우깡 대신 붓을 훔친 씨걸이",
+          "url": "https://www.instagram.com/artour_busan/reel/DfYkOi7i8T3/",
+          "views": 243,
+          "likes": 1,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-05",
+          "type": "릴스",
+          "title": "노을 앞에서 갑자기 춤추기 시작한 씨걸이",
+          "url": "https://www.instagram.com/artour_busan/reel/DfYkEWfCnNm/",
+          "views": 131,
+          "likes": 2,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-03",
+          "type": "릴스",
+          "title": "바다를 그리던 씨걸이, 바람 한 번에 진지해졌습니다",
+          "url": "https://www.instagram.com/artour_busan/reel/DfRa3CMiofx/",
+          "views": 169,
+          "likes": 4,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-02",
+          "type": "게시물(이미지)",
+          "title": "여긴 정말, 들어가도 되는 곳? (도모헌)",
+          "url": "https://www.instagram.com/artour_busan/p/DfRTgpSE6BC/",
+          "views": null,
+          "likes": 2,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-10-21",
+          "type": "릴스",
+          "title": "부산 여행, 귀엽게 시작했는데… 마지막엔 왜 이렇게 진지해?",
+          "url": "https://www.instagram.com/artour_busan/reel/DeyIthYCpvR/",
+          "views": 139,
+          "likes": 2,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-10-21",
+          "type": "게시물(이미지)",
+          "title": "커피만 마시고 나오기엔 아까운 곳, 부산 F1963",
+          "url": "https://www.instagram.com/artour_busan/p/DeyHdibk7Bi/",
+          "views": null,
+          "likes": 3,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-10-13",
+          "type": "게시물(이미지)",
+          "title": "부산을 예술로 만나는 순간 (첫 인사)",
+          "url": "https://www.instagram.com/artour_busan/p/DedKtn2E94d/",
+          "views": null,
+          "likes": 2,
+          "comments": 0,
+          "shares": null
+        }
+      ],
+      "notes": "프로페셔널 대시보드/계정 인사이트(도달·조회 30일)는 열리지 않아(professional_dashboard 및 accounts/insights 오류) null. 이미지 게시물 5개는 조회수 미표시라 null. 릴스 조회수는 프로필 릴스 탭 표시값, 날짜는 게시물 페이지 표시일. 공유·저장 수는 미확인."
+    },
+    {
+      "key": "facebook",
+      "name": "Facebook 페이지",
+      "url": "https://www.facebook.com/profile.php?id=61595298063187",
+      "followers": 1,
+      "followersLabel": "팔로워",
+      "following": 1,
+      "posts": null,
+      "totals": {
+        "views": 276,
+        "interactions": 1,
+        "likes": 1,
+        "comments": 0,
+        "shares": 0,
+        "reach": null
+      },
+      "period": "최근 28일 (10월 20일~11월 16일, 비즈니스 대시보드)",
+      "views_detail": {
+        "views_28d": 276,
+        "views_28d_change": "+1,524%",
+        "views_3sec_plus": 50,
+        "views_1min_plus": 0,
+        "watch_time": "1시간 1분",
+        "by_type": {
+          "릴스": "90.6%",
+          "여러사진": "7.3%",
+          "사진": "1.1%",
+          "기타": "1.1%"
+        },
+        "followers_vs_nonfollowers": {
+          "followers": "0.4%",
+          "non_followers": "99.6%"
+        },
+        "new_follows_28d": 0
+      },
+      "items": [
+        {
+          "date": "2026-10-22",
+          "type": "릴스",
+          "title": "부산의 색과 빛을 따라 여행하던 갈매기. 마지막에 갑자기 진지해집니다",
+          "url": null,
+          "views": 92,
+          "likes": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "릴스",
+          "title": "와이어 공장에서 커피 마시는 씨걸이? (F1963)",
+          "url": null,
+          "views": 37,
+          "likes": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-03",
+          "type": "릴스",
+          "title": "바다를 그리던 씨걸이, 바람 한 번에 진지해졌습니다",
+          "url": null,
+          "views": 28,
+          "likes": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "릴스",
+          "title": "옥상에서 그림 그리던 씨걸이가 캔버스를 놓친 순간",
+          "url": null,
+          "views": 15,
+          "likes": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "릴스",
+          "title": "새우깡 대신 붓을 훔친 씨걸이",
+          "url": null,
+          "views": 15,
+          "likes": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "릴스",
+          "title": "노을 앞에서 갑자기 춤추기 시작한 씨걸이",
+          "url": null,
+          "views": 15,
+          "likes": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "릴스",
+          "title": "도모헌 정원에서 하루를 보낸 씨걸이",
+          "url": null,
+          "views": 13,
+          "likes": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "릴스",
+          "title": "미술관에서 작품인 척하던 씨걸이의 최후",
+          "url": null,
+          "views": 11,
+          "likes": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "릴스",
+          "title": "작전명 아르투어부산, 씨걸이 액션 예고편 〈THE BERET〉",
+          "url": null,
+          "views": 9,
+          "likes": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-03",
+          "type": "게시물(이미지)",
+          "title": "여긴 정말, 들어가도 되는 곳? (도모헌)",
+          "url": null,
+          "views": 9,
+          "likes": 1,
+          "comments": 0,
+          "shares": null
+        }
+      ],
+      "notes": "페이지 좋아요 수는 별도 표시 없이 팔로워 1명으로만 표시. 도달(reach)은 표시되지 않음(조회만 제공). 게시물별 데이터는 콘텐츠 라이브러리(10/1~11/17, 조회순)에서 지연 로딩된 상위 10개만 수집(전체 게시물 수·나머지 항목 미수집). 11/17 게시 2건 조회 5, 6. 28일 참여 합계 1건(공감 1, 댓글 0, 공유 0). 게시물별 공유 수 미표시."
+    },
+    {
+      "key": "x",
+      "name": "X (Twitter)",
+      "url": "https://x.com/artour_busan",
+      "followers": 1,
+      "followersLabel": "팔로워",
+      "following": 0,
+      "posts": 25,
+      "totals": {
+        "views": 184,
+        "likes": 1,
+        "reposts": 0,
+        "replies": 2
+      },
+      "period": "누적(수집된 19개 게시물 기준)",
+      "items": [
+        {
+          "date": "2026-11-06",
+          "type": "게시물",
+          "title": "사진미술관에서 영감 받은 씨걸이의 부산 스냅",
+          "url": null,
+          "views": 5,
+          "likes": 0,
+          "reposts": 0,
+          "replies": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "게시물",
+          "title": "지하철 문이 열릴 때마다 변하는 씨걸이",
+          "url": null,
+          "views": 14,
+          "likes": 0,
+          "reposts": 0,
+          "replies": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "게시물",
+          "title": "씨걸이 vs 비둘기, 영도 벽화 스피드 배틀",
+          "url": "https://x.com/artour_busan/status/2118548724482011242",
+          "views": 23,
+          "likes": 1,
+          "reposts": 0,
+          "replies": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "게시물",
+          "title": "자갈치 새벽 경매에서 씨걸이가 낙찰받은 것",
+          "url": "https://x.com/artour_busan/status/2118548602880696388",
+          "views": 13,
+          "likes": 0,
+          "reposts": 0,
+          "replies": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "게시물",
+          "title": "씨걸이 시점으로 부산 예술지도를 날아 봤다",
+          "url": "https://x.com/artour_busan/status/2118548456742719942",
+          "views": 23,
+          "likes": 0,
+          "reposts": 0,
+          "replies": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "게시물",
+          "title": "씨걸이의 어린 시절, 광안리에서 처음 붓을 든 날",
+          "url": "https://x.com/artour_busan/status/2118537439283499493",
+          "views": 12,
+          "likes": 0,
+          "reposts": 0,
+          "replies": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "게시물",
+          "title": "도모헌 정원에서 하루를 보낸 갈매기",
+          "url": "https://x.com/artour_busan/status/2118524027925061729",
+          "views": 7,
+          "likes": 0,
+          "reposts": 0,
+          "replies": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "게시물",
+          "title": "미술관에서 작품인 척하던 갈매기의 최후",
+          "url": "https://x.com/artour_busan/status/2118523880499511419",
+          "views": 7,
+          "likes": 0,
+          "reposts": 0,
+          "replies": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "게시물",
+          "title": "와이어 공장에서 커피 마시는 갈매기?",
+          "url": "https://x.com/artour_busan/status/2118523741164781731",
+          "views": 8,
+          "likes": 0,
+          "reposts": 0,
+          "replies": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "게시물",
+          "title": "옥상에서 그림 그리던 갈매기가 캔버스를 놓친 순간",
+          "url": "https://x.com/artour_busan/status/2118523581240127571",
+          "views": 6,
+          "likes": 0,
+          "reposts": 0,
+          "replies": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "게시물",
+          "title": "새우깡 대신 붓을 훔친 부산 갈매기",
+          "url": "https://x.com/artour_busan/status/2118523409202327896",
+          "views": 13,
+          "likes": 0,
+          "reposts": 0,
+          "replies": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "게시물",
+          "title": "노을 앞에서 갑자기 춤추기 시작한 갈매기",
+          "url": "https://x.com/artour_busan/status/2118523187717931218",
+          "views": 4,
+          "likes": 0,
+          "reposts": 0,
+          "replies": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-03",
+          "type": "게시물",
+          "title": "바다를 그리던 씨걸이, 바람 한 번에 진지해졌습니다",
+          "url": "https://x.com/artour_busan/status/2117529614193152042",
+          "views": 10,
+          "likes": 0,
+          "reposts": 0,
+          "replies": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-03",
+          "type": "게시물",
+          "title": "여긴 정말, 들어가도 되는 곳?",
+          "url": "https://x.com/artour_busan/status/2117512956284162144",
+          "views": 15,
+          "likes": 0,
+          "reposts": 0,
+          "replies": 1,
+          "comments": 1,
+          "shares": null
+        },
+        {
+          "date": "2026-11-03",
+          "type": "게시물",
+          "title": "소소풍라운지에서 작품을 보고, 정원에서 산책 한 바퀴.",
+          "url": "https://x.com/artour_busan/status/2117513281518911601",
+          "views": 6,
+          "likes": 0,
+          "reposts": 0,
+          "replies": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-10-22",
+          "type": "게시물",
+          "title": "부산 여행, 귀엽게 시작했는데… 마지막엔 왜 이렇게 진지해?",
+          "url": "https://x.com/artour_busan/status/2113129779578929169",
+          "views": 5,
+          "likes": 0,
+          "reposts": 0,
+          "replies": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-10-22",
+          "type": "게시물",
+          "title": "커피만 마시고 나오기엔 아까운 부산 F1963.",
+          "url": "https://x.com/artour_busan/status/2113126344800522598",
+          "views": 4,
+          "likes": 0,
+          "reposts": 0,
+          "replies": 1,
+          "comments": 1,
+          "shares": null
+        },
+        {
+          "date": "2026-10-22",
+          "type": "게시물",
+          "title": "F1963 전시와 예술도서관 (카드 5-8)",
+          "url": "https://x.com/artour_busan/status/2113126348172738971",
+          "views": 3,
+          "likes": 0,
+          "reposts": 0,
+          "replies": 0,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-10-14",
+          "type": "게시물",
+          "title": "부산을 예술로 만나는 새로운 시선.",
+          "url": "https://x.com/artour_busan/status/2110174749326479459",
+          "views": 6,
+          "likes": 0,
+          "reposts": 0,
+          "replies": 0,
+          "comments": 0,
+          "shares": null
+        }
+      ],
+      "notes": "프로필 게시물 25개 중 19개만 확인(나머지 6개는 타임라인 지연 로딩/미노출로 미수집; 합계는 수집분 기준). 표시 값은 조회수/좋아요/답글이며 라벨에 없는 항목은 0으로 기록. 계정 애널리틱스는 프로필에 Premium 인증 유도 문구가 표시되어(유료 필요) 열지 않음. 상단 2개 게시물 URL 미수집."
+    },
+    {
+      "key": "youtube",
+      "name": "YouTube",
+      "url": "https://www.youtube.com/channel/UCGCsElQVju6rVecK1A4-kZg",
+      "followers": 0,
+      "followersLabel": "구독자",
+      "following": null,
+      "posts": 19,
+      "totals": {
+        "views": 152,
+        "views_28d": 157,
+        "watch_time_hours_28d": 0.4,
+        "likes": null,
+        "comments": 0,
+        "community_post_likes": 0,
+        "community_post_comments": 0
+      },
+      "period": "누적(공개 영상 19개 합계) / 분석 개요는 지난 28일",
+      "items": [
+        {
+          "date": "2026-11-06",
+          "type": "Shorts",
+          "title": "작전명 아르투어부산, 씨걸이 액션 예고편 〈THE BERET〉 #Shorts",
+          "url": null,
+          "views": 6,
+          "likes": null,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "Shorts",
+          "title": "씨걸이의 부산 예술여행 하루 코스 #Shorts",
+          "url": null,
+          "views": 2,
+          "likes": null,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "Shorts",
+          "title": "그림 속으로 뛰어든 씨걸이 #Shorts",
+          "url": null,
+          "views": 3,
+          "likes": null,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "Shorts",
+          "title": "영화의전당 런웨이에 선 씨걸이, 비트마다 변신 #Shorts",
+          "url": null,
+          "views": 1,
+          "likes": null,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "Shorts",
+          "title": "야생의 씨걸이, 미술관에 가다 #Shorts",
+          "url": null,
+          "views": 2,
+          "likes": null,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "Shorts",
+          "title": "사진미술관에서 영감 받은 씨걸이의 부산 스냅 #Shorts",
+          "url": null,
+          "views": 0,
+          "likes": null,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "Shorts",
+          "title": "지하철 문이 열릴 때마다 변하는 씨걸이 #Shorts",
+          "url": null,
+          "views": 4,
+          "likes": null,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "Shorts",
+          "title": "씨걸이 vs 비둘기, 영도 벽화 스피드 배틀 #Shorts",
+          "url": null,
+          "views": 5,
+          "likes": null,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "Shorts",
+          "title": "자갈치 새벽 경매에서 씨걸이가 낙찰받은 것 #Shorts",
+          "url": null,
+          "views": 24,
+          "likes": null,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "Shorts",
+          "title": "씨걸이 시점으로 부산 예술지도를 날아 봤다 #Shorts",
+          "url": null,
+          "views": 0,
+          "likes": null,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "Shorts",
+          "title": "씨걸이의 어린 시절, 광안리에서 처음 붓을 든 날 #Shorts",
+          "url": null,
+          "views": 0,
+          "likes": null,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "Shorts",
+          "title": "도모헌 정원에서 하루를 보낸 씨걸이 #Shorts",
+          "url": null,
+          "views": 2,
+          "likes": null,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "Shorts",
+          "title": "미술관에서 작품인 척하던 씨걸이의 최후 #Shorts",
+          "url": null,
+          "views": 87,
+          "likes": null,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "Shorts",
+          "title": "와이어 공장에서 커피 마시는 씨걸이? #Shorts",
+          "url": null,
+          "views": 2,
+          "likes": null,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "Shorts",
+          "title": "옥상에서 그림 그리던 씨걸이가 캔버스를 놓친 순간 #Shorts",
+          "url": null,
+          "views": 0,
+          "likes": null,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "Shorts",
+          "title": "새우깡 대신 붓을 훔친 씨걸이 #Shorts",
+          "url": null,
+          "views": 2,
+          "likes": null,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-06",
+          "type": "Shorts",
+          "title": "노을 앞에서 갑자기 춤추기 시작한 씨걸이 #Shorts",
+          "url": null,
+          "views": 0,
+          "likes": null,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-11-03",
+          "type": "Shorts",
+          "title": "바다를 그리던 갈매기가 갑자기 진지해진 이유 #Shorts",
+          "url": null,
+          "views": 10,
+          "likes": null,
+          "comments": 0,
+          "shares": null
+        },
+        {
+          "date": "2026-10-22",
+          "type": "Shorts",
+          "title": "부산 여행하던 갈매기가 갑자기 진지해진 이유 #Shorts",
+          "url": null,
+          "views": 2,
+          "likes": null,
+          "comments": 0,
+          "shares": null
+        }
+      ],
+      "community": {
+        "posts_seen": "5개 이상(최신 2026-11-17 깡깡이예술마을, 부산근현대역사관 등)",
+        "latest_likes": 0,
+        "latest_comments": 0
+      },
+      "notes": "Studio 분석 개요(지난 28일): 조회수 157, 시청 시간 0.4시간(목록 조회수 합 152와의 차이는 집계 기준 차이로 추정). Studio 목록에는 댓글 열만 있고 좋아요 열은 없음(최신 Shorts THE BERET 좋아요 0만 확인). 초안 2개는 제외. 영상별 좋아요 미수집이라 null. 총 조회수는 목록 합계로 산출. 개별 영상 URL 미수집."
+    },
+    {
+      "key": "naver",
+      "name": "네이버 블로그",
+      "url": "https://blog.naver.com/artour_busan",
+      "followers": 1,
+      "followersLabel": "이웃",
+      "following": null,
+      "posts": 24,
+      "totals": {
+        "views_nov_2_to_17": 28,
+        "views_oct_ranked_posts": 15,
+        "views_today": 1,
+        "likes_latest_post": 0,
+        "comments_latest_post": 0,
+        "visitors_unique": null
+      },
+      "period": "일간 조회수 11/2~11/17 합계 28(11/17 실시간 1 포함), 10월 월간 순위 합계 15",
+      "daily_views": {
+        "2026-11-17": 1,
+        "2026-11-16": 0,
+        "2026-11-15": 0,
+        "2026-11-14": 2,
+        "2026-11-13": 0,
+        "2026-11-12": 5,
+        "2026-11-11": 1,
+        "2026-11-10": 0,
+        "2026-11-09": 2,
+        "2026-11-08": 1,
+        "2026-11-07": 2,
+        "2026-11-06": 2,
+        "2026-11-05": 0,
+        "2026-11-04": 4,
+        "2026-11-03": 7,
+        "2026-11-02": 1
+      },
+      "items": [
+        {
+          "date": "2026-11-17",
+          "type": "블로그 글",
+          "title": "영도 깡깡이예술마을, 마을다방에서 벽화 골목까지 씨걸이와 천천히",
+          "url": null,
+          "views": null,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-11-17",
+          "type": "블로그 글",
+          "title": "부산근현대역사관, 은행 금고에서 1929년 별관 서가까지 씨걸이와 천천히",
+          "url": null,
+          "views": null,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-11-09",
+          "type": "블로그 글",
+          "title": "작전명 아르투어부산, 씨걸이 액션 예고편 〈THE BERET〉｜아르투어부산 캐릭터 영상",
+          "url": null,
+          "views": null,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-11-09",
+          "type": "블로그 글",
+          "title": "씨걸이의 부산 예술여행 하루 코스｜아르투어부산 캐릭터 영상",
+          "url": null,
+          "views": null,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-11-09",
+          "type": "블로그 글",
+          "title": "그림 속으로 뛰어든 씨걸이｜아르투어부산 캐릭터 영상",
+          "url": null,
+          "views": null,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-10-22",
+          "type": "블로그 글",
+          "title": "부산 F1963, 커피만 마시고 나오기엔 아까운 곳｜전시·예술도서관·소리길",
+          "url": null,
+          "views": 8,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-10-22",
+          "type": "블로그 글",
+          "title": "부산 여행하던 갈매기가 갑자기 진지해진 이유｜아르투어 부산 캐릭터 영상",
+          "url": null,
+          "views": 5,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        },
+        {
+          "date": "2026-10-14",
+          "type": "블로그 글",
+          "title": "아르투어 부산 첫 인사 | 부산을 예술로 만나는 새로운 경험",
+          "url": null,
+          "views": 2,
+          "likes": null,
+          "comments": null,
+          "shares": null
+        }
+      ],
+      "notes": "이웃 1명, 글 24개. 오늘 조회수 1(11/17 17:06 기준), 유입 100% 네이버 블로그 PC. 11월 글별 조회수 순위는 데이터 없음이라 null; 10월 월간 순위의 3개 글만 조회수 확인. 순방문자수·누적 방문자·글별 공감/댓글은 확인 안 됨(최신 글 공감 0, 댓글 없음). 글 24개 중 8개 제목만 수집."
+    }
+  ]
+}

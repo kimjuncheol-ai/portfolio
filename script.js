@@ -359,6 +359,56 @@ if (tourPopup) {
   });
 }
 
+// Long archives: the section index becomes tabs so one section shows at a time (all sections stay in the HTML without JavaScript).
+(() => {
+  document.querySelectorAll('nav[data-section-tabs]').forEach((nav) => {
+    const tabs = [...nav.querySelectorAll('a[href^="#"]')];
+    const panels = tabs.map(tab => document.getElementById(tab.hash.slice(1)));
+    if (tabs.length < 2 || panels.some(panel => !panel)) return;
+    nav.setAttribute('role', 'tablist');
+    tabs.forEach((tab, i) => {
+      tab.setAttribute('role', 'tab');
+      tab.id ||= `${panels[i].id}-tab`;
+      tab.setAttribute('aria-controls', panels[i].id);
+      panels[i].setAttribute('role', 'tabpanel');
+      panels[i].setAttribute('aria-labelledby', tab.id);
+    });
+    const select = (index, { focus = false, reveal = false } = {}) => {
+      tabs.forEach((tab, i) => {
+        const active = i === index;
+        tab.setAttribute('aria-selected', String(active));
+        tab.tabIndex = active ? 0 : -1;
+        panels[i].hidden = !active;
+      });
+      if (focus) tabs[index].focus();
+      if (reveal && nav.getBoundingClientRect().top < 0) nav.scrollIntoView({ block: 'start' });
+    };
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', (event) => {
+        event.preventDefault();
+        select(index, { reveal: true });
+        history.replaceState(null, '', tab.hash);
+      });
+      tab.addEventListener('keydown', (event) => {
+        const step = { ArrowRight: 1, ArrowLeft: -1 }[event.key];
+        if (!step) return;
+        event.preventDefault();
+        select((index + step + tabs.length) % tabs.length, { focus: true });
+      });
+    });
+    const fromHash = () => {
+      const target = location.hash.length > 1 ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
+      const index = target ? panels.findIndex(panel => panel.contains(target)) : -1;
+      if (index < 0) return false;
+      select(index);
+      requestAnimationFrame(() => (target === panels[index] ? nav : target).scrollIntoView({ block: 'start' }));
+      return true;
+    };
+    if (!fromHash()) select(0);
+    window.addEventListener('hashchange', fromHash);
+  });
+})();
+
 // Card news: show one series at a time behind a series picker (all series stay in the HTML without JavaScript).
 (() => {
   const archive = document.querySelector('#artour-cardnews');

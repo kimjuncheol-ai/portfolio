@@ -243,6 +243,11 @@ a:focus-visible {
 }
 .archive-index a { display: inline-flex; align-items: center; min-height: 2.5rem; padding: .35rem .75rem; text-decoration: none; color: #b2dcb7; }
 .archive-index a:hover, .archive-index a:focus-visible { color: #001803; background: var(--green); outline: none; }
+.archive-index { scroll-margin-top: 8rem; }
+.archive-index a[aria-selected="true"] { color: #001803; background: var(--green); }
+.archive-index a[aria-selected="true"]::before { content: "> "; }
+[role="tabpanel"][hidden] { display: none !important; }
+.archive-index--sns { margin-top: clamp(2.5rem, 5vw, 4rem); }
 .archive-section, .channel-story-section { margin-top: clamp(3.5rem, 7vw, 6rem); scroll-margin-top: 8rem; }
 #projects, .visual-case { scroll-margin-top: 8rem; }
 .archive-section .collection-intro h2 { font-size: clamp(1.45rem, 2.6vw, 2.5rem); line-height: 1.35; }
@@ -601,6 +606,42 @@ a:focus-visible {
 
 .cardnews-series { padding-block: 1.5rem 2rem; border-bottom: 1px dashed #167522; scroll-margin-top: 8rem; }
 .cardnews-series[hidden] { display: none; }
+/* SNS stats dashboard */
+.sns-dash { margin-top: clamp(1rem, 2vw, 1.5rem); border: 1px solid var(--green); background: #030503; }
+.sns-dash > header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1rem; padding: .5rem .65rem; border-bottom: 1px dashed #167522; color: #62a56a; font-size: .7rem; }
+.sns-dash h3 { margin: 0; color: #9eeaa7; font-size: inherit; font-weight: 400; }
+.sns-dash__kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; border-bottom: 1px dashed #167522; }
+.sns-dash__kpis > div { padding: .9rem .75rem; border-left: 1px dashed #167522; }
+.sns-dash__kpis > div:first-child { border-left: 0; }
+.sns-dash__kpis dt { color: #68c574; font-size: .7rem; }
+.sns-dash__kpis dd { margin: .35rem 0 0; color: #e5ffe8; font-size: clamp(1.4rem, 2.6vw, 2rem); font-variant-numeric: tabular-nums; }
+.sns-dash__kpis dd.sns-dash__sub { margin-top: .2rem; color: #8dcb94; font-size: .7rem; }
+.sns-dash__grid { display: grid; grid-template-columns: minmax(14rem, .8fr) minmax(0, 2fr); }
+.sns-dash__chart { margin: 0; padding: .9rem .75rem; border-right: 1px dashed #167522; }
+.sns-dash__chart figcaption { margin-bottom: .6rem; color: #68c574; font-size: .7rem; }
+.sns-dash__chart ol { display: grid; gap: .55rem; margin: 0; padding: 0; list-style: none; font-size: .72rem; }
+.sns-dash__chart li { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr) 3.5rem; gap: .5rem; align-items: center; color: #b2dcb7; }
+.sns-dash__chart strong { color: #e5ffe8; font-weight: 400; text-align: right; font-variant-numeric: tabular-nums; }
+.sns-dash__bar { height: .7rem; background: #0b1a0d; }
+.sns-dash__bar i { display: block; width: var(--w); height: 100%; background: var(--green); }
+.sns-dash__table { min-width: 0; overflow-x: auto; }
+.sns-dash table { width: 100%; border-collapse: collapse; font-size: .72rem; }
+.sns-dash th, .sns-dash td { padding: .55rem .65rem; border-bottom: 1px solid #0f3a16; text-align: left; vertical-align: top; font-weight: 400; }
+.sns-dash thead th { color: #68c574; white-space: nowrap; }
+.sns-dash tbody th { color: #e5ffe8; white-space: nowrap; }
+.sns-dash td { color: #d5f2d9; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sns-dash td small { display: block; color: #6fae77; font-size: .62rem; }
+.sns-dash td.sns-dash__top { min-width: 14rem; white-space: normal; word-break: keep-all; }
+.sns-dash td.sns-dash__top span { color: #68c574; }
+.sns-dash__note { margin: 0; padding: .6rem .75rem; border-top: 1px dashed #167522; color: #79b782; font-size: .66rem; line-height: 1.7; word-break: keep-all; }
+@media (max-width: 900px) {
+  .sns-dash__kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sns-dash__kpis > div:nth-child(3) { border-left: 0; }
+  .sns-dash__kpis > div:nth-child(n + 3) { border-top: 1px dashed #167522; }
+  .sns-dash__grid { grid-template-columns: minmax(0, 1fr); }
+  .sns-dash__chart { border-right: 0; border-bottom: 1px dashed #167522; }
+  .sns-dash__table { contain: inline-size; }
+}
 /* Series picker: one card news series is shown at a time. */
 .cardnews-picker { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .6rem; margin-top: 1.25rem; scroll-margin-top: 8rem; }
 .cardnews-picker button { display: flex; align-items: center; gap: .75rem; min-width: 0; padding: .5rem .65rem; border: 1px solid #167522; background: #030503; color: #b2dcb7; text-align: left; }
