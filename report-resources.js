@@ -46,10 +46,6 @@ window.REPORT_TOURS = {
   const sourceNames = { kor: '국문 관광정보 서비스_GW', wellness: '웰니스관광정보' };
   const sourceStates = { live: '정상 응답', pending: '연결 준비 중', error: '응답 확인 불가' };
   const safeImage = value => { try { const u = new URL(value); return u.protocol === 'https:' && u.hostname === 'tong.visitkorea.or.kr' ? u.href : ''; } catch { return ''; } };
-  const summary = value => {
-    const first = String(value || '').match(/^.*?[.!?](?:\s|$)/u)?.[0]?.trim();
-    return first && first.length <= 70 ? first : '';
-  };
   // Keep search metadata aligned with the exact API text displayed on the card.
   const syncStructuredResource = (card, key) => {
     const script = document.getElementById('page-structured-data');
@@ -85,8 +81,7 @@ window.REPORT_TOURS = {
         const address = card.querySelector('[data-api-address]');
         address.textContent = item.address;
         address.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.address)}`;
-        const intro = summary(item.description);
-        if (intro) card.querySelector('[data-api-intro]').textContent = intro;
+        // The card's one-line intro stays the curated noun phrase so all six read alike; the API description appears in the explorer.
         syncStructuredResource(card, item.key);
         const stamp = card.querySelector('[data-api-stamp]');
         stamp.textContent = `API 갱신 · ${item.modifiedAt?.slice(0,4)}.${item.modifiedAt?.slice(4,6)}.${item.modifiedAt?.slice(6,8)} 자료`;
