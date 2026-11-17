@@ -600,6 +600,23 @@ a:focus-visible {
 .channel-log a:hover, .channel-log a:focus-visible { color: #fff; }
 
 .cardnews-series { padding-block: 1.5rem 2rem; border-bottom: 1px dashed #167522; scroll-margin-top: 8rem; }
+.cardnews-series[hidden] { display: none; }
+/* Series picker: one card news series is shown at a time. */
+.cardnews-picker { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .6rem; margin-top: 1.25rem; scroll-margin-top: 8rem; }
+.cardnews-picker button { display: flex; align-items: center; gap: .75rem; min-width: 0; padding: .5rem .65rem; border: 1px solid #167522; background: #030503; color: #b2dcb7; text-align: left; }
+.cardnews-picker img { flex: 0 0 auto; width: 2.6rem; height: auto; aspect-ratio: 4 / 5; border: 1px solid #20582a; }
+.cardnews-picker span { display: grid; gap: .2rem; min-width: 0; }
+.cardnews-picker strong { overflow: hidden; color: #e5ffe8; font-size: .85rem; font-weight: 400; text-overflow: ellipsis; white-space: nowrap; }
+.cardnews-picker small { color: #68c574; font-size: .7rem; }
+.cardnews-picker button:hover { border-color: var(--green); }
+.cardnews-picker button:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+.cardnews-picker button[aria-selected="true"] { border-color: var(--green); background: var(--green); color: #001803; }
+.cardnews-picker button[aria-selected="true"] strong,
+.cardnews-picker button[aria-selected="true"] small { color: #001803; }
+@media (max-width: 700px) {
+  .cardnews-picker { display: flex; overflow-x: auto; contain: inline-size; scroll-snap-type: x mandatory; padding-bottom: .4rem; }
+  .cardnews-picker button { flex: 0 0 min(72%, 15rem); scroll-snap-align: start; }
+}
 .cardnews-series__head { display: grid; grid-template-columns: minmax(10rem, .65fr) minmax(0, 1fr); gap: .75rem 3rem; align-items: start; margin-bottom: 1.4rem; }
 .cardnews-series__head .project-entry__kind { margin-bottom: .6rem; }
 .cardnews-series h3 { margin: 0; color: #e5ffe8; font-size: clamp(1.1rem, 1.8vw, 1.5rem); font-weight: 400; line-height: 1.45; text-wrap: balance; word-break: keep-all; }

@@ -359,6 +359,62 @@ if (tourPopup) {
   });
 }
 
+// Card news: show one series at a time behind a series picker (all series stay in the HTML without JavaScript).
+(() => {
+  const archive = document.querySelector('#artour-cardnews');
+  const series = archive ? [...archive.querySelectorAll(':scope > .cardnews-series')] : [];
+  if (series.length < 2) return;
+  const picker = document.createElement('div');
+  picker.className = 'cardnews-picker';
+  picker.setAttribute('role', 'tablist');
+  picker.setAttribute('aria-label', '카드뉴스 시리즈 선택');
+  const tabs = series.map((item, index) => {
+    const title = item.querySelector('h3')?.textContent.split(' · ')[0] || `시리즈 ${index + 1}`;
+    const meta = item.querySelector('.project-entry__kind')?.textContent.split(' / ')[1]?.split(' · ')[0] || '';
+    const thumb = item.querySelector('.cardnews-strip img')?.getAttribute('src');
+    const tab = document.createElement('button');
+    tab.type = 'button';
+    tab.id = `${item.id}-tab`;
+    tab.setAttribute('role', 'tab');
+    tab.setAttribute('aria-controls', item.id);
+    tab.innerHTML = `${thumb ? `<img src="${thumb}" alt="" width="54" height="68" loading="lazy">` : ''}<span><strong></strong><small></small></span>`;
+    tab.querySelector('strong').textContent = title;
+    tab.querySelector('small').textContent = meta;
+    item.setAttribute('role', 'tabpanel');
+    item.setAttribute('aria-labelledby', tab.id);
+    picker.append(tab);
+    return tab;
+  });
+  series[0].before(picker);
+  const select = (index, focus = false) => {
+    tabs.forEach((tab, i) => {
+      const active = i === index;
+      tab.setAttribute('aria-selected', String(active));
+      tab.tabIndex = active ? 0 : -1;
+      series[i].hidden = !active;
+    });
+    if (focus) tabs[index].focus();
+  };
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => select(index));
+    tab.addEventListener('keydown', (event) => {
+      const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[event.key];
+      if (!step) return;
+      event.preventDefault();
+      select((index + step + tabs.length) % tabs.length, true);
+    });
+  });
+  const fromHash = () => {
+    const index = series.findIndex(item => `#${item.id}` === location.hash);
+    if (index < 0) return false;
+    select(index);
+    requestAnimationFrame(() => picker.scrollIntoView({ block: 'start' }));
+    return true;
+  };
+  if (!fromHash()) select(0);
+  window.addEventListener('hashchange', fromHash);
+})();
+
 // Group related works in a single row, with native touch/trackpad scrolling.
 (() => {
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
