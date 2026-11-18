@@ -1,0 +1,5 @@
+/* Readability pass informed by Unslop, Damir Sokolovsky, CC BY 4.0.
+   Scoped to brand-reference annotations and social statistics; common layout is untouched. */
+.brand-marks p,.brand-marks figcaption,.brand-rule-visuals figcaption{font-size:max(.6875rem, .85vw);line-height:1.7}
+.sns-dash small{font-size:.6875rem;line-height:1.7}
+.sns-dash td small,.sns-dash__trend small{font-size:.6875rem!important;line-height:1.7}

@@ -1,4 +1,5 @@
-/* Final project follows the existing archive typography and spacing scale. */
+/* Polish informed by Unslop — Damir Sokolovsky, https://heydamir.design/unslop, CC BY 4.0.
+   Final project follows the existing archive typography and spacing scale. */
 .muboso-case{color:var(--green);--case-line:#167522;min-width:0}
 .muboso-case p{line-height:1.85;word-break:keep-all;overflow-wrap:break-word}
 .case-command,.case-index,.case-detail{font-size:.75rem;letter-spacing:.04em;color:#68c574}
