@@ -1137,6 +1137,9 @@ a:focus-visible {
     .resource-card { grid-row: span 8; grid-template-rows: subgrid; row-gap: 0; }
     .resource-card dl { display: contents; }
     .resource-card dl > div { margin-inline: .65rem; }
+    /* Report resources: two rows of cards, read left to right, scrolled sideways together. */
+    .resource-grid.media-rail[data-rows="2"] { grid-auto-flow: row; grid-template-rows: none; grid-auto-rows: auto; grid-template-columns: repeat(var(--rail-cols), min(clamp(18rem, 27vw, 23rem), calc(100% - 2.5rem))); grid-auto-columns: auto; }
+    .resource-grid.media-rail[data-rows="2"] > .resource-card { margin-bottom: clamp(0.8rem, 1.4vw, 1.25rem); }
   }
 }
 .resource-api, .resource-planned { margin-top: clamp(2rem, 4vw, 3.5rem); color: #d7ffdc; }

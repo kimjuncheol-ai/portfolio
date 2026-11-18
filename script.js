@@ -558,6 +558,8 @@ if (tourPopup) {
     const title = rail.getAttribute('aria-label') || section?.querySelector('h3, h2')?.textContent || '작품 모음';
     rail.id ||= `media-rail-${index + 1}`;
     rail.classList.add('media-rail');
+    // Report resource cards sit in two rows on wider screens so twice as many are visible at once.
+    if (rail.matches('.resource-grid') && cards.length > 3) { rail.dataset.rows = '2'; rail.style.setProperty('--rail-cols', Math.ceil(cards.length / 2)); }
     rail.tabIndex = 0;
     // Preserve ordered-list semantics for numbered card news.
     if (!rail.matches('ol, ul')) rail.setAttribute('role', 'group');
@@ -576,7 +578,8 @@ if (tourPopup) {
       const first = cards.findIndex(card => start(card) + card.offsetWidth > rail.scrollLeft + 8);
       const visible = cards.filter(card => start(card) < rail.scrollLeft + rail.clientWidth - 8 && start(card) + card.offsetWidth > rail.scrollLeft + 8);
       const last = first + visible.length;
-      const label = visible.length > 1 ? `${first + 1}–${last} / ${cards.length}` : `${first + 1} / ${cards.length}`;
+      const twoRows = rail.dataset.rows === '2' && matchMedia('(min-width: 701px)').matches;
+      const label = twoRows ? `${visible.length}곳 표시 / ${cards.length}곳` : visible.length > 1 ? `${first + 1}–${last} / ${cards.length}` : `${first + 1} / ${cards.length}`;
       const position = controls.querySelector('.media-rail-position');
       if (position.textContent !== label) position.textContent = label;
       previous.disabled = rail.scrollLeft < 2;
