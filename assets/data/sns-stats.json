@@ -1,6 +1,6 @@
 {
   "asOf": "2026-11-18",
-  "collectedAt": "2026-11-18 14:54 KST",
+  "collectedAt": "2026-11-18 15:18 KST",
   "channels": [
     {
       "key": "instagram",
@@ -43,7 +43,7 @@
       "viewsBasis": "불러온 게시물 누적",
       "followers": 1,
       "posts": 28,
-      "views": 510,
+      "views": 534,
       "counted": 28,
       "top": {
         "title": "씨걸이 vs 비둘기, 영도 벽화 스피드 배틀",
@@ -73,22 +73,16 @@
       "name": "Naver Blog",
       "url": "https://blog.naver.com/artour_busan",
       "followersLabel": "이웃",
-      "viewsBasis": "11.2부터 일별 합산",
+      "viewsBasis": "월간·일별 합산 누적",
       "followers": 1,
       "posts": 24,
-      "views": 28,
-      "dailyViews": null,
-      "dailyViewsYesterday": null,
-      "note": "naver stats temporarily unavailable",
+      "views": 59,
       "top": {
         "title": "부산 F1963, 커피만 마시고 나오기엔 아까운 곳｜전시·예술도서관·소리길",
         "views": 8,
         "url": null
       },
-      "status": "partial",
-      "kept": [
-        "views"
-      ]
+      "status": "ok"
     }
   ]
 }

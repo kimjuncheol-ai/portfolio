@@ -13,7 +13,7 @@ const CHANNELS = [
   { key: 'facebook', name: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61595298063187', followersLabel: '팔로워', viewsBasis: '최근 28일' },
   { key: 'x', name: 'X', url: 'https://x.com/artour_busan', followersLabel: '팔로워', viewsBasis: '불러온 게시물 누적' },
   { key: 'youtube', name: 'YouTube', url: 'https://www.youtube.com/@artour_busan', followersLabel: '구독자', viewsBasis: '채널 누적' },
-  { key: 'naver', name: 'Naver Blog', url: 'https://blog.naver.com/artour_busan', followersLabel: '이웃', viewsBasis: '11.2부터 일별 합산' },
+  { key: 'naver', name: 'Naver Blog', url: 'https://blog.naver.com/artour_busan', followersLabel: '이웃', viewsBasis: '월간·일별 합산 누적' },
 ];
 
 // Runs one channel script in a fresh `aside repl` session and returns the JSON line it prints.
@@ -36,21 +36,18 @@ const SKIP = fs.existsSync(path.join(__dirname, 'skip.json')) ? JSON.parse(fs.re
 const historyFile = path.join(DATA, 'sns-history.json');
 const history = fs.existsSync(historyFile) ? JSON.parse(fs.readFileSync(historyFile, 'utf8')) : [];
 
-// Naver shows only per-day views, so each day's count is stored in history and the total is
-// the views counted by hand up to 2026-11-17 plus every later day's count.
-const NAVER_BASE = { through: '2026-11-17', views: 28 };
-const yesterday = new Date(Date.parse(date) - 86400e3).toISOString().slice(0, 10);
+// Naver has no lifetime view count: the total is every finished month from the monthly table plus this
+// month's days. Daily counts are kept in naver-daily.json so days that drop out of Naver's 15-day table stay counted.
+const naverDailyFile = path.join(DATA, 'naver-daily.json');
 function naverViews(stats) {
-  const setDaily = (day, value) => {
-    if (value == null) return;
-    let entry = history.find(h => h.date === day);
-    if (!entry) { entry = { date: day, channels: {} }; history.push(entry); }
-    entry.channels.naver = { ...(entry.channels.naver || {}), dailyViews: value };
-  };
-  setDaily(date, stats.dailyViews);
-  setDaily(yesterday, stats.dailyViewsYesterday);
-  const counted = history.filter(h => h.date > NAVER_BASE.through && h.channels.naver?.dailyViews != null);
-  return counted.length ? NAVER_BASE.views + counted.reduce((sum, h) => sum + h.channels.naver.dailyViews, 0) : null;
+  const daily = fs.existsSync(naverDailyFile) ? JSON.parse(fs.readFileSync(naverDailyFile, 'utf8')) : {};
+  Object.assign(daily, stats.daily || {});
+  fs.writeFileSync(naverDailyFile, JSON.stringify(Object.fromEntries(Object.entries(daily).sort()), null, 2) + '\n');
+  const month = date.slice(0, 7);
+  const finished = Object.entries(stats.monthly || {}).filter(([m]) => m < month).reduce((sum, [, v]) => sum + v, 0);
+  const current = Object.entries(daily).filter(([d]) => d.startsWith(month)).reduce((sum, [, v]) => sum + v, 0);
+  delete stats.daily; delete stats.monthly;
+  return Object.keys(daily).length ? finished + current : null;
 }
 
 const channels = CHANNELS.map((channel) => {
@@ -98,7 +95,7 @@ console.log(`saved ${date} ${time} · ${channels.filter(c => c.status === 'ok').
 
 if (process.argv.includes('--push')) {
   const git = (...args) => spawnSync('git', ['-c', 'safe.directory=*', ...args], { cwd: ROOT, encoding: 'utf8' });
-  git('add', 'assets/data/sns-stats.json', 'assets/data/sns-history.json');
+  git('add', 'assets/data/sns-stats.json', 'assets/data/sns-history.json', 'assets/data/naver-daily.json');
   if (git('diff', '--cached', '--quiet').status !== 0) {
     git('commit', '-m', `chore: update SNS stats ${date}`);
     const push = git('push', 'origin', 'main');
