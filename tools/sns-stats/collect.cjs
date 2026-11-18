@@ -17,8 +17,8 @@ const CHANNELS = [
 ];
 
 // Runs one channel script in a fresh `aside repl` session and returns the JSON line it prints.
-function runChannel(key) {
-  const body = fs.readFileSync(path.join(__dirname, 'channels', `${key}.js`), 'utf8')
+function runChannel(key, prelude = '') {
+  const body = prelude + fs.readFileSync(path.join(__dirname, 'channels', `${key}.js`), 'utf8')
     .split(/\r?\n/).map(l => l.trim()).filter(l => l && !l.startsWith('//')).join(' ');
   const r = spawnSync(ASIDE, ['repl'], { input: body + '\n', encoding: 'utf8', timeout: 150000, maxBuffer: 16 * 1024 * 1024 });
   const line = (r.stdout || '').split(/\r?\n/).find(l => l.includes('@@JSON'));
@@ -50,6 +50,40 @@ function naverViews(stats) {
   return Object.keys(daily).length ? finished + current : null;
 }
 
+// Likes that need their own pass (to stay inside Aside's 120 s per session):
+// YouTube counts each Short's like button in small batches (each retried once); Naver adds finished months to this month's days
+// from its 공감수 ranking, keeping days in naver-likes-daily.json.
+const naverLikesFile = path.join(DATA, 'naver-likes-daily.json');
+function extraLikes(key) {
+  try {
+    if (key === 'youtube') {
+      const batches = [];
+      for (let start = 0; start < 60; start += 3) {
+        const run = () => runChannel('youtube-likes', `const SLICE = [${start}, ${start + 3}];\n`);
+        let batch;
+        try { batch = run(); } catch { batch = run(); }
+        batches.push(batch);
+        if (start + 3 >= batch.total) break;
+      }
+      const complete = batches.every(b => b.checked === b.of);
+      return complete ? { likes: batches.reduce((sum, b) => sum + b.likes, 0) } : {};
+    }
+    if (key === 'naver') {
+      const r = runChannel('naver-likes');
+      const daily = fs.existsSync(naverLikesFile) ? JSON.parse(fs.readFileSync(naverLikesFile, 'utf8')) : {};
+      Object.assign(daily, r.daily || {});
+      fs.writeFileSync(naverLikesFile, JSON.stringify(Object.fromEntries(Object.entries(daily).sort()), null, 2) + '\n');
+      const month = date.slice(0, 7);
+      const finished = Object.entries(r.monthly || {}).filter(([m]) => m < month).reduce((sum, [, v]) => sum + v, 0);
+      const current = Object.entries(daily).filter(([d]) => d.startsWith(month)).reduce((sum, [, v]) => sum + v, 0);
+      return { likes: finished + current };
+    }
+  } catch (error) {
+    console.error(key, 'likes failed:', error.message.slice(-220));
+  }
+  return {};
+}
+
 const channels = CHANNELS.map((channel) => {
   try {
     if (SKIP.includes(channel.key)) throw new Error('skipped (skip.json)');
@@ -62,6 +96,7 @@ const channels = CHANNELS.map((channel) => {
     }
     console.log(channel.key, JSON.stringify(stats));
     if (channel.key === 'naver') stats.views = naverViews(stats);
+    Object.assign(stats, extraLikes(channel.key));
     // A metric the page did not show this time keeps its last known value instead of dropping to empty.
     const old = previous?.channels?.find(c => c.key === channel.key) || {};
     const kept = ['followers', 'posts', 'views', 'likes', 'top'].filter(k => stats[k] == null && old[k] != null);
@@ -96,7 +131,7 @@ console.log(`saved ${date} ${time} · ${channels.filter(c => c.status === 'ok').
 
 if (process.argv.includes('--push')) {
   const git = (...args) => spawnSync('git', ['-c', 'safe.directory=*', ...args], { cwd: ROOT, encoding: 'utf8' });
-  git('add', 'assets/data/sns-stats.json', 'assets/data/sns-history.json', 'assets/data/naver-daily.json');
+  git('add', 'assets/data/sns-stats.json', 'assets/data/sns-history.json', 'assets/data/naver-daily.json', 'assets/data/naver-likes-daily.json');
   if (git('diff', '--cached', '--quiet').status !== 0) {
     git('commit', '-m', `chore: update SNS stats ${date}`);
     const push = git('push', 'origin', 'main');

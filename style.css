@@ -1697,8 +1697,8 @@ a:focus-visible {
 @media (min-width: 1200px) {
   .site-shell {
     width: calc(100% - clamp(1rem, 2vw, 2rem));
-    min-height: calc(100svh - clamp(1rem, 2vw, 2rem));
-    margin: clamp(0.5rem, 1vw, 1rem);
+    min-height: calc(100svh - clamp(0.5rem, 1vw, 1rem));
+    margin: 0 clamp(0.5rem, 1vw, 1rem) clamp(0.5rem, 1vw, 1rem);
   }
 }
 
