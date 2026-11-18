@@ -13,7 +13,7 @@ const CHANNELS = [
   { key: 'facebook', name: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61595298063187', followersLabel: '팔로워', viewsBasis: '최근 28일' },
   { key: 'x', name: 'X', url: 'https://x.com/artour_busan', followersLabel: '팔로워', viewsBasis: '불러온 게시물 누적' },
   { key: 'youtube', name: 'YouTube', url: 'https://www.youtube.com/@artour_busan', followersLabel: '구독자', viewsBasis: '채널 누적' },
-  { key: 'naver', name: 'Naver Blog', url: 'https://blog.naver.com/artour_busan', followersLabel: '이웃', viewsBasis: '블로그 누적' },
+  { key: 'naver', name: 'Naver Blog', url: 'https://blog.naver.com/artour_busan', followersLabel: '이웃', viewsBasis: '11.2부터 일별 합산' },
 ];
 
 // Runs one channel script in a fresh `aside repl` session and returns the JSON line it prints.
@@ -33,6 +33,26 @@ const previous = fs.existsSync(path.join(DATA, 'sns-stats.json')) ? JSON.parse(f
 
 // Channels listed in skip.json are not visited (e.g. while an account is under review); they keep their last values.
 const SKIP = fs.existsSync(path.join(__dirname, 'skip.json')) ? JSON.parse(fs.readFileSync(path.join(__dirname, 'skip.json'), 'utf8')) : [];
+const historyFile = path.join(DATA, 'sns-history.json');
+const history = fs.existsSync(historyFile) ? JSON.parse(fs.readFileSync(historyFile, 'utf8')) : [];
+
+// Naver shows only per-day views, so each day's count is stored in history and the total is
+// the views counted by hand up to 2026-11-17 plus every later day's count.
+const NAVER_BASE = { through: '2026-11-17', views: 28 };
+const yesterday = new Date(Date.parse(date) - 86400e3).toISOString().slice(0, 10);
+function naverViews(stats) {
+  const setDaily = (day, value) => {
+    if (value == null) return;
+    let entry = history.find(h => h.date === day);
+    if (!entry) { entry = { date: day, channels: {} }; history.push(entry); }
+    entry.channels.naver = { ...(entry.channels.naver || {}), dailyViews: value };
+  };
+  setDaily(date, stats.dailyViews);
+  setDaily(yesterday, stats.dailyViewsYesterday);
+  const counted = history.filter(h => h.date > NAVER_BASE.through && h.channels.naver?.dailyViews != null);
+  return counted.length ? NAVER_BASE.views + counted.reduce((sum, h) => sum + h.channels.naver.dailyViews, 0) : null;
+}
+
 const channels = CHANNELS.map((channel) => {
   try {
     if (SKIP.includes(channel.key)) throw new Error('skipped (skip.json)');
@@ -44,6 +64,7 @@ const channels = CHANNELS.map((channel) => {
       stats = runChannel(channel.key);
     }
     console.log(channel.key, JSON.stringify(stats));
+    if (channel.key === 'naver') stats.views = naverViews(stats);
     // A metric the page did not show this time keeps its last known value instead of dropping to empty.
     const old = previous?.channels?.find(c => c.key === channel.key) || {};
     const kept = ['followers', 'posts', 'views'].filter(k => stats[k] == null && old[k] != null);
@@ -65,12 +86,12 @@ if (!channels.some(c => c.status !== 'stale')) {
 fs.mkdirSync(DATA, { recursive: true });
 fs.writeFileSync(path.join(DATA, 'sns-stats.json'), JSON.stringify(snapshot, null, 2) + '\n');
 
-const historyFile = path.join(DATA, 'sns-history.json');
-const history = fs.existsSync(historyFile) ? JSON.parse(fs.readFileSync(historyFile, 'utf8')) : [];
 // Only channels read this run are recorded; a day keeps earlier readings for channels that failed.
 const fresh = Object.fromEntries(channels.filter(c => c.status !== 'stale').map(c => [c.key, { followers: c.followers, views: c.views, posts: c.posts }]));
 const at = history.findIndex(h => h.date === date);
-if (at >= 0) Object.assign(history[at].channels, fresh); else history.push({ date, channels: fresh });
+if (at < 0) history.push({ date, channels: {} });
+const today = history.find(h => h.date === date);
+for (const [key, value] of Object.entries(fresh)) today.channels[key] = { ...(today.channels[key] || {}), ...value };
 history.sort((a, b) => a.date.localeCompare(b.date));
 fs.writeFileSync(historyFile, JSON.stringify(history, null, 2) + '\n');
 console.log(`saved ${date} ${time} · ${channels.filter(c => c.status === 'ok').length}/${channels.length} channels ok`);
