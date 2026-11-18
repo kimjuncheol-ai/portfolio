@@ -28,5 +28,30 @@
         "posts": 24
       }
     }
+  },
+  {
+    "date": "2026-11-18",
+    "channels": {
+      "facebook": {
+        "followers": 1,
+        "views": 276,
+        "posts": 24
+      },
+      "x": {
+        "followers": 1,
+        "views": 408,
+        "posts": 28
+      },
+      "youtube": {
+        "followers": 0,
+        "views": 152,
+        "posts": 19
+      },
+      "naver": {
+        "followers": 1,
+        "views": 28,
+        "posts": 24
+      }
+    }
   }
 ]
