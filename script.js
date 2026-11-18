@@ -258,12 +258,12 @@ if (tourPopup) {
 
   const renderHome = () => {
     const gallery = activeTour.images.map(([src, alt, imageClass = '']) => `<img class="${escapeHTML(imageClass)}" src="${escapeHTML(src)}" alt="${escapeHTML(alt)}" loading="lazy">`).join('');
-    const source = activeTour.apiSource ? `<p class="win95-data-source">출처: <a href="${activeTour.apiSourceUrl}" target="_blank" rel="noopener noreferrer">${escapeHTML(activeTour.apiSource)}</a> · 자료 수정일 ${escapeHTML(activeTour.apiUpdatedAt?.slice(0,8))}${activeTour === tourData.forest ? ' · 공원 전체 정보이며 치유의 숲 세부 운영은 공식 안내 확인' : ''}</p>` : '<p class="win95-data-source">공식 홈페이지 기준 편집 · 확인일 2026.10.29</p>';
+    const source = activeTour.apiSource ? `<p class="win95-data-source">출처: <a href="${activeTour.apiSourceUrl}" target="_blank" rel="noopener noreferrer">${escapeHTML(activeTour.apiSource)}</a> · 자료 수정일 ${escapeHTML(activeTour.apiUpdatedAt?.slice(0,8))}${activeTour === tourData.forest ? ' · 공원 전체 정보이며 치유의 숲 세부 운영은 공식 안내 확인' : ''}</p>` : `<p class="win95-data-source">공식 홈페이지 기준 편집 · 확인일 ${activeTour.checked || '2026.10.29'}</p>`;
     popupContent.innerHTML = `
       <h2>${escapeHTML(activeTour.name)}</h2>
       <p class="win95-intro">${escapeHTML(activeTour.description)}</p>
       <div class="win95-type-row"><span class="win95-tag-icon" aria-hidden="true"></span><strong class="win95-type-label">${activeTour.type}</strong></div>
-      <div class="win95-meta"><span>${activeTour.tags.join(' ')}</span><span>편집 기준: 2026.10.29</span></div>
+      <div class="win95-meta"><span>${activeTour.tags.join(' ')}</span><span>편집 기준: ${activeTour.checked || '2026.10.29'}</span></div>
       <div class="win95-gallery${activeTour.images.length === 1 ? ' win95-gallery--single' : ''}">${gallery}</div>${source}`;
   };
 

@@ -21,3 +21,13 @@
 - 아르떼: ARTe Museum BUSAN immersive GARDEN STARRY BUSAN interior: the panoramic projection of Busan hillside houses and coastal city lights extends from left distant wall to near right wall, reflections on dark floor; preserve the supplied photo scene and perspective, not a generic museum exterior.
 - 뮤지엄 원: Museum 1 Busan interior with its suspended clear vertical cylindrical digital-art installations at center foreground, mirrored modern gallery with overhead beams, multiple displays and reflections. Preserve the distinctive suspended-cylinder installation and spatial structure in the supplied photo.
 - 허심청: Hurshimchung Busan hot spring interior: sweeping high circular glass-and-rib dome above, tiered curved blue-tiled bathing pools with a central sculptural fountain, side railings and some indoor plants. Preserve the recognizable dome ribs and pool arrangement from the supplied photo.
+
+## 2026-11-18 추가 카드 (부산근현대역사관 · 깡깡이예술마을 · 도모헌)
+
+`mmch-pixel.webp`, `kangkangee-pixel.webp`, `domoheon-pixel.webp`는 아래 사진을 1:1로 자른 뒤 114px 격자로 줄이고, 기존 카드의 녹색 13단계 팔레트와 4×4 순서 디더링으로 변환해 확대한 이미지입니다(AI 생성 아님).
+
+- 부산근현대역사관: 한국관광공사 4113502 (공공누리 제1유형) → `mmch.jpg`, 팝업 보조 `mmch-2.jpg`(4130220)
+- 깡깡이예술마을: 한국관광공사 2947325 (공공누리 제1유형) → `kangkangee.jpg`, 팝업 보조 `kangkangee-2.jpg`(2947327)
+- 도모헌: 부산시 도모헌 공식 사이트 '여름의 도모헌'(2026-07-31) → `domoheon.jpg`, 팝업 보조 `domoheon-2.jpg`(소소풍 정원)
+
+세 곳은 API 연동 대상이 아니며 운영 정보는 카드뉴스 제작 때 확인한 공식 안내 기준입니다.

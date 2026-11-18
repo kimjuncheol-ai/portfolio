@@ -32,6 +32,39 @@ window.REPORT_TOURS = {
       { name: '온천욕', audience: '온천 이용객', description: '여러 형태의 온천탕을 이용하며 쉬어가는 체험입니다. 개인의 건강 상태에 맞춰 이용해 주세요.', detail: '이용 시간·요금은 공식 안내 확인' },
       { name: '찜질·휴식', audience: '시설 이용객', description: '찜질 공간과 부대시설을 이용해 여행 중 휴식 시간을 가질 수 있습니다.', detail: '이용 조건·추가 요금은 공식 안내 확인' }
     ], reviews: []
+  },
+  mmch: {
+    name: '부산근현대역사관', type: '역사·전시', checked: '2026.11.17',
+    description: '옛 한국은행 부산지점 건물을 고쳐 문을 연 역사관으로, 부산의 근현대를 전시로 풀어냅니다. 지하 옛 금고는 금고미술관이 되었고, 1929년에 지어진 별관에는 책을 읽으며 쉬어 갈 대청서가가 있습니다.',
+    tags: ['#원도심', '#금고미술관', '#대청서가'],
+    programsUrl: 'https://www.busan.go.kr/mmch/index',
+    images: [['assets/report/mmch.jpg', '부산근현대역사관 본관 외관 · 한국관광공사 제공 · 공공누리 제1유형'], ['assets/report/mmch-2.jpg', '부산근현대역사관 별관 대청서가 · 한국관광공사 제공 · 공공누리 제1유형']],
+    programs: [
+      { name: '근현대 역사 전시', audience: '관람객', description: '개항기부터 현대까지 부산의 변화를 상설 전시로 살펴봅니다.', detail: '09:00–18:00(입장 마감 17:00) · 월요일·1월 1일 휴관 · 무료' },
+      { name: '대청서가', audience: '누구나', description: '1929년 건립 별관의 서가에서 책을 고르고 쉬어 갈 수 있습니다.', detail: '이용 조건은 공식 홈페이지 확인' }
+    ], reviews: []
+  },
+  kangkangee: {
+    name: '깡깡이예술마을', type: '공공예술·마을', checked: '2026.11.17',
+    description: '배를 고치던 영도 대평동 수리조선 마을에 공공예술을 더한 마을입니다. 벽화 골목과 마을박물관, 주민이 운영하는 대평마을다방을 따라 조선소 곁 풍경을 천천히 걸어볼 수 있습니다.',
+    tags: ['#영도', '#수리조선', '#공공예술'],
+    programsUrl: 'http://kangkangee.com/',
+    images: [['assets/report/kangkangee.jpg', '깡깡이예술마을 안내센터와 벽화 · 한국관광공사 제공 · 공공누리 제1유형'], ['assets/report/kangkangee-2.jpg', '깡깡이마을박물관 전시 · 한국관광공사 제공 · 공공누리 제1유형']],
+    programs: [
+      { name: '마을 산책', audience: '방문객', description: '벽화와 공공예술 작품을 따라 수리조선 마을 골목을 걷습니다. 주민 생활 공간이므로 조용히 둘러봐 주세요.', detail: '마을 둘러보기 무료' },
+      { name: '마을박물관·대평마을다방', audience: '방문객', description: '수리조선의 역사를 전시로 보고 주민이 운영하는 다방에서 쉬어 갑니다.', detail: '10:00–17:00 · 월요일 휴무 · 방문 전 051-418-3336 확인 권장' }
+    ], reviews: []
+  },
+  domoheon: {
+    name: '도모헌', type: '문화·정원', checked: '2026.11.02',
+    description: '1984년에 지어진 옛 부산시장 관사를 2024년 시민에게 개방한 문화공간입니다. 카페 모모스와 소소풍라운지, 부산 제1호 생활정원 소소풍을 오가며 머물 수 있습니다.',
+    tags: ['#남천동', '#소소풍정원', '#열린관사'],
+    programsUrl: 'https://www.busan.go.kr/domoheon/index',
+    images: [['assets/report/domoheon.jpg', '여름의 도모헌 · 출처: 부산시'], ['assets/report/domoheon-2.jpg', '소소풍 정원 · 출처: 부산시 도모헌']],
+    programs: [
+      { name: '소소풍 정원 산책', audience: '누구나', description: '차량 진입로를 바꾼 산책길과 생태연못을 따라 정원을 걷습니다.', detail: '입장 무료' },
+      { name: '라운지 전시·독서', audience: '누구나', description: '소소풍라운지에서 전시를 보거나 책을 읽으며 쉬어 갑니다.', detail: '화~금·일 10:00–18:00 / 토 10:00–20:00 · 월요일·공휴일 휴관' }
+    ], reviews: []
   }
 };
 
