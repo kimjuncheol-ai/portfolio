@@ -74,6 +74,215 @@ window.REPORT_TOURS = {
   bokcheon: {"name":"복천박물관","type":"고고·역사","checked":"2026.11.18","description":"1996년 개관한 고고 전문 박물관으로, 사적 복천동고분군에서 나온 갑옷·투구·금동관 등 유물을 전시합니다. 고분공원 능선의 53·54호분 야외전시관에서는 무덤 내부를 발굴 당시 모습 그대로 볼 수 있습니다.","tags":["#가야","#복천동고분군","#동래"],"programsUrl":"https://museum.busan.go.kr/bokcheon/","images":[["assets/report/bokcheon-1.jpg","복천박물관 외관 · ⓒ한국관광공사 · 공공누리 제3유형"],["assets/report/bokcheon-2.jpg","복천동 고분공원과 도심 전망 · ⓒ한국관광공사 · 공공누리 제3유형"]],"programs":[{"name":"상설전시 관람","audience":"관람객","description":"복천동고분군에서 출토된 무기·갑옷·장신구 등 가야 유물을 살펴봅니다.","detail":"화~일 09:00–18:00(입장 마감 17:00) · 월요일·1월 1일 휴관 · 무료"},{"name":"야외전시관·고분공원 산책","audience":"누구나","description":"53·54호분 내부를 보고 능선을 따라 이어진 고분공원을 걷습니다.","detail":"야외고분군 20:00까지"}],"reviews":[]}
 };
 
+// Visitor reviews: first-hand Naver blog posts, each opened and checked on 2026-11-18 (sources: outputs/report-reviews-20261118/).
+const REPORT_REVIEWS = {
+  "museum1": [
+    {
+      "title": "뮤지엄 원, 6세 아이와 다녀온 미디어아트 전시 후기",
+      "author": "둥또맘",
+      "url": "https://blog.naver.com/yrkim90/224417264834"
+    },
+    {
+      "title": "뮤지엄 원 〈다시, 낭만의 시대〉 전시 관람 후기",
+      "author": "하잉지니",
+      "url": "https://blog.naver.com/cogml3377/224393589943"
+    },
+    {
+      "title": "뮤지엄 원 〈상실의 징후들〉 전시와 주차·할인 후기",
+      "author": "류몽씨",
+      "url": "https://blog.naver.com/huihui63/223357198740"
+    }
+  ],
+  "arte": [
+    {
+      "title": "35개월 아이와 아르떼뮤지엄 부산 방문 후기",
+      "author": "도리넹",
+      "url": "https://blog.naver.com/dohariha/224478540937"
+    },
+    {
+      "title": "아르떼뮤지엄 부산 주차와 관람 정보 후기",
+      "author": "너굴쓰",
+      "url": "https://blog.naver.com/nugurrii/223613431698"
+    },
+    {
+      "title": "아르떼뮤지엄 부산 주말 오픈런 관람 후기",
+      "author": "다정한곰님",
+      "url": "https://blog.naver.com/gloomy_holic/223687481074"
+    }
+  ],
+  "hurshim": [
+    {
+      "title": "엄마와 함께 간 허심청 온천 이용 방법 후기",
+      "author": "윤마밍",
+      "url": "https://blog.naver.com/syk_sy/223749539963"
+    },
+    {
+      "title": "7살 아이와 겨울 가족여행으로 간 허심청 후기",
+      "author": "지아맘",
+      "url": "https://blog.naver.com/8852561/224477642375"
+    },
+    {
+      "title": "허심청 온천탕·찜질방 가격과 세신 이용 후기",
+      "author": "팡또",
+      "url": "https://blog.naver.com/pang_doo/223545257769"
+    }
+  ],
+  "mmch": [
+    {
+      "title": "부산근현대역사관 금고미술관 전시 관람 후기",
+      "author": "MEMOJI",
+      "url": "https://blog.naver.com/jeewon0403/224302035193"
+    },
+    {
+      "title": "부산근현대역사관 관람과 근처 카페 방문 후기",
+      "author": "마음챙김여행",
+      "url": "https://blog.naver.com/mindfultrip108/223463143578"
+    },
+    {
+      "title": "부산근현대역사관 본관과 별관 전시 관람 후기",
+      "author": "냥이프 3세",
+      "url": "https://blog.naver.com/celine1031/223964701736"
+    }
+  ],
+  "kangkangee": [
+    {
+      "title": "깡깡이예술마을 유람선 투어와 근대 역사 여행 후기",
+      "author": "리아",
+      "url": "https://blog.naver.com/julie_kim_/224344111464"
+    },
+    {
+      "title": "깡깡이예술마을 투어, 예약부터 체험까지 후기",
+      "author": "강낭토끼",
+      "url": "https://blog.naver.com/youngyoung000/224107431551"
+    },
+    {
+      "title": "버스로 찾아간 깡깡이예술마을 투어 후기",
+      "author": "힝둥이",
+      "url": "https://blog.naver.com/bijou_j_/223463219120"
+    }
+  ],
+  "domoheon": [
+    {
+      "title": "도모헌 정원과 무료 주차장, 가족 나들이 후기",
+      "author": "다도가족",
+      "url": "https://blog.naver.com/sug6375/224387478458"
+    },
+    {
+      "title": "옛 시장 관사 도모헌의 무료 전시회 관람 후기",
+      "author": "소땡",
+      "url": "https://blog.naver.com/sohyun6575/224074369719"
+    },
+    {
+      "title": "아이와 함께 간 도모헌 전시와 들락날락 후기",
+      "author": "윰로그",
+      "url": "https://blog.naver.com/dbal0336/224107278006"
+    }
+  ],
+  "f1963": [
+    {
+      "title": "F1963 테라로사와 서점, 아이와 함께한 가족 나들이 후기",
+      "author": "늘보",
+      "url": "https://blog.naver.com/dorosiyj/224464502005"
+    },
+    {
+      "title": "전시와 카페, 책방이 모인 F1963 실내 데이트 후기",
+      "author": "수띵",
+      "url": "https://blog.naver.com/0026_j/224476047993"
+    },
+    {
+      "title": "F1963 처음 가본 날, 공간 구성과 주차 정보 후기",
+      "author": "kujaka",
+      "url": "https://blog.naver.com/kujaka/224478459517"
+    }
+  ],
+  "goeun": [
+    {
+      "title": "고은사진미술관 이인미 사진전 〈흐르는 도시〉 관람 후기",
+      "author": "안녕서니",
+      "url": "https://blog.naver.com/goodmorning_sunny/224430066818"
+    },
+    {
+      "title": "아이와 함께 본 〈SEED STORIES〉 전시 후기",
+      "author": "ROBMOM",
+      "url": "https://blog.naver.com/meetsally/224419060518"
+    },
+    {
+      "title": "비 오는 날 찾은 랄프 깁슨 사진전 관람 후기",
+      "author": "키정잇",
+      "url": "https://blog.naver.com/ki_jung_eat/224395503945"
+    }
+  ],
+  "dureraum": [
+    {
+      "title": "영화의전당 처음 방문, 주차장부터 야외극장까지 둘러본 후기",
+      "author": "샬린",
+      "url": "https://blog.naver.com/charlene77/224423429494"
+    },
+    {
+      "title": "부산국제영화제 3일, 야외상영과 GV 관람 후기",
+      "author": "뜨르르",
+      "url": "https://blog.naver.com/nothomb11/224443620994"
+    },
+    {
+      "title": "무료로 이용한 영화의전당 라이브러리 방문 후기",
+      "author": "어흥킴",
+      "url": "https://blog.naver.com/myart1225/224397514244"
+    }
+  ],
+  "huinnyeoul": [
+    {
+      "title": "가족과 다녀온 흰여울문화마을 주차와 산책 후기",
+      "author": "홍꼬탕",
+      "url": "https://blog.naver.com/s134568/224476162912"
+    },
+    {
+      "title": "흰여울문화마을 볼거리와 소요시간 솔직 후기",
+      "author": "슬기로운 참새생활",
+      "url": "https://blog.naver.com/jindojihee0822/224459523495"
+    },
+    {
+      "title": "대중교통으로 찾아간 흰여울 해안 산책로 후기",
+      "author": "방랑자 보거스",
+      "url": "https://blog.naver.com/bogus_123/224453081730"
+    }
+  ],
+  "bmuseum": [
+    {
+      "title": "무료로 둘러본 부산박물관 상설전시와 주차 후기",
+      "author": "은어야",
+      "url": "https://blog.naver.com/kjskyj26/224477573162"
+    },
+    {
+      "title": "21개월 쌍둥이와 함께한 부산박물관 가을 나들이 후기",
+      "author": "트립노트365",
+      "url": "https://blog.naver.com/hjbj10042002/224477778125"
+    },
+    {
+      "title": "부산박물관 특별전 〈조선의 정원〉 관람 후기",
+      "author": "휴운",
+      "url": "https://blog.naver.com/selbashyuk/224468358310"
+    }
+  ],
+  "bokcheon": [
+    {
+      "title": "아이와 둘러본 복천박물관 야외전시관과 고분 후기",
+      "author": "부산댁 미지수",
+      "url": "https://blog.naver.com/jiddumiss/224432088941"
+    },
+    {
+      "title": "초등 아들과 떠난 가야·신라 역사탐방 관람 후기",
+      "author": "AJUMMA83",
+      "url": "https://blog.naver.com/dreamer2018_/224317312245"
+    },
+    {
+      "title": "개관 30주년 특별전 〈고분의 기억, 오늘을 빚다〉 관람 후기",
+      "author": "김우디",
+      "url": "https://blog.naver.com/alsthd7/224301607260"
+    }
+  ]
+};
+Object.entries(REPORT_REVIEWS).forEach(([key, reviews]) => { if (window.REPORT_TOURS[key]) window.REPORT_TOURS[key].reviews = reviews; });
+
 (() => {
   const panel = document.querySelector('[data-api-monitor]');
   if (!panel) return;
