@@ -5,6 +5,9 @@ const tY = (await pgY.evaluate(() => document.body.innerText)).replace(/,/g, '')
 const subY = tY.match(/구독자\s*(없음|[\d.]+\s*(?:천|만)?\s*명)/);
 const toNumY = (s) => { if (!s || s === '없음') return 0; const m = s.match(/([\d.]+)\s*(천|만)?/); return Math.round(parseFloat(m[1]) * ({ 천: 1e3, 만: 1e4 }[m[2]] || 1)); };
 const viewsY = [...tY.matchAll(/조회수\s*(없음|[\d.]+\s*(?:천|만)?회)/g)].map(m => toNumY(m[1]));
-const outY = { followers: subY ? toNumY(subY[1]) : null, views: viewsY.length ? viewsY.reduce((a, b) => a + b, 0) : null, posts: viewsY.length || null };
+await pgY.goto("https://studio.youtube.com/channel/UCGCsElQVju6rVecK1A4-kZg");
+await pgY.waitForTimeout(8000);
+const studioY = (await pgY.evaluate(() => document.body.innerText)).replace(/,/g, '').match(/현재 구독자 수\s*([\d.]+\s*(?:천|만)?)/);
+const outY = { followers: studioY ? toNumY(studioY[1]) : subY ? toNumY(subY[1]) : null, views: viewsY.length ? viewsY.reduce((a, b) => a + b, 0) : null, posts: viewsY.length || null };
 await closeTab(pgY);
 console.log('@@JSON' + JSON.stringify(outY));

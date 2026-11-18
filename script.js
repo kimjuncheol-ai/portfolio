@@ -37,10 +37,47 @@ document.querySelectorAll('.site-nav a').forEach((link) => {
   }
 });
 
+// Logo: letters light up one by one, left to right, on a loop; on the first visit of a session it types itself in first.
+(() => {
+  const logo = document.querySelector('.site-header .logo');
+  if (!logo || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const text = logo.textContent;
+  const letters = [...text].map((character, index) => {
+    const span = document.createElement('span');
+    span.className = 'logo__char';
+    span.style.setProperty('--i', index);
+    span.textContent = character;
+    return span;
+  });
+  logo.style.setProperty('--n', letters.length);
+  const wave = () => logo.classList.add('is-wave');
+  let played = false;
+  try { played = sessionStorage.getItem('kimjuncheol-logo-typed') === 'true'; } catch { played = false; }
+  if (played) {
+    logo.replaceChildren(...letters);
+    wave();
+    return;
+  }
+  try { sessionStorage.setItem('kimjuncheol-logo-typed', 'true'); } catch { /* the animation still runs without storage */ }
+  logo.replaceChildren();
+  logo.classList.add('is-typing');
+  letters.forEach((span, index) => setTimeout(() => {
+    logo.append(span);
+    if (index === letters.length - 1) {
+      logo.classList.replace('is-typing', 'is-settling');
+      setTimeout(() => { logo.classList.remove('is-settling'); wave(); }, 1800);
+    }
+  }, 120 + index * 45));
+})();
+
 const typingLines = [...document.querySelectorAll('.typing-line')];
 const profileOutput = document.querySelector('.profile-output');
 
 if (typingLines.length) {
+  // Intro pace (1.5× the original 32 / 500 / 350 ms); the portrait prints in step with the typed text.
+  const TYPE_DELAY = 32 / 1.5;
+  const START_DELAY = 500 / 1.5;
+  const LINE_DELAY = 350 / 1.5;
   const storageKey = 'kimjuncheol-intro-played';
   const savedContent = typingLines.map((line) => [...line.childNodes].map((node) => ({
     text: node.textContent,
@@ -70,7 +107,7 @@ if (typingLines.length) {
           line.append(character);
           typedCharacters += 1;
           if (profileOutput) profileOutput.style.setProperty('--print-progress', `${(typedCharacters / totalCharacters) * 100}%`);
-          await wait(32);
+          await wait(TYPE_DELAY);
         }
       }
     }
@@ -95,10 +132,10 @@ if (typingLines.length) {
       // The animation still works if storage is unavailable.
     }
 
-    await wait(500);
+    await wait(START_DELAY);
     for (let index = 0; index < typingLines.length; index += 1) {
       await typeLine(typingLines[index], savedContent[index]);
-      await wait(350);
+      await wait(LINE_DELAY);
     }
     typingLines.at(-1).classList.add('typing-complete');
     if (profileOutput) {

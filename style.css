@@ -808,6 +808,30 @@ a:focus-visible {
   font-size: clamp(1.45rem, 2.5vw, 2.2rem);
   font-weight: 700;
   text-decoration: none;
+  text-shadow: 0 0 0 transparent;
+  transition: text-shadow .2s;
+}
+
+/* Terminal caret: shown while the logo types in, for a few blinks after, and on hover. */
+.logo::after {
+  content: "_";
+  display: inline-block;
+  width: .6em;
+  opacity: 0;
+}
+.logo.is-typing::after { opacity: 1; }
+.logo.is-settling::after { animation: blink .6s steps(1) 3; opacity: 1; }
+.logo:hover, .logo:focus-visible { text-shadow: 0 0 .6rem rgba(0, 255, 32, .45); }
+.logo:hover::after, .logo:focus-visible::after { opacity: 1; animation: blink .8s steps(1) infinite; }
+/* Wave: each letter brightens in turn from left to right, then the sweep repeats. */
+.logo.is-wave .logo__char { animation: logo-wave calc(var(--n) * .16s + 1.2s) linear infinite; animation-delay: calc(var(--i) * .16s); }
+@keyframes logo-wave {
+  0%, 100% { color: var(--green); text-shadow: none; }
+  6% { color: #e9ffec; text-shadow: 0 0 .5rem rgba(0, 255, 32, .8); }
+  16% { color: var(--green); text-shadow: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo, .logo::after, .logo .logo__char { transition: none; animation: none !important; }
 }
 
 .site-nav {
