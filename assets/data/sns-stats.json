@@ -1,6 +1,6 @@
 {
   "asOf": "2026-11-18",
-  "collectedAt": "2026-11-18 15:18 KST",
+  "collectedAt": "2026-11-18 15:42 KST",
   "channels": [
     {
       "key": "instagram",
@@ -11,8 +11,12 @@
       "followers": 5,
       "posts": 24,
       "views": 10128,
-      "reels": 19,
-      "top": null,
+      "likes": 89,
+      "top": {
+        "title": "씨걸이 vs 비둘기, 영도 벽화 스피드 배틀 🎨",
+        "views": 6705,
+        "url": "https://www.instagram.com/artour_busan/reel/DfYq3J3CRIU/"
+      },
       "status": "ok"
     },
     {
@@ -24,6 +28,7 @@
       "followers": 1,
       "posts": 24,
       "views": 276,
+      "likes": 1,
       "top": {
         "title": "부산의 색과 빛을 따라 여행하던 갈매기. 마지막에 갑자기 진지해집니다",
         "views": 92,
@@ -32,7 +37,9 @@
       "status": "partial",
       "kept": [
         "posts",
-        "views"
+        "views",
+        "likes",
+        "top"
       ]
     },
     {
@@ -43,13 +50,14 @@
       "viewsBasis": "불러온 게시물 누적",
       "followers": 1,
       "posts": 28,
-      "views": 534,
-      "counted": 28,
+      "views": 581,
+      "likes": 1,
       "top": {
-        "title": "씨걸이 vs 비둘기, 영도 벽화 스피드 배틀",
-        "views": 23,
-        "url": "https://x.com/artour_busan/status/2118548724482011242"
+        "title": "씨걸이의 부산 예술여행 하루 코스 ",
+        "views": 49,
+        "url": "https://x.com/artour_busan/status/2118566560453587037"
       },
+      "counted": 28,
       "status": "ok"
     },
     {
@@ -58,14 +66,14 @@
       "url": "https://www.youtube.com/@artour_busan",
       "followersLabel": "구독자",
       "viewsBasis": "채널 누적",
+      "top": {
+        "title": "미술관에서 작품인 척하던 씨걸이의 최후 🗿",
+        "views": 87,
+        "url": "https://www.youtube.com/shorts/yGas7SWgwHE"
+      },
       "followers": 0,
       "views": 152,
       "posts": 19,
-      "top": {
-        "title": "미술관에서 작품인 척하던 씨걸이의 최후 #Shorts",
-        "views": 87,
-        "url": null
-      },
       "status": "ok"
     },
     {
@@ -82,7 +90,10 @@
         "views": 8,
         "url": null
       },
-      "status": "ok"
+      "status": "ok",
+      "kept": [
+        "top"
+      ]
     }
   ]
 }

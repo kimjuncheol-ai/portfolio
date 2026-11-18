@@ -64,14 +64,15 @@ const channels = CHANNELS.map((channel) => {
     if (channel.key === 'naver') stats.views = naverViews(stats);
     // A metric the page did not show this time keeps its last known value instead of dropping to empty.
     const old = previous?.channels?.find(c => c.key === channel.key) || {};
-    const kept = ['followers', 'posts', 'views'].filter(k => stats[k] == null && old[k] != null);
+    const kept = ['followers', 'posts', 'views', 'likes', 'top'].filter(k => stats[k] == null && old[k] != null);
     kept.forEach((k) => { stats[k] = old[k]; });
-    return { ...channel, ...stats, top: old.top ?? null, status: kept.length ? 'partial' : 'ok', ...(kept.length ? { kept } : {}) };
+    const core = kept.filter(k => k !== 'likes' && k !== 'top');
+    return { ...channel, ...stats, status: core.length ? 'partial' : 'ok', ...(kept.length ? { kept } : {}) };
   } catch (error) {
     console.error(channel.key, 'failed:', error.message);
     // Keep the last known numbers so the dashboard still renders, but mark them as stale.
     const old = previous?.channels?.find(c => c.key === channel.key);
-    return { ...channel, ...(old ? { followers: old.followers, posts: old.posts, views: old.views } : {}), status: 'stale', error: error.message.slice(0, 160) };
+    return { ...channel, ...(old ? { followers: old.followers, posts: old.posts, views: old.views, likes: old.likes ?? null, top: old.top ?? null } : {}), status: 'stale', error: error.message.slice(0, 160) };
   }
 });
 
