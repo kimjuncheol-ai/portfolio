@@ -1153,7 +1153,7 @@ a:focus-visible {
 .resource-api__sources { display: flex; flex-wrap: wrap; gap: .7rem 1.5rem; margin-top: 1rem; }
 .resource-api__sources a { display: inline-flex; align-items: center; gap: .55rem; color: #b5ffbf; text-underline-offset: .2em; line-height: 1.7; }
 .resource-api__sources .api-led { width: .4rem; height: .4rem; }
-.resource-api__scope { color: #a2bea6; max-width: 100ch; line-height: 1.8; font-size: .75rem; margin: 1rem 0 0; }
+.resource-api__scope { color: #a2bea6; line-height: 1.8; font-size: .75rem; margin: 1rem 0 0; }
 .resource-api__meta { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .8rem; margin-top: 1.25rem; color: #a2bea6; font-size: .75rem; }
 .resource-api button { border: 1px solid #167522; padding: .5rem .75rem; background: transparent; color: var(--green); font: inherit; }
 .resource-api button:hover, .resource-api button:focus-visible { border-color: var(--green); outline: 1px solid var(--green); outline-offset: 2px; }
