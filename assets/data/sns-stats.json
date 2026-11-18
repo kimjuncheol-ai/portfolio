@@ -1,6 +1,6 @@
 {
   "asOf": "2026-11-18",
-  "collectedAt": "2026-11-18 09:00 KST",
+  "collectedAt": "2026-11-18 14:18 KST",
   "channels": [
     {
       "key": "instagram",
@@ -11,8 +11,9 @@
       "followers": 5,
       "posts": 24,
       "views": 10128,
-      "status": "stale",
-      "error": "skipped (skip.json)"
+      "reels": 19,
+      "top": null,
+      "status": "ok"
     },
     {
       "key": "facebook",
@@ -42,7 +43,7 @@
       "viewsBasis": "불러온 게시물 누적",
       "followers": 1,
       "posts": 28,
-      "views": 408,
+      "views": 433,
       "counted": 28,
       "top": {
         "title": "씨걸이 vs 비둘기, 영도 벽화 스피드 배틀",

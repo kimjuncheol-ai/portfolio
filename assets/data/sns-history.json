@@ -39,7 +39,7 @@
       },
       "x": {
         "followers": 1,
-        "views": 408,
+        "views": 433,
         "posts": 28
       },
       "youtube": {
@@ -50,6 +50,11 @@
       "naver": {
         "followers": 1,
         "views": 28,
+        "posts": 24
+      },
+      "instagram": {
+        "followers": 5,
+        "views": 10128,
         "posts": 24
       }
     }
