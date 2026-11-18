@@ -2064,3 +2064,7 @@ a:focus-visible {
 body .site-main > * + * { margin-top: var(--space-section); }
 body .site-main > [data-section-tabs] ~ [role="tabpanel"] { margin-top: var(--space-tab); }
 body .site-main > .terminal-prompt { margin-top: 1rem; }
+
+/* One ending prompt rhythm for every archive page, including active tab panels. */
+body .site-main > .terminal-prompt {margin:1rem 0 0;}
+body .site-main > :has(+ .terminal-prompt) {margin-bottom:0;}

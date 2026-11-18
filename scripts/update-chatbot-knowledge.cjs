@@ -49,9 +49,11 @@ films.forEach((film,i)=>{
  const premise=i===0?' 부산의 모든 예술이 사라진 상황에서 레이저 경보를 피해 명화를 되찾는 씨걸이의 액션 예고편입니다.':'';
  replace('artour-short-'+videoId,{question:`《${film.name}》 영상은 어떤 내용인가요?`,terms:[film.name,...specific[i].split('|')],answer:`《${film.name}》는 ${date} 공개한 아르투어부산의 ${seconds}초 AI 캐릭터 영상입니다.${premise} SNS의 숏폼 모음에서 해당 작품을 찾아 YouTube 등 연결된 채널로 전체 영상을 볼 수 있습니다.`,source:['sns.html#artour-shorts',film.name]});
 });
+// Current public pages take precedence over earlier catalog snapshots.
+for (const [slug, fields] of Object.entries(require('./current-project-faqs.json'))) replace(slug, fields);
 js=js.replace(pattern,'const fallbackKnowledge = '+JSON.stringify(catalog,null,2).replaceAll('<','\\u003c').replace(/\n/g,'\n  ')+';');
 js=js.replace(/const suggestionsList = pageName === 'report.html'[\s\S]*?;\n  suggestionsList/,`const suggestionsByPage = {
-    'report.html': ['선정 관광 자원 여섯 곳 알려줘', '아르떼뮤지엄은 어떤 곳인가요?', '어떤 API를 사용하나요?'],
+    'report.html': ['선정 관광 자원 15곳 알려줘', '아르떼뮤지엄은 어떤 곳인가요?', '어떤 API를 사용하나요?'],
     'contents.html': ['어떤 프로젝트가 있나요?', '영상은 어떻게 크게 보나요?', '최신 씨걸이 영상은?'],
     'sns.html': ['최신 씨걸이 영상은?', '카드뉴스는 어디서 보나요?', 'SNS 채널을 알려줘']
   };

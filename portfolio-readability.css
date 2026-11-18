@@ -3,3 +3,9 @@
 .brand-marks p,.brand-marks figcaption,.brand-rule-visuals figcaption{font-size:max(.6875rem, .85vw);line-height:1.7}
 .sns-dash small{font-size:.6875rem;line-height:1.7}
 .sns-dash td small,.sns-dash__trend small{font-size:.6875rem!important;line-height:1.7}
+
+/* Small informational labels use one readable floor across archive pages. */
+.brand-color-meta > span,.brand-color-meta dl div,
+.channel-card__network,.channel-card__open,.sns-dash__note,
+.media-rail-controls,.resource-card__source {font-size:.6875rem;}
+.profile-output figcaption,.brand-console__bar,.brand-console__status,.brand-story__eyebrow,.brand-section-label,.channel-feature__copy>div,.channel-feature>div,.channel-log>header,.channel-log li>span{font-size:.6875rem;}

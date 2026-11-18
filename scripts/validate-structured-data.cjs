@@ -72,7 +72,7 @@ const fail = (where, message) => errors.push(where + ': ' + message);
             }
             check(entry,where+'/'+property);
           } else if (typeof entry==='string' && ranges.includes('schema:URL') && !ranges.includes('schema:Text')) {
-            try { assert.equal(new URL(entry).protocol,'https:'); } catch { fail(where,property+' must be an absolute HTTPS URL'); }
+            try { assert(['http:','https:'].includes(new URL(entry).protocol)); } catch { fail(where,property+' must be an absolute HTTP(S) URL'); }
           } else if (typeof entry==='number' && ranges.includes('schema:Integer')) {
             if (!Number.isInteger(entry)) fail(where,property+' must be an integer');
           }

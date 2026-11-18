@@ -1,0 +1,38 @@
+[
+  {
+    "url": "https://www.busan.go.kr/moca/index",
+    "status": 200,
+    "final": "https://www.busan.go.kr/moca/index",
+    "title": "Home : 부산현대미술관"
+  },
+  {
+    "url": "https://www.yeongdo.go.kr/tour/01452/01900.web?amode=view&idx=2",
+    "status": 200,
+    "final": "https://www.yeongdo.go.kr/tour/01452/01900.web?amode=view&idx=2",
+    "title": "관광명소 추천코스 | 영도구 문화관광",
+    "snippets": [
+      "도 API를 건너뛰시려면 본 링크를 선택(키보드의 Enter키 선택)해주세요. TOP 담당자 : 문화관광과 ☎ 051-419-4041 최근업데이트 : 2024-01-19 09:56:52 만족도 조사 현재 열람하신 페이지를 평가해 주세요. 평가: 매우 만족 (5점) 만족 (4점) 보통 (3점) 불만족 (2점) "
+    ]
+  },
+  {
+    "url": "https://art.busan.go.kr/lecetuxre2/list.nm",
+    "status": 200,
+    "final": "https://art.busan.go.kr/lecetuxre2/list.nm",
+    "title": "프로그램 | 교육/행사 | 부산시립미술관",
+    "snippets": [
+      "9-23 14:00 ~ 2026-11-13 14:00 강사 접수현황 정원 : 363/450, 대기 : 0/0 (인터넷접수) [재개관 기념음악회]미술관에서 만나는 시월의 낭만 기간 2026-10-31 ~ 2026-10-31 신청기간 2026-10-31 16:30 ~ 2026-10-31 18:00 작가 르 콩세르"
+    ]
+  },
+  {
+    "url": "https://www.busan.go.kr/moca/education05",
+    "status": 200,
+    "final": "https://www.busan.go.kr/moca/education05",
+    "title": "교육 : 부산현대미술관"
+  },
+  {
+    "url": "https://www.bisco.or.kr/bschildpark/sub/sub04/sub04_1/",
+    "status": 200,
+    "final": "https://www.bisco.or.kr/bschildpark/sub/sub04/sub04_1/",
+    "title": "어린이대공원"
+  }
+]

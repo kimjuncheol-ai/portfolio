@@ -314,7 +314,13 @@ if (tourPopup) {
   };
 
   const selectFolder = (section) => {
-    folderButtons.forEach((button) => button.classList.toggle('is-active', button.dataset.section === section));
+    folderButtons.forEach((button) => {
+      const active = button.dataset.section === section;
+      button.classList.toggle('is-active', active);
+      button.setAttribute('aria-controls', 'popup-content');
+      if (active) button.setAttribute('aria-current', 'true');
+      else button.removeAttribute('aria-current');
+    });
     popupStatus.textContent = section;
     popupAddress.textContent = `C:\\${activeTour.name}\\${section}`;
     popupItemCount.textContent = section === '모션 카드뉴스' ? '5개 영상' : `${activeTour.motionVideos ? 4 : 3}개 개체`;
@@ -341,7 +347,12 @@ if (tourPopup) {
     } else {
       popupContent.innerHTML = `<h2>${section}</h2><p>이 폴더의 내용은 준비 중입니다.</p>`;
     }
+    popupContent.parentElement.scrollTop = 0;
   };
+
+  tourPopup.addEventListener('close', () => {
+    popupContent.querySelectorAll('video').forEach(video => video.pause());
+  });
 
   document.querySelectorAll('[data-popup-title]').forEach((button) => {
     button.addEventListener('click', () => {

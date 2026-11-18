@@ -1,0 +1,101 @@
+[
+  {
+    "url": "https://www.busan.go.kr/moca/index",
+    "error": "fetch failed"
+  },
+  {
+    "url": "https://art.busan.go.kr/index.nm",
+    "status": 200,
+    "final": "https://art.busan.go.kr/index.nm",
+    "title": "부산시립미술관",
+    "len": 46228
+  },
+  {
+    "url": "https://www.museum1.co.kr/",
+    "status": 200,
+    "final": "https://www.museum1.co.kr/",
+    "title": "museum1",
+    "len": 927924
+  },
+  {
+    "url": "https://kr.artemuseum.com/BUSAN",
+    "status": 200,
+    "final": "https://kr.artemuseum.com/BUSAN",
+    "title": "아르떼뮤지엄 부산",
+    "len": 1139710
+  },
+  {
+    "url": "https://www.hotelnongshim.com/kr/",
+    "status": 200,
+    "final": "https://www.hotelnongshim.com/kr/",
+    "title": "호텔농심",
+    "len": 44791
+  },
+  {
+    "url": "https://www.bisco.or.kr/bschildpark/",
+    "status": 200,
+    "final": "https://www.bisco.or.kr/bschildpark/",
+    "title": "어린이대공원",
+    "len": 22683
+  },
+  {
+    "url": "https://www.busan.go.kr/mmch/index",
+    "status": 200,
+    "final": "https://www.busan.go.kr/mmch/index",
+    "title": "Home : 부산광역시 부산근현대역사관",
+    "len": 32766
+  },
+  {
+    "url": "http://kangkangee.com/",
+    "status": 200,
+    "final": "http://kangkangee.com/",
+    "title": "깡깡이예술마을",
+    "len": 495265
+  },
+  {
+    "url": "https://www.busan.go.kr/domoheon/index",
+    "status": 200,
+    "final": "https://www.busan.go.kr/domoheon/index",
+    "title": "도모헌(옛 부산시장 관사)",
+    "len": 54577
+  },
+  {
+    "url": "https://www.f1963.org/ko/?c=about&s=1",
+    "status": 200,
+    "final": "https://www.f1963.org/ko/?c=about&s=1",
+    "title": "F1963",
+    "len": 28324
+  },
+  {
+    "url": "https://www.goeunmuseum.kr/",
+    "status": 200,
+    "final": "https://www.goeunmuseum.kr/",
+    "title": "고은사진미술관",
+    "len": 124404
+  },
+  {
+    "url": "https://www.dureraum.org/bcc/main/main.do?rbsIdx=1",
+    "status": 200,
+    "final": "https://www.dureraum.org/bcc/main/main.do?rbsIdx=1",
+    "title": "영화의전당\r\n\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\r\n\t",
+    "len": 132038
+  },
+  {
+    "url": "https://www.yeongdo.go.kr/tour/01452/01900.web?amode=view&idx=2",
+    "error": "The operation was aborted due to timeout"
+  },
+  {
+    "url": "https://museum.busan.go.kr/busan/",
+    "status": 200,
+    "final": "https://museum.busan.go.kr/busan/index",
+    "title": "Home : 부산광역시 부산박물관",
+    "len": 40415
+  },
+  {
+    "url": "https://museum.busan.go.kr/bokcheon/",
+    "status": 200,
+    "final": "https://museum.busan.go.kr/bokcheon/index",
+    "title": "Home : 부산광역시 복천박물관",
+    "len": 31395
+  }
+]
