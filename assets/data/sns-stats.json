@@ -1,6 +1,6 @@
 {
-  "asOf": "2026-11-18",
-  "collectedAt": "2026-11-18 16:14 KST",
+  "asOf": "2026-11-19",
+  "collectedAt": "2026-11-19 16:21 KST",
   "channels": [
     {
       "key": "instagram",
@@ -27,7 +27,7 @@
       "viewsBasis": "최근 28일",
       "followers": 1,
       "posts": 24,
-      "views": 276,
+      "views": 328,
       "likes": 1,
       "top": {
         "title": "부산의 색과 빛을 따라 여행하던 갈매기. 마지막에 갑자기 진지해집니다",
@@ -37,8 +37,6 @@
       "status": "partial",
       "kept": [
         "posts",
-        "views",
-        "likes",
         "top"
       ]
     },
@@ -50,11 +48,11 @@
       "viewsBasis": "불러온 게시물 누적",
       "followers": 1,
       "posts": 28,
-      "views": 657,
+      "views": 692,
       "likes": 1,
       "top": {
         "title": "씨걸이의 부산 예술여행 하루 코스 ",
-        "views": 52,
+        "views": 53,
         "url": "https://x.com/artour_busan/status/2118566560453587037"
       },
       "counted": 28,
@@ -71,11 +69,11 @@
         "views": 87,
         "url": "https://www.youtube.com/shorts/yGas7SWgwHE"
       },
-      "followers": 0,
-      "views": 152,
+      "followers": 1,
+      "views": 157,
       "posts": 19,
-      "status": "ok",
-      "likes": 0
+      "likes": 1,
+      "status": "ok"
     },
     {
       "key": "naver",
@@ -85,7 +83,7 @@
       "viewsBasis": "월간·일별 합산 누적",
       "followers": 1,
       "posts": 24,
-      "views": 59,
+      "views": 65,
       "likes": 2,
       "top": {
         "title": "부산 F1963, 커피만 마시고 나오기엔 아까운 곳｜전시·예술도서관·소리길",

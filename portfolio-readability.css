@@ -2,6 +2,7 @@
    Scoped to brand-reference annotations and social statistics; common layout is untouched. */
 .brand-marks p,.brand-marks figcaption,.brand-rule-visuals figcaption{font-size:max(.6875rem, .85vw);line-height:1.7}
 .sns-dash small{font-size:.6875rem;line-height:1.7}
+.sns-dash tbody th small{display:block;min-width:8rem;max-width:10rem;white-space:normal;word-break:keep-all;color:#6fae77;line-height:1.7}
 .sns-dash td small,.sns-dash__trend small{font-size:.6875rem!important;line-height:1.7}
 
 /* Small informational labels use one readable floor across archive pages. */

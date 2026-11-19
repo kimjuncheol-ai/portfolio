@@ -429,7 +429,7 @@ if (tourPopup) {
       dash.querySelector('.sns-dash__chart ol').innerHTML = ch.map(c => `<li><span>${esc(c.name)}</span><span class="sns-dash__bar"><i style="--w: ${Math.max(0.6, (c.views || 0) / max * 100).toFixed(1)}%"></i></span><strong>${n(c.views)}</strong></li>`).join('');
       dash.querySelector('tbody').innerHTML = ch.map(c => {
         const topCell = c.top ? `${c.top.url ? `<a href="${esc(c.top.url)}" target="_blank" rel="noopener noreferrer">${esc(c.top.title)} ↗</a>` : esc(c.top.title)} <span>${n(c.top.views)}</span>` : '—';
-        const names = { followers: '팔로워', posts: '게시물', views: '조회수' };
+        const names = { followers: '팔로워', posts: '게시물', views: '조회수', likes: '좋아요', top: '최고 조회 콘텐츠' };
         const keptCore = (c.kept || []).filter(k => names[k]).map(k => names[k]);
         const flag = c.status === 'stale' ? ' <small>이번 수집 실패 · 직전 값 표시</small>' : keptCore.length ? ` <small>${keptCore.join('·')}: 직전 확인값</small>` : '';
         return `<tr><th scope="row">${esc(c.name)}${flag}</th><td>${n(c.followers)} <small>${esc(c.followersLabel)}</small></td><td>${n(c.posts)}</td><td>${n(c.views)} <small>${esc(c.viewsBasis)}</small></td><td>${n(c.likes)}</td><td class="sns-dash__top">${topCell}</td></tr>`;

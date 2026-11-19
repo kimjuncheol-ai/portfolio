@@ -6,7 +6,7 @@ const path = require('path');
 const { spawnSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..', '..');
-const ASIDE = process.env.ASIDE_EXE || 'C:/Users/user/Documents/Codex/2026-10-14/aside-instagram-youtube-facebook-page-x/work/aside-cli/current/aside.exe';
+const ASIDE = process.env.ASIDE_EXE || path.join(process.env.LOCALAPPDATA, 'Aside', 'CLI', 'current', 'aside.exe');
 const DATA = path.join(ROOT, 'assets', 'data');
 const CHANNELS = [
   { key: 'instagram', name: 'Instagram', url: 'https://www.instagram.com/artour_busan/', followersLabel: '팔로워', viewsBasis: '릴스 누적' },
