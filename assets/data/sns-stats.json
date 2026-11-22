@@ -26,19 +26,15 @@
       "followersLabel": "팔로워",
       "viewsBasis": "최근 28일",
       "followers": 1,
-      "posts": 24,
+      "posts": 27,
       "views": 328,
       "likes": 1,
       "top": {
         "title": "부산의 색과 빛을 따라 여행하던 갈매기. 마지막에 갑자기 진지해집니다",
-        "views": 92,
+        "views": 93,
         "url": "https://www.facebook.com/reel/1088883160651033/"
       },
-      "status": "partial",
-      "kept": [
-        "posts",
-        "top"
-      ]
+      "status": "ok"
     },
     {
       "key": "x",
@@ -86,14 +82,12 @@
       "views": 65,
       "likes": 2,
       "top": {
-        "title": "부산 F1963, 커피만 마시고 나오기엔 아까운 곳｜전시·예술도서관·소리길",
-        "views": 8,
-        "url": "https://blog.naver.com/artour_busan/224450081098"
+        "title": "영도 깡깡이예술마을, 마을다방에서 벽화 골목까지 씨걸이와 천천히",
+        "views": 15,
+        "url": "https://blog.naver.com/artour_busan/224480753053"
       },
-      "status": "ok",
-      "kept": [
-        "top"
-      ]
+      "status": "ok"
     }
-  ]
+  ],
+  "verificationNote": "11월 23일 재확인한 Facebook 게시물 수·최고 조회 콘텐츠는 11월 19일까지의 콘텐츠 라이브러리 기준이며, 네이버 최고 조회 콘텐츠는 10월 14일~11월 22일 일별 조회수 순위 합산입니다."
 }

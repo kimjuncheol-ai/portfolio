@@ -1,0 +1,10 @@
+begin;
+insert into public.site_faqs (slug,question,answer,keywords,source_paths,embedding,active,updated_at) values
+('report-upcoming','추가 구현 예정 공간은 어디인가요?','Report의 추가 구현 예정 공간은 부산영화체험박물관, 부산문화회관, 을숙도생태공원 3곳입니다. 현재 공개된 관광 자원 15곳은 Report의 상세 카드에서 볼 수 있습니다.',array['구현 예정','추가 예정','예정 목록','next destinations','부산영화체험박물관','부산문화회관','을숙도생태공원'],array['report.html#resource-planned-title'],null,true,now()),
+('profile','김준철은 어떤 사람인가요?','김준철은 고교에서 디지털방송을, 대학에서 신학을, 대학원에서 종교철학을 공부했습니다. 그리스도교 성직자를 지망하고 있으며, AI를 활용하여 다양한 컨텐츠를 제작하는 역량을 기르고자 합니다.',array['김준철','누구','소개','전공','학력','디지털방송','종교철학','성직자','root'],array['index.html'],null,true,now()),
+('social','아르투어부산 SNS 채널은 어디인가요?','아르투어부산은 부산의 예술과 여행을 소개합니다. SNS 페이지에서 X, YouTube, Instagram, Facebook, 네이버 블로그 5개 채널과 씨걸이 숏폼 19편을 볼 수 있습니다. 카드뉴스는 깡깡이예술마을, 부산근현대역사관, 도모헌, F1963 네 시리즈입니다. 채널별 최신 게시물·조회수·팔로워는 SNS 대시보드에서 확인할 수 있습니다.',array['아르투어부산','아르투어 부산','sns','인스타그램','유튜브','네이버 블로그','페이스북','facebook','트위터','5채널'],array['sns.html'],null,true,now()),
+('final-project','final_project 페이지에는 어떤 내용이 있나요?','final_project는 외국인 부산 여행자를 위한 음식 탐색 웹앱 무보소(I EAT BUSAN)를 소개합니다. 음식 검색·먹는 방법·알레르기 안내, 지도·식당 탐색, 커뮤니티와 음식 도우미를 실제 화면으로 볼 수 있습니다. 김준철은 팀장으로 협업을 이끌고 UX/UI 디자인을 AI로 구현했습니다. 문소정은 PM, 박현민은 개발 총괄, 이정규는 DB 개발·영상 제작, 김채운은 마케팅·영상 제작을 담당했습니다. 페이지의 웹앱 직접 보기 링크로 서비스를 이용할 수 있습니다.',array['final','final_project','최종 프로젝트','완성 프로젝트','무보소','muboso','i eat busan'],array['final.html'],null,true,now()),
+('contact','김준철에게 어떻게 연락하나요?','이메일은 kimjuncheolai@gmail.com입니다. 포트폴리오 페이지 하단의 이메일을 누르면 메일 작성 화면이 열립니다.',array['연락','이메일','메일','문의','contact','email'],array['index.html'],null,true,now()),
+('social-dashboard','아르투어부산 SNS 통계는 어디에서 보나요?','SNS 페이지의 채널 통계 대시보드에서 5개 채널의 게시물, 팔로워·구독자·이웃, 조회수, 좋아요와 최고 조회 콘텐츠를 확인할 수 있습니다. 집계 시점은 표 상단에 표시되며, 채널별 조회 기간이 달라 조회수 합계는 참고용입니다.',array['sns 통계','대시보드','조회수','팔로워','구독자','채널 통계','최고 조회','게시물 수'],array['sns.html#artour-dashboard'],null,true,now())
+on conflict (slug) do update set question=excluded.question,answer=excluded.answer,keywords=excluded.keywords,source_paths=excluded.source_paths,embedding=null,active=true,updated_at=now();
+commit;

@@ -447,7 +447,7 @@ if (tourPopup) {
         return `<div><p><span>${label}</span><strong>${n(values.at(-1))}</strong><small>${values.length > 1 ? `${change >= 0 ? '+' : ''}${n(change)} · ${days.length}일` : '기록 1일차'}</small></p><svg viewBox="0 0 100 40" preserveAspectRatio="none" role="img" aria-label="${label} 추이"><polyline points="${pts}" vector-effect="non-scaling-stroke"/></svg></div>`;
       };
       trend.innerHTML = `<figcaption>날짜별 추이 · ${esc(days[0]?.date)} ~ ${esc(days.at(-1)?.date)}</figcaption>${line('followers', '팔로워 합계')}${line('views', '조회수 합계')}`;
-      dash.querySelector('.sns-dash__note').textContent = '매일 Aside 브라우저로 각 채널 화면의 수치를 자동 수집해 갱신합니다(공식 API 미사용). 채널마다 조회수 기준(누적·최근 28일 등)이 달라 합계는 참고용이며, 화면에 표시되지 않은 값은 —로, 이번에 읽지 못한 값은 이전 값으로 표시합니다.';
+      dash.querySelector('.sns-dash__note').textContent = '채널마다 조회수 기준이 달라 합계는 참고용입니다. 확인할 수 없는 값은 —로 표시하고, 이전 수치를 사용하는 항목은 표에 표시합니다.' + (stats.verificationNote ? ' ' + stats.verificationNote : '');
     })
     .catch(() => {});
 })();

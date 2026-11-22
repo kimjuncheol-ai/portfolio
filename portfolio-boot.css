@@ -1,0 +1,82 @@
+.portfolio-boot-active { overflow: hidden; }
+
+.portfolio-boot {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  border: 0;
+  overflow: hidden;
+  background: #050906;
+  color: #82fb92;
+  font: 400 1rem / 1.5 'JetBrains Mono', monospace;
+}
+
+.portfolio-boot[open] { display: grid; place-items: center; }
+.portfolio-boot::backdrop { background: #050906; }
+.portfolio-boot.is-leaving { animation: portfolio-boot-exit 240ms ease both; }
+.portfolio-boot.is-leaving::backdrop { animation: portfolio-boot-exit 240ms ease both; }
+
+.portfolio-boot__rain {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(24, minmax(0, 1fr));
+  overflow: hidden;
+  mask-image: linear-gradient(black, transparent);
+}
+
+.portfolio-boot__rain span {
+  color: #398147;
+  justify-self: center;
+  writing-mode: vertical-rl;
+  letter-spacing: .65em;
+  animation: portfolio-boot-rain 860ms var(--delay) ease-out both;
+}
+
+.portfolio-boot__console {
+  position: relative;
+  width: min(100%, 32rem);
+  padding: clamp(1.25rem, 6vw, 3rem);
+  box-sizing: border-box;
+  border: 1px solid #285e31;
+  background: #08120a;
+  box-shadow: 0 0 4rem #1bcf3224;
+  animation: portfolio-boot-console 520ms ease-out both;
+}
+
+.portfolio-boot__console p { margin: 0; font-size: .8rem; }
+.portfolio-boot__console strong {
+  display: block;
+  margin: .65rem 0 1.25rem;
+  font-size: clamp(1.1rem, 6vw, 2.8rem);
+  letter-spacing: -.045em;
+}
+
+.portfolio-boot__meter { height: 3px; margin-bottom: .85rem; background: #193a1e; }
+.portfolio-boot__meter::before {
+  content: "";
+  display: block;
+  height: 100%;
+  background: #39f657;
+  transform-origin: left;
+  animation: portfolio-boot-meter 950ms ease-out both;
+}
+
+.portfolio-boot__ready { animation: portfolio-boot-console 150ms 1050ms ease-out both; }
+
+@keyframes portfolio-boot-rain {
+  from { opacity: 0; transform: translateY(-85%); }
+  to { opacity: .35; transform: translateY(12vh); }
+}
+@keyframes portfolio-boot-console {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes portfolio-boot-meter { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes portfolio-boot-exit { to { opacity: 0; } }

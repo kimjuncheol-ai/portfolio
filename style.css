@@ -933,10 +933,13 @@ a:focus-visible {
   overflow-wrap: normal;
 }
 
-.typing-line {
+.typing-line,
+.intro-copy-line {
   min-height: 1.85em;
   margin: 0 0 clamp(1.5rem, 3vw, 2.5rem);
 }
+
+.intro-copy-line:last-of-type { margin-bottom: 0; }
 
 .terminal-heading {
   animation: none;
