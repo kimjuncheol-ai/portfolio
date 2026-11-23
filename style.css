@@ -946,7 +946,8 @@ a:focus-visible {
   display: none;
 }
 
-.typing-line.is-typing::after {
+.typing-line.is-typing::after,
+.intro-personal-site a.is-typing::after {
   content: "_";
   display: inline-block;
   animation: blink 0.8s steps(1) infinite;

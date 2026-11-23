@@ -86,7 +86,7 @@ function afterPortfolioBoot(callback) {
   }, 120 + index * 45)));
 })();
 
-const typingLines = [...document.querySelectorAll('.typing-line')];
+const typingLines = [...document.querySelectorAll('.typing-copy .typing-line, .intro-personal-site > a')];
 const profileOutput = document.querySelector('.profile-output');
 
 if (typingLines.length) {
@@ -95,7 +95,7 @@ if (typingLines.length) {
   const START_DELAY = 500 / 1.5;
   const LINE_DELAY = 350 / 1.5;
   const storageKey = 'kimjuncheol-intro-played-v2';
-  const ending = document.querySelectorAll('.typing-copy .intro-personal-site, .typing-copy .terminal-prompt');
+  const terminalPrompt = document.querySelector('.typing-copy .terminal-prompt');
   const savedContent = typingLines.map((line) => [...line.childNodes].map((node) => ({
     text: node.textContent.trim(),
     isBreak: node.nodeName === 'BR'
@@ -137,7 +137,7 @@ if (typingLines.length) {
       line.textContent = '';
       line.hidden = true;
     });
-    ending.forEach((element) => { element.hidden = true; });
+    if (terminalPrompt) terminalPrompt.hidden = true;
     typedCharacters = 0;
     if (profileOutput) {
       profileOutput.style.setProperty('--print-progress', '0%');
@@ -157,7 +157,7 @@ if (typingLines.length) {
       await typeLine(typingLines[index], savedContent[index]);
       await wait(LINE_DELAY);
     }
-    ending.forEach((element) => { element.hidden = false; });
+    if (terminalPrompt) terminalPrompt.hidden = false;
     if (profileOutput) {
       profileOutput.style.setProperty('--print-progress', '100%');
       profileOutput.classList.remove('is-printing');
