@@ -36,3 +36,15 @@
 
 [7]–[15]의 카드 이미지는 모두 TapNow `gpt-image-2`(1:1, medium)로 생성한 픽셀 일러스트입니다. 장면 참고 사진을 첫 번째, `hurshim-pixel.webp`를 스타일 참고로 두 번째 이미지로 넣고 위 공통 지시문을 그대로 썼습니다.
 추가 6곳(F1963·고은사진미술관·영화의전당·흰여울문화마을·부산박물관·복천박물관)의 탐색기 사진 `<key>-1.jpg`, `<key>-2.jpg`는 한국관광공사 TourAPI 원본을 변형 없이 사용합니다(흰여울 2장과 goeun-2는 공공누리 제1유형, 나머지는 제3유형). 조사 기록: `outputs/report-cards-20261118/`.
+
+## 2026-11-23 모션 카드뉴스
+
+탐색기 15곳의 모션 카드뉴스는 `report-motion.js`에 장소별 장면과 출처가 있고, `report-motion.css`에서 사진과 문구의 전환을 처리합니다. 부산현대미술관 5개 장면에는 아래의 서로 다른 기록 사진을 사용했습니다. 부산관광공사 부산관광아카이브 제공, 공공누리 제2유형. 웹 전송을 위해 크기와 파일 형식을 조정했습니다.
+
+- `motion/moca-1.webp` [METADATA019846](https://visitbusan.net/archive/dataSearch/view.nm?dataSid=METADATA019846)
+- `motion/moca-2.webp` [METADATA019848](https://visitbusan.net/archive/dataSearch/view.nm?dataSid=METADATA019848)
+- `motion/moca-3.webp` [METADATA019850](https://visitbusan.net/archive/dataSearch/view.nm?dataSid=METADATA019850)
+- `motion/moca-4.webp` [METADATA019857](https://visitbusan.net/archive/dataSearch/view.nm?dataSid=METADATA019857)
+- `motion/moca-5.webp` [METADATA019851](https://visitbusan.net/archive/dataSearch/view.nm?dataSid=METADATA019851)
+
+다른 장소는 기존 탐색기 사진을 사용합니다. 한국관광공사 제3유형 사진은 원본 파일을 그대로 표시합니다. 원본을 한 장만 확보한 뮤지엄 원·아르떼뮤지엄 부산·허심청은 두 번째 장을 사진 없는 관람 안내로 구성했습니다.

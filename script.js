@@ -176,13 +176,6 @@ if (tourPopup) {
         { title: '부산현대미술관에서 만난 세 전시 관람 후기', author: '부산광역시', url: 'https://blog.naver.com/cooolbusan/224328255685' },
         { title: '무료로 만나는 〈코뿔소와 유니콘〉 전시 관람 후기', author: '부산교육', url: 'https://blog.naver.com/with_pen/224327082717' },
         { title: '부산현대미술관 무료전시, 초등 아이와 다녀온 후기', author: '텔미', url: 'https://blog.naver.com/tellmememory/224330861096' }
-      ],
-      motionVideos: [
-        'assets/video/busan-moca-card-1.mp4',
-        'assets/video/busan-moca-card-2.mp4',
-        'assets/video/busan-moca-card-3.mp4',
-        'assets/video/busan-moca-card-4.mp4',
-        'assets/video/busan-moca-card-5.mp4'
       ]
     },
     bma: {
@@ -239,6 +232,8 @@ if (tourPopup) {
   const closeButton = tourPopup.querySelector('.win95-close');
   const titlebar = tourPopup.querySelector('.win95-titlebar');
   let activeTour = tourData.moca;
+  let motionCards = [];
+  let stopMotion = () => {};
   const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   window.addEventListener('report:resource', ({ detail }) => {
     const tour = tourData[detail.key];
@@ -298,22 +293,82 @@ if (tourPopup) {
   };
 
   const renderMotionCards = () => {
-    const videos = activeTour.motionVideos.map((src, index) => `
-      <article class="win95-motion-card">
-        <div class="win95-motion-card__bar"><span>[${index + 1}] MOTION CARD</span></div>
-        <video autoplay muted loop playsinline controls preload="metadata" aria-label="부산현대미술관 모션 카드뉴스 ${index + 1}">
-          <source src="${src}" type="video/mp4">
-          이 브라우저에서는 MP4 영상을 재생할 수 없습니다.
-        </video>
-      </article>`).join('');
     popupContent.innerHTML = `
-      <h2>${activeTour.name} — 모션 카드뉴스</h2>
-      <div class="win95-motion-meta"><span>5개 영상</span><span>자동 재생 · 반복</span></div>
-      <div class="win95-motion-grid">${videos}</div>`;
-    popupContent.querySelectorAll('video').forEach((video) => video.play().catch(() => {}));
+      <h2>${escapeHTML(activeTour.name)} — 모션 카드뉴스</h2>
+      <div class="motion-controls" role="group" aria-label="모션 카드 재생">
+        <button type="button" data-motion-prev>이전</button>
+        <button type="button" data-motion-play>자동 넘김</button>
+        <span data-motion-count aria-live="polite"></span>
+        <button type="button" data-motion-next>다음</button>
+      </div>
+      <div class="motion-slides"></div>`;
+    const stage = popupContent.querySelector('.motion-slides');
+    const counter = popupContent.querySelector('[data-motion-count]');
+    const previous = popupContent.querySelector('[data-motion-prev]');
+    const next = popupContent.querySelector('[data-motion-next]');
+    const play = popupContent.querySelector('[data-motion-play]');
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    let index = 0;
+    let timer;
+    let playing = false;
+    const pause = () => {
+      window.clearTimeout(timer);
+      playing = false;
+      play.textContent = '자동 넘김';
+      play.setAttribute('aria-pressed', 'false');
+    };
+    stopMotion = pause;
+
+    const show = () => {
+      const [file, title, copy, credit, source] = motionCards[index];
+      stage.innerHTML = `
+        <article class="motion-slide${file ? '' : ' motion-slide--text'}">
+          ${file ? `<figure>
+            <img src="assets/report/${escapeHTML(file)}" alt="" decoding="async">
+            <figcaption>사진: <a href="${escapeHTML(source)}" target="_blank" rel="noopener noreferrer">${escapeHTML(credit)}</a></figcaption>
+          </figure>` : ''}
+          <div class="motion-slide__copy">
+            <p>${escapeHTML(activeTour.name)}</p>
+            <h3>${escapeHTML(title)}</h3>
+            <p>${escapeHTML(copy)}</p>
+          </div>
+        </article>`;
+      counter.textContent = `${index + 1} / ${motionCards.length}`;
+      previous.disabled = index === 0;
+      next.disabled = index === motionCards.length - 1;
+    };
+    const advance = () => {
+      timer = window.setTimeout(() => {
+        if (index >= motionCards.length - 1) {
+          pause();
+          return;
+        }
+        index += 1;
+        show();
+        advance();
+      }, 5400);
+    };
+    previous.addEventListener('click', () => { pause(); index -= 1; show(); });
+    next.addEventListener('click', () => { pause(); index += 1; show(); });
+    play.addEventListener('click', () => {
+      if (playing) {
+        pause();
+        return;
+      }
+      if (index >= motionCards.length - 1) { index = 0; show(); }
+      playing = true;
+      play.textContent = '일시 정지';
+      play.setAttribute('aria-pressed', 'true');
+      advance();
+    });
+    play.hidden = reduceMotion.matches;
+    pause();
+    show();
   };
 
   const selectFolder = (section) => {
+    stopMotion();
+    stopMotion = () => {};
     folderButtons.forEach((button) => {
       const active = button.dataset.section === section;
       button.classList.toggle('is-active', active);
@@ -323,7 +378,7 @@ if (tourPopup) {
     });
     popupStatus.textContent = section;
     popupAddress.textContent = `C:\\${activeTour.name}\\${section}`;
-    popupItemCount.textContent = section === '모션 카드뉴스' ? '5개 영상' : `${activeTour.motionVideos ? 4 : 3}개 개체`;
+    popupItemCount.textContent = section === '모션 카드뉴스' ? `${motionCards.length}개 카드` : `${motionCards.length ? 4 : 3}개 개체`;
     officialLink.classList.toggle('is-program-link', section === '체험 프로그램');
     if (section === '홈') {
       officialLink.hidden = false;
@@ -342,7 +397,7 @@ if (tourPopup) {
       renderPrograms();
     } else if (section === '방문자 후기') {
       renderReviews();
-    } else if (section === '모션 카드뉴스' && activeTour.motionVideos) {
+    } else if (section === '모션 카드뉴스' && motionCards.length) {
       renderMotionCards();
     } else {
       popupContent.innerHTML = `<h2>${section}</h2><p>이 폴더의 내용은 준비 중입니다.</p>`;
@@ -351,13 +406,15 @@ if (tourPopup) {
   };
 
   tourPopup.addEventListener('close', () => {
-    popupContent.querySelectorAll('video').forEach(video => video.pause());
+    stopMotion();
+    stopMotion = () => {};
   });
 
   document.querySelectorAll('[data-popup-title]').forEach((button) => {
     button.addEventListener('click', () => {
       activeTour = tourData[button.dataset.popupKey];
-      motionFolder.hidden = !activeTour.motionVideos;
+      motionCards = window.REPORT_MOTION?.[button.dataset.popupKey] || [];
+      motionFolder.hidden = !motionCards.length;
       popupTitle.textContent = `${button.dataset.popupTitle} - 탐색기`;
       officialLink.dataset.homeUrl = button.dataset.officialUrl;
       selectFolder('홈');

@@ -51,12 +51,16 @@
 }
 
 .portfolio-boot__console p { margin: 0; font-size: .8rem; }
-.portfolio-boot__console strong {
-  display: block;
-  margin: .65rem 0 1.25rem;
-  font-size: clamp(1.1rem, 6vw, 2.8rem);
-  letter-spacing: -.045em;
+.portfolio-boot__host { color: #a1cba6; letter-spacing: .12em; }
+.portfolio-boot__log {
+  min-height: 5.1em;
+  margin: .8rem 0 .85rem;
 }
+.portfolio-boot__console .portfolio-boot__log p {
+  font-size: clamp(.8rem, 3.7vw, 1.08rem);
+  line-height: 1.65;
+}
+.portfolio-boot__log .is-typing::after { content: '_'; }
 
 .portfolio-boot__meter { height: 3px; margin-bottom: .85rem; background: #193a1e; }
 .portfolio-boot__meter::before {
@@ -65,10 +69,13 @@
   height: 100%;
   background: #39f657;
   transform-origin: left;
-  animation: portfolio-boot-meter 950ms ease-out both;
+  transform: scaleX(0);
 }
 
-.portfolio-boot__ready { animation: portfolio-boot-console 150ms 1050ms ease-out both; }
+.portfolio-boot__ready { min-height: 1.5em; }
+.portfolio-boot__ready[hidden] { display: block; visibility: hidden; }
+.portfolio-boot.is-connected .portfolio-boot__ready { animation: portfolio-boot-console 220ms ease-out both; }
+.portfolio-boot.is-connected .portfolio-boot__meter::before { animation: portfolio-boot-meter 180ms ease-out both; }
 
 @keyframes portfolio-boot-rain {
   from { opacity: 0; transform: translateY(-85%); }

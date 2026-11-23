@@ -1,6 +1,20 @@
 <!doctype html>
 <html lang="ko">
 <head>
+  <style>
+    html.portfolio-boot-pending, html.portfolio-boot-pending body { background: #050906; }
+    .portfolio-boot-pending > body > :not(.portfolio-boot) { visibility: hidden; }
+  </style>
+  <script>
+    try {
+      if (typeof HTMLDialogElement !== 'undefined' && !matchMedia('(prefers-reduced-motion: reduce)').matches &&
+          !localStorage.getItem('portfolio-boot-seen-v1')) {
+        const root = document.documentElement;
+        root.classList.add('portfolio-boot-pending');
+        setTimeout(() => root.classList.remove('portfolio-boot-pending'), 4000);
+      }
+    } catch {}
+  </script>
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-1DD5HK1S03"></script>
 	<script>
@@ -21,9 +35,11 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Song+Myung&amp;display=swap" media="print" onload="this.media='all'">
 	<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Song+Myung&amp;display=swap"></noscript>
 	<script src="report-resources.js?v=20261118-reviews" defer></script>
-	<script src="script.js?v=20261118-deep" defer></script>
+	<link rel="stylesheet" href="report-motion.css?v=20261123">
+	<script src="report-motion.js?v=20261123" defer></script>
+	<script src="script.js?v=20261123-report-motion" defer></script>
 	<script src="supabase-config.js" defer></script>
-	<script src="chatbot.js?v=20261123-public-pages" defer></script>
+	<script src="chatbot.js?v=20261123-report-motion" defer></script>
   <link rel="canonical" href="https://kimjuncheol-ai.github.io/portfolio/report.html">
   <script id="page-structured-data" type="application/ld+json">
   {
@@ -491,8 +507,8 @@
   }
   </script>
   <link rel="stylesheet" href="portfolio-readability.css?v=20261118-deep">
-  <link rel="stylesheet" href="portfolio-boot.css?v=20261123">
-  <script src="portfolio-boot.js?v=20261123" defer></script>
+  <link rel="stylesheet" href="portfolio-boot.css?v=20261123-ssh">
+  <script src="portfolio-boot.js?v=20261123-ssh" defer></script>
 </head>
 <body>
 	<div class="site-shell">
