@@ -894,6 +894,11 @@
   try { hasConsent = localStorage.getItem(consentKey) === 'accepted'; } catch (error) { hasConsent = false; }
   consentPanel.hidden = hasConsent;
 
+  const allowedSourceOrigins = new Set([
+    location.origin,
+    'https://kimjuncheol-ai.github.io',
+    'https://portfolio-one-cyan-20.vercel.app'
+  ]);
   const addMessage = (role, text, sources = [], { persist = true } = {}) => {
     const item = document.createElement('article');
     item.className = `site-ai__message site-ai__message--${role}`;
@@ -902,20 +907,25 @@
     const copy = document.createElement('p');
     copy.textContent = text;
     item.append(label, copy);
-    if (sources.length) {
+    if (Array.isArray(sources) && sources.length) {
       const sourceList = document.createElement('div');
       sourceList.className = 'site-ai__sources';
-      sources.forEach((source) => {
+      for (const source of sources) {
+        const address = source?.url || source?.[0];
+        if (typeof address !== 'string') continue;
+        let url;
+        try { url = new URL(address, location.href); } catch { continue; }
+        if (!['https:', 'http:'].includes(url.protocol) || !allowedSourceOrigins.has(url.origin) || url.username || url.password) continue;
         const link = document.createElement('a');
-        link.href = source.url || source[0];
+        link.href = url.href;
         link.textContent = `[${source.title || source[1]}]`;
         link.addEventListener('click', () => window.gtag?.('event', 'chatbot_source_click', { source_page: link.href }));
         sourceList.append(link);
-      });
-      item.append(sourceList);
+      }
+      if (sourceList.childElementCount) item.append(sourceList);
     }
     messages.append(item);
-    messages.scrollTop = messages.scrollHeight;
+    if (!panel.hidden) messages.scrollTop = messages.scrollHeight;
     if (persist) {
       transcript.push({ role, text, sources });
       if (transcript.length > 30) transcript.splice(0, transcript.length - 30);
@@ -1003,6 +1013,7 @@
 
   const openPanel = () => {
     panel.hidden = false;
+    messages.scrollTop = messages.scrollHeight;
     launcher.setAttribute('aria-expanded', 'true');
     launcher.setAttribute('aria-label', '사이트 안내 AI 닫기');
     input.focus();

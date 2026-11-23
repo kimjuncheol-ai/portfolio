@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="ko">
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; form-action 'self'; script-src 'self' https://www.googletagmanager.com 'sha256-K9JV0y8zYN2WDVzDfk6bceuDPiosVCUljiFu54ySd3E=' 'sha256-I64QJIMry0perjHwgK+oCnaj1WntqjkWbC3eXI/TQq4='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://epsjgiucvagyzzesoqvb.supabase.co https://busan-slowwave.vercel.app https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://www.google.com; frame-src 'none'">
   <style>
     html.portfolio-boot-pending, html.portfolio-boot-pending body { background: #050906; }
     .portfolio-boot-pending > body > :not(.portfolio-boot) { visibility: hidden; }
@@ -23,23 +25,22 @@
 		gtag('js', new Date());
 		gtag('config', 'G-1DD5HK1S03');
 	</script>
-	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="부산의 예술·문화·웰니스 관광 자원 15곳과 한국관광공사 공공데이터 API 연동 리포트">
 	<title>report | kimjuncheol</title>
 	<link rel="icon" href="favicon.svg" type="image/svg+xml">
-	<link rel="stylesheet" href="style.css?v=20261118-deep">
+	<link rel="stylesheet" href="style.css?v=20261123-site-update">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Song+Myung&amp;display=swap">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Song+Myung&amp;display=swap" media="print" onload="this.media='all'">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Song+Myung&amp;display=swap" media="print" data-deferred-style>
 	<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Song+Myung&amp;display=swap"></noscript>
 	<script src="report-resources.js?v=20261118-reviews" defer></script>
 	<link rel="stylesheet" href="report-motion.css?v=20261123-reels">
 	<script src="report-motion.js?v=20261123-reels" defer></script>
-	<script src="script.js?v=20261123-reels" defer></script>
+	<script src="script.js?v=20261123-site-update" defer></script>
 	<script src="supabase-config.js" defer></script>
-	<script src="chatbot.js?v=20261123-personal-site" defer></script>
+	<script src="chatbot.js?v=20261123-site-update" defer></script>
   <link rel="canonical" href="https://kimjuncheol-ai.github.io/portfolio/report.html">
   <script id="page-structured-data" type="application/ld+json">
   {
@@ -506,8 +507,8 @@
     ]
   }
   </script>
-  <link rel="stylesheet" href="portfolio-readability.css?v=20261118-deep">
-  <link rel="stylesheet" href="portfolio-boot.css?v=20261123-ssh-ip">
+  <link rel="stylesheet" href="portfolio-readability.css?v=20261123-site-update">
+  <link rel="stylesheet" href="portfolio-boot.css?v=20261123-site-update">
   <script src="portfolio-boot.js?v=20261123-ssh-12" defer></script>
 </head>
 <body>
@@ -539,7 +540,7 @@
 <article data-resource-key="moca" class="resource-card" tabindex="0" aria-label="부산현대미술관 관광 자원 카드">
 						<header class="resource-card__header"><span>[1]</span><h2>부산현대미술관</h2></header>
 						<button class="resource-card__image-link" type="button" data-popup-key="moca" data-popup-title="부산현대미술관" data-official-url="https://www.busan.go.kr/moca/index" aria-label="부산현대미술관 탐색기 팝업 열기">
-							<img class="resource-card__image" src="assets/museum-of-contemporary-art-busan.webp" alt="8비트 픽셀 아트로 표현한 부산현대미술관 외관" loading="lazy" width="1254" height="1254">
+							<img class="resource-card__image" src="assets/museum-of-contemporary-art-busan.webp" alt="8비트 픽셀 아트로 표현한 부산현대미술관 외관" loading="lazy" decoding="async" width="1254" height="1254">
 						</button>
 						<dl>
 							<div><dt>대표 유형</dt><dd>문화·예술</dd></div>
@@ -554,7 +555,7 @@
 <article data-resource-key="bma" class="resource-card" tabindex="0" aria-label="부산시립미술관 관광 자원 카드">
 						<header class="resource-card__header"><span>[2]</span><h2>부산시립미술관</h2></header>
 						<button class="resource-card__image-link" type="button" data-popup-key="bma" data-popup-title="부산시립미술관" data-official-url="https://art.busan.go.kr/index.nm" aria-label="부산시립미술관 탐색기 팝업 열기">
-							<img class="resource-card__image" src="assets/busan-museum-of-art.webp" alt="8비트 픽셀 아트로 표현한 부산시립미술관 외관" loading="lazy" width="1254" height="1254">
+							<img class="resource-card__image" src="assets/busan-museum-of-art.webp" alt="8비트 픽셀 아트로 표현한 부산시립미술관 외관" loading="lazy" decoding="async" width="1254" height="1254">
 						</button>
 						<dl>
 							<div><dt>대표 유형</dt><dd>문화·예술</dd></div>
@@ -569,7 +570,7 @@
 <article data-resource-key="museum1" class="resource-card" tabindex="0" aria-label="뮤지엄 원 관광 자원 카드">
     <header class="resource-card__header"><span>[3]</span><h2>뮤지엄 원</h2></header>
     <button class="resource-card__image-link" type="button" data-popup-key="museum1" data-popup-title="뮤지엄 원" data-official-url="https://www.museum1.co.kr/" aria-label="뮤지엄 원 탐색기 팝업 열기">
-      <img class="resource-card__image" src="assets/report/museum1-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 뮤지엄 원 미디어아트 공간" loading="lazy" width="1254" height="1254">
+      <img class="resource-card__image" src="assets/report/museum1-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 뮤지엄 원 미디어아트 공간" loading="lazy" decoding="async" width="1254" height="1254">
     </button>
     <dl>
       <div><dt>대표 유형</dt><dd>문화·예술</dd></div>
@@ -584,7 +585,7 @@
 <article data-resource-key="arte" class="resource-card" tabindex="0" aria-label="아르떼뮤지엄 부산 관광 자원 카드">
     <header class="resource-card__header"><span>[4]</span><h2>아르떼뮤지엄 부산</h2></header>
     <button class="resource-card__image-link" type="button" data-popup-key="arte" data-popup-title="아르떼뮤지엄 부산" data-official-url="https://kr.artemuseum.com/BUSAN" aria-label="아르떼뮤지엄 부산 탐색기 팝업 열기">
-      <img class="resource-card__image" src="assets/report/arte-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 아르떼뮤지엄 부산의 GARDEN STARRY BUSAN" loading="lazy" width="1254" height="1254">
+      <img class="resource-card__image" src="assets/report/arte-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 아르떼뮤지엄 부산의 GARDEN STARRY BUSAN" loading="lazy" decoding="async" width="1254" height="1254">
     </button>
     <dl>
       <div><dt>대표 유형</dt><dd>문화·예술</dd></div>
@@ -599,7 +600,7 @@
 <article data-resource-key="hurshim" class="resource-card" tabindex="0" aria-label="허심청 관광 자원 카드">
     <header class="resource-card__header"><span>[5]</span><h2>허심청</h2></header>
     <button class="resource-card__image-link" type="button" data-popup-key="hurshim" data-popup-title="허심청" data-official-url="https://www.hotelnongshim.com/kr/" aria-label="허심청 탐색기 팝업 열기">
-      <img class="resource-card__image" src="assets/report/hurshim-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 허심청의 돔과 온천탕" loading="lazy" width="1254" height="1254">
+      <img class="resource-card__image" src="assets/report/hurshim-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 허심청의 돔과 온천탕" loading="lazy" decoding="async" width="1254" height="1254">
     </button>
     <dl>
       <div><dt>대표 유형</dt><dd>온천·웰니스</dd></div>
@@ -614,7 +615,7 @@
 <article data-resource-key="forest" class="resource-card" tabindex="0" aria-label="부산어린이대공원 치유의 숲 관광 자원 카드">
 						<header class="resource-card__header"><span>[6]</span><h2>부산어린이대공원 치유의 숲</h2></header>
 						<button class="resource-card__image-link" type="button" data-popup-key="forest" data-popup-title="부산어린이대공원 치유의 숲" data-official-url="https://www.bisco.or.kr/bschildpark/" aria-label="부산어린이대공원 치유의 숲 탐색기 팝업 열기">
-							<img class="resource-card__image" src="assets/healing-forest.webp" alt="8비트 픽셀 아트로 표현한 부산어린이대공원 치유의 숲" loading="lazy" width="1254" height="1254">
+							<img class="resource-card__image" src="assets/healing-forest.webp" alt="8비트 픽셀 아트로 표현한 부산어린이대공원 치유의 숲" loading="lazy" decoding="async" width="1254" height="1254">
 						</button>
 						<dl>
 							<div><dt>대표 유형</dt><dd>자연·웰니스</dd></div>
@@ -629,7 +630,7 @@
 <article data-resource-key="mmch" class="resource-card" tabindex="0" aria-label="부산근현대역사관 관광 자원 카드">
     <header class="resource-card__header"><span>[7]</span><h2>부산근현대역사관</h2></header>
     <button class="resource-card__image-link" type="button" data-popup-key="mmch" data-popup-title="부산근현대역사관" data-official-url="https://www.busan.go.kr/mmch/index" aria-label="부산근현대역사관 탐색기 팝업 열기">
-      <img class="resource-card__image" src="assets/report/mmch-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 부산근현대역사관 본관 외관" loading="lazy" width="1254" height="1254">
+      <img class="resource-card__image" src="assets/report/mmch-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 부산근현대역사관 본관 외관" loading="lazy" decoding="async" width="1254" height="1254">
     </button>
     <dl>
       <div><dt>대표 유형</dt><dd>역사·전시</dd></div>
@@ -644,7 +645,7 @@
 <article data-resource-key="kangkangee" class="resource-card" tabindex="0" aria-label="깡깡이예술마을 관광 자원 카드">
     <header class="resource-card__header"><span>[8]</span><h2>깡깡이예술마을</h2></header>
     <button class="resource-card__image-link" type="button" data-popup-key="kangkangee" data-popup-title="깡깡이예술마을" data-official-url="http://kangkangee.com/" aria-label="깡깡이예술마을 탐색기 팝업 열기">
-      <img class="resource-card__image" src="assets/report/kangkangee-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 깡깡이예술마을의 벽화 건물과 골목" loading="lazy" width="1254" height="1254">
+      <img class="resource-card__image" src="assets/report/kangkangee-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 깡깡이예술마을의 벽화 건물과 골목" loading="lazy" decoding="async" width="1254" height="1254">
     </button>
     <dl>
       <div><dt>대표 유형</dt><dd>공공예술·마을</dd></div>
@@ -659,7 +660,7 @@
 <article data-resource-key="domoheon" class="resource-card" tabindex="0" aria-label="도모헌 관광 자원 카드">
     <header class="resource-card__header"><span>[9]</span><h2>도모헌</h2></header>
     <button class="resource-card__image-link" type="button" data-popup-key="domoheon" data-popup-title="도모헌" data-official-url="https://www.busan.go.kr/domoheon/index" aria-label="도모헌 탐색기 팝업 열기">
-      <img class="resource-card__image" src="assets/report/domoheon-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 도모헌 건물과 정원" loading="lazy" width="1254" height="1254">
+      <img class="resource-card__image" src="assets/report/domoheon-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 도모헌 건물과 정원" loading="lazy" decoding="async" width="1254" height="1254">
     </button>
     <dl>
       <div><dt>대표 유형</dt><dd>문화·정원</dd></div>
@@ -674,7 +675,7 @@
 <article data-resource-key="f1963" class="resource-card" tabindex="0" aria-label="F1963 관광 자원 카드">
     <header class="resource-card__header"><span>[10]</span><h2>F1963</h2></header>
     <button class="resource-card__image-link" type="button" data-popup-key="f1963" data-popup-title="F1963" data-official-url="https://www.f1963.org/ko/?c=about&amp;s=1" aria-label="F1963 탐색기 팝업 열기">
-      <img class="resource-card__image" src="assets/report/f1963-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 F1963 공장 건물과 수공간" loading="lazy" width="1254" height="1254">
+      <img class="resource-card__image" src="assets/report/f1963-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 F1963 공장 건물과 수공간" loading="lazy" decoding="async" width="1254" height="1254">
     </button>
     <dl>
       <div><dt>대표 유형</dt><dd>복합문화·산업유산</dd></div>
@@ -689,7 +690,7 @@
 <article data-resource-key="goeun" class="resource-card" tabindex="0" aria-label="고은사진미술관 관광 자원 카드">
     <header class="resource-card__header"><span>[11]</span><h2>고은사진미술관</h2></header>
     <button class="resource-card__image-link" type="button" data-popup-key="goeun" data-popup-title="고은사진미술관" data-official-url="https://www.goeunmuseum.kr/" aria-label="고은사진미술관 탐색기 팝업 열기">
-      <img class="resource-card__image" src="assets/report/goeun-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 담쟁이로 덮인 고은사진미술관 외관" loading="lazy" width="1254" height="1254">
+      <img class="resource-card__image" src="assets/report/goeun-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 담쟁이로 덮인 고은사진미술관 외관" loading="lazy" decoding="async" width="1254" height="1254">
     </button>
     <dl>
       <div><dt>대표 유형</dt><dd>사진·전시</dd></div>
@@ -704,7 +705,7 @@
 <article data-resource-key="dureraum" class="resource-card" tabindex="0" aria-label="영화의전당 관광 자원 카드">
     <header class="resource-card__header"><span>[12]</span><h2>영화의전당</h2></header>
     <button class="resource-card__image-link" type="button" data-popup-key="dureraum" data-popup-title="영화의전당" data-official-url="https://www.dureraum.org/bcc/main/main.do?rbsIdx=1" aria-label="영화의전당 탐색기 팝업 열기">
-      <img class="resource-card__image" src="assets/report/dureraum-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 영화의전당 빅루프" loading="lazy" width="1254" height="1254">
+      <img class="resource-card__image" src="assets/report/dureraum-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 영화의전당 빅루프" loading="lazy" decoding="async" width="1254" height="1254">
     </button>
     <dl>
       <div><dt>대표 유형</dt><dd>영화·공연</dd></div>
@@ -719,7 +720,7 @@
 <article data-resource-key="huinnyeoul" class="resource-card" tabindex="0" aria-label="흰여울문화마을 관광 자원 카드">
     <header class="resource-card__header"><span>[13]</span><h2>흰여울문화마을</h2></header>
     <button class="resource-card__image-link" type="button" data-popup-key="huinnyeoul" data-popup-title="흰여울문화마을" data-official-url="https://www.yeongdo.go.kr/tour/01452/01900.web?amode=view&amp;idx=2" aria-label="흰여울문화마을 탐색기 팝업 열기">
-      <img class="resource-card__image" src="assets/report/huinnyeoul-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 바다 절벽 위 흰여울문화마을 길" loading="lazy" width="1254" height="1254">
+      <img class="resource-card__image" src="assets/report/huinnyeoul-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 바다 절벽 위 흰여울문화마을 길" loading="lazy" decoding="async" width="1254" height="1254">
     </button>
     <dl>
       <div><dt>대표 유형</dt><dd>문화·산책</dd></div>
@@ -734,7 +735,7 @@
 <article data-resource-key="bmuseum" class="resource-card" tabindex="0" aria-label="부산박물관 관광 자원 카드">
     <header class="resource-card__header"><span>[14]</span><h2>부산박물관</h2></header>
     <button class="resource-card__image-link" type="button" data-popup-key="bmuseum" data-popup-title="부산박물관" data-official-url="https://museum.busan.go.kr/busan/" aria-label="부산박물관 탐색기 팝업 열기">
-      <img class="resource-card__image" src="assets/report/bmuseum-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 부산박물관 정면 외관" loading="lazy" width="1254" height="1254">
+      <img class="resource-card__image" src="assets/report/bmuseum-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 부산박물관 정면 외관" loading="lazy" decoding="async" width="1254" height="1254">
     </button>
     <dl>
       <div><dt>대표 유형</dt><dd>역사·문화</dd></div>
@@ -749,7 +750,7 @@
 <article data-resource-key="bokcheon" class="resource-card" tabindex="0" aria-label="복천박물관 관광 자원 카드">
     <header class="resource-card__header"><span>[15]</span><h2>복천박물관</h2></header>
     <button class="resource-card__image-link" type="button" data-popup-key="bokcheon" data-popup-title="복천박물관" data-official-url="https://museum.busan.go.kr/bokcheon/" aria-label="복천박물관 탐색기 팝업 열기">
-      <img class="resource-card__image" src="assets/report/bokcheon-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 복천박물관 건물과 신록" loading="lazy" width="1254" height="1254">
+      <img class="resource-card__image" src="assets/report/bokcheon-pixel.webp" alt="녹색 8비트 픽셀 아트로 표현한 복천박물관 건물과 신록" loading="lazy" decoding="async" width="1254" height="1254">
     </button>
     <dl>
       <div><dt>대표 유형</dt><dd>고고·역사</dd></div>

@@ -1,3 +1,5 @@
+document.querySelectorAll('link[data-deferred-style]').forEach((link) => { link.media = 'all'; });
+
 const menuButton = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('.site-nav');
 
@@ -255,7 +257,8 @@ if (tourPopup) {
   let motionKey = '';
   let motionCards = [];
   let stopMotion = () => {};
-  const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const htmlEntities = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+  const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, character => htmlEntities[character]);
   window.addEventListener('report:resource', ({ detail }) => {
     const tour = tourData[detail.key];
     if (!tour) return;
@@ -349,8 +352,8 @@ if (tourPopup) {
         .map(([, , , name, href]) => `<a href="${escapeHTML(href)}" target="_blank" rel="noopener noreferrer">${escapeHTML(name)}</a>`);
       stage.innerHTML = `
         <figure class="report-reel">
-          ${still ? `<img src="${poster}" width="720" height="1280" alt="${escapeHTML(title)} 정지 카드">` :
-            `<video src="${video}" poster="${poster}" playsinline controls preload="metadata" aria-label="${escapeHTML(singleVideo ? activeTour.name : title)} 모션 카드뉴스"></video>`}
+          ${still ? `<img src="${poster}" width="720" height="1280" decoding="async" alt="${escapeHTML(title)} 정지 카드">` :
+            `<video src="${video}" poster="${poster}" autoplay muted playsinline controls aria-label="${escapeHTML(singleVideo ? activeTour.name : title)} 모션 카드뉴스"></video>`}
           <figcaption>
             <a href="${still ? poster : video}" download>${still ? 'JPG' : 'MP4'} 다운로드</a>
             <details><summary>내용과 사진 출처</summary>${description}
@@ -358,6 +361,15 @@ if (tourPopup) {
             </details>
           </figcaption>
         </figure>`;
+      const player = stage.querySelector('video');
+      if (player && isSeparateVideo && index < motionCards.length - 1) {
+        player.addEventListener('ended', () => {
+          if (!tourPopup.open || !player.isConnected) return;
+          index += 1;
+          show();
+        }, { once: true });
+      }
+      player?.play().catch(() => {});
       counter.textContent = singleVideo ? `${motionCards.length}개 장면` : `${index + 1} / ${motionCards.length}`;
       previous.hidden = next.hidden = singleVideo;
       previous.disabled = index === 0;

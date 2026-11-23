@@ -1,3 +1,5 @@
+document.querySelectorAll('link[data-deferred-style]').forEach((link) => { link.media = 'all'; });
+
 (() => {
   const config = window.SITE_AI_CONFIG || {};
   const connection = document.querySelector('#admin-connection');
@@ -126,7 +128,11 @@
       const block = document.createElement('article');
       block.className = 'rag-conversation';
       const heading = document.createElement('header');
-      heading.innerHTML = `<strong>session ${sessionId.slice(0, 8)}</strong><span>${formatDate(items[0].created_at)}</span>`;
+      const sessionLabel = document.createElement('strong');
+      sessionLabel.textContent = `session ${sessionId.slice(0, 8)}`;
+      const timestamp = document.createElement('span');
+      timestamp.textContent = formatDate(items[0].created_at);
+      heading.append(sessionLabel, timestamp);
       block.append(heading);
       [...items].reverse().forEach((message) => {
         const row = document.createElement('div');
