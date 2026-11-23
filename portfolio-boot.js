@@ -1,5 +1,6 @@
 (() => {
   const key = 'portfolio-boot-seen-v1';
+  const sshTarget = 'kimjuncheol@218.235.89.82';
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   if (motion.matches || typeof HTMLDialogElement === 'undefined' ||
       !document.documentElement.classList.contains('portfolio-boot-pending')) return;
@@ -98,7 +99,7 @@
   ready.addEventListener('animationend', holdCompletedScreen, { once: true });
   (async () => {
     await wait(180);
-    await type('[data-boot-command]', 'ssh portfolio.local');
+    await type('[data-boot-command]', `ssh ${sshTarget}`);
     await wait(150);
     await type('[data-boot-user]', 'kimjuncheol');
     await wait(150);

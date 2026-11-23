@@ -1,4 +1,10 @@
 .portfolio-boot-active { overflow: hidden; }
+.intro-personal-site { margin: .7rem 0 0; }
+.intro-personal-site a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: .22em;
+}
 
 .portfolio-boot {
   position: fixed;
@@ -59,6 +65,7 @@
 .portfolio-boot__console .portfolio-boot__log p {
   font-size: clamp(.8rem, 3.7vw, 1.08rem);
   line-height: 1.65;
+  overflow-wrap: anywhere;
 }
 .portfolio-boot__log .is-typing::after { content: '_'; }
 

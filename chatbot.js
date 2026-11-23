@@ -770,14 +770,17 @@
     {
       "slug": "contact",
       "question": "김준철에게 어떻게 연락하나요?",
-      "answer": "이메일은 kimjuncheolai@gmail.com입니다. 포트폴리오 페이지 하단의 이메일을 누르면 메일 작성 화면이 열립니다.",
+      "answer": "이메일은 kimjuncheolai@gmail.com입니다. 포트폴리오 페이지 하단의 이메일을 누르면 메일 작성 화면이 열립니다. 메인 소개의 ‘개인 웹사이트’ 링크에서 김준철의 개인 사이트도 열 수 있습니다.",
       "terms": [
         "연락",
         "이메일",
         "메일",
         "문의",
         "contact",
-        "email"
+        "email",
+        "개인 웹사이트",
+        "개인 사이트",
+        "개인 홈페이지"
       ],
       "source": [
         "index.html",
