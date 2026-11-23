@@ -826,8 +826,8 @@
         <h2 id="site-ai-consent-title">챗봇 이용 정보 수집 동의</h2>
         <p>사이트 안내와 답변 품질 확인을 위해 다음 정보를 수집합니다.</p>
         <dl>
-          <div><dt>수집 항목</dt><dd>익명 세션 ID, 질문·답변, 접속 페이지, 이용 시각</dd></div>
-          <div><dt>이용 목적</dt><dd>사이트 질문 응답, 답변 시나리오 개선</dd></div>
+          <div><dt>수집 항목</dt><dd>익명 세션 ID, 질문·답변, 접속 페이지, 이용 시각, 요청 제한용 가명 식별자</dd></div>
+          <div><dt>이용 목적</dt><dd>사이트 질문 응답, 답변 시나리오 개선, 서비스 안정성 유지</dd></div>
           <div><dt>보관 기간</dt><dd>현재 탭: 탭 종료 시 삭제 / 서버: 수집일로부터 90일</dd></div>
           <div><dt>저장 위치</dt><dd>현재 브라우저 탭 및 Supabase 클라우드 데이터베이스</dd></div>
         </dl>
@@ -976,6 +976,10 @@
       body: JSON.stringify({ message: question, history: history.slice(-6), sessionId, page: pageName, consent: true, consentVersion: 'v1' })
     });
     const data = await response.json().catch(() => ({}));
+    if (response.status === 429) {
+      const seconds = Number(response.headers.get('Retry-After') || data.retryAfter);
+      return { retryAfter: Number.isFinite(seconds) && seconds > 0 ? Math.ceil(seconds) : 60 };
+    }
     if (!response.ok) throw new Error(data.error || '답변 서버에 연결하지 못했습니다.');
     return data;
   };
@@ -993,6 +997,12 @@
     try {
       const result = isConfigured ? await remoteAnswer(question) : localAnswer(question);
       waiting.remove();
+      if (result.retryAfter) {
+        history.pop();
+        input.value = question;
+        addMessage('assistant', `${result.retryAfter}초 후 다시 보내 주세요. 입력하신 질문은 그대로 남겨 두었습니다.`);
+        return;
+      }
       addMessage('assistant', result.answer, result.sources || []);
       history.push({ role: 'assistant', content: result.answer });
       persistTabState();

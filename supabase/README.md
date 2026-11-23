@@ -7,7 +7,7 @@ The static site works without Supabase in local-preview mode. Complete these ste
 3. Add that user's UUID to `public.site_admins`:
    `insert into public.site_admins (user_id) values ('USER_UUID');`
 4. Set the Edge Function secret `SITE_URL=https://kimjuncheol-ai.github.io/portfolio`.
-5. Deploy `site-chat` without JWT verification (it is the public visitor endpoint) and deploy `sync-site` normally.
+5. Apply the rate-limit migration `migrations/202611230004_site_chat_rate_limit.sql` before deploying `site-chat`. Deploy `site-chat` without JWT verification (it is the public visitor endpoint) and deploy `sync-site` normally. Questions are limited to 12 per session and 60 per network per 60 seconds. HTTP 429 includes `Retry-After`. Consent withdrawal remains available when questions are limited.
 6. Put the project's public URL and publishable key in `/supabase-config.js`.
 7. Open `/admin.html`, sign in, and run the first sync.
 

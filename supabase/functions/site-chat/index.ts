@@ -2,12 +2,14 @@ import 'jsr:@supabase/functions-js/edge-runtime.d.ts'
 import { createClient } from 'npm:@supabase/supabase-js@2'
 import { corsHeaders, json } from '../_shared/cors.ts'
 import { lexicalScore } from '../_shared/faq-score.ts'
+import { createRateKeys } from './rate-keys.ts'
 
 type Match = { page_path: string; source_url: string; page_title: string; content: string; similarity: number }
 type Faq = { question: string; answer: string; keywords?: string[]; source_paths: string[]; similarity?: number }
 
 const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')
 const supabaseUrl = Deno.env.get('SUPABASE_URL')
+const rateKeys = serviceKey ? createRateKeys(serviceKey) : null
 const siteUrl = (Deno.env.get('SITE_URL') || '').replace(/\/$/, '')
 const approvedPages = ['index.html', 'about.html', 'report.html', 'contents.html', 'sns.html', 'final.html']
 const sourceLabels: Record<string, string> = {
@@ -36,7 +38,7 @@ const makeExtractiveAnswer = (question: string, matches: Match[]) => {
 Deno.serve(async (request) => {
   if (request.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders })
   if (request.method !== 'POST') return json({ error: 'Method not allowed' }, 405)
-  if (!supabaseUrl || !serviceKey || !siteUrl) return json({ error: 'RAG server is not configured.' }, 503)
+  if (!supabaseUrl || !serviceKey || !siteUrl || !rateKeys) return json({ error: 'RAG server is not configured.' }, 503)
   try {
     const body = await request.json()
     const message = String(body.message || '').trim().slice(0, 500)
@@ -51,6 +53,24 @@ Deno.serve(async (request) => {
     }
     if (body.consent !== true || body.consentVersion !== 'v1') return json({ error: '정보 수집 동의가 필요합니다.' }, 403)
     if (!message) return json({ error: '질문을 입력해 주세요.' }, 400)
+
+    const [sessionKey, networkKey] = await rateKeys(request.headers, sessionId)
+    const { data: retryAfter, error: limitError } = await supabase.rpc('site_chat_acquire_slot', {
+      p_session: sessionKey, p_network: networkKey,
+    })
+    if (limitError || !Number.isInteger(retryAfter)) {
+      console.error('Site chat limiter unavailable', limitError?.code)
+      return json({ error: '잠시 후 다시 시도해 주세요.' }, 503)
+    }
+    if (retryAfter > 0) {
+      return new Response(JSON.stringify({ error: '질문을 너무 빠르게 보내고 있습니다.', retryAfter }), {
+        status: 429,
+        headers: {
+          ...corsHeaders, 'Content-Type': 'application/json; charset=utf-8',
+          'Retry-After': String(retryAfter), 'Access-Control-Expose-Headers': 'Retry-After',
+        },
+      })
+    }
 
     await supabase.from('site_chat_sessions').delete().lt('last_seen_at', new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString())
     const model = new Supabase.ai.Session('gte-small')
