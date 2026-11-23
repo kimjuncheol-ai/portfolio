@@ -252,6 +252,7 @@ if (tourPopup) {
   const closeButton = tourPopup.querySelector('.win95-close');
   const titlebar = tourPopup.querySelector('.win95-titlebar');
   let activeTour = tourData.moca;
+  let motionKey = '';
   let motionCards = [];
   let stopMotion = () => {};
   const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -317,7 +318,7 @@ if (tourPopup) {
       <h2>${escapeHTML(activeTour.name)} — 모션 카드뉴스</h2>
       <div class="motion-controls" role="group" aria-label="모션 카드 재생">
         <button type="button" data-motion-prev>이전</button>
-        <button type="button" data-motion-play>자동 넘김</button>
+        <button type="button" data-motion-view aria-pressed="false">정지 카드 보기</button>
         <span data-motion-count aria-live="polite"></span>
         <button type="button" data-motion-next>다음</button>
       </div>
@@ -326,63 +327,51 @@ if (tourPopup) {
     const counter = popupContent.querySelector('[data-motion-count]');
     const previous = popupContent.querySelector('[data-motion-prev]');
     const next = popupContent.querySelector('[data-motion-next]');
-    const play = popupContent.querySelector('[data-motion-play]');
-    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    const view = popupContent.querySelector('[data-motion-view]');
+    const isSeparateVideo = motionKey === 'moca';
     let index = 0;
-    let timer;
-    let playing = false;
-    const pause = () => {
-      window.clearTimeout(timer);
-      playing = false;
-      play.textContent = '자동 넘김';
-      play.setAttribute('aria-pressed', 'false');
-    };
+    let still = false;
+    const pause = () => stage.querySelector('video')?.pause();
     stopMotion = pause;
 
     const show = () => {
-      const [file, title, copy, credit, source] = motionCards[index];
+      pause();
+      const [, title, copy] = motionCards[index];
+      const root = 'assets/report/motion/reels/';
+      const pageNumber = String(index + 1).padStart(2, '0');
+      const poster = root + motionKey + '-' + pageNumber + '.jpg';
+      const video = root + motionKey + (isSeparateVideo ? '-' + pageNumber : '') + '.mp4';
+      const singleVideo = !isSeparateVideo && !still;
+      const description = singleVideo ? motionCards.map(([, name, detail]) => `<h4>${escapeHTML(name)}</h4><p>${escapeHTML(detail)}</p>`).join('') :
+        `<h4>${escapeHTML(title)}</h4><p>${escapeHTML(copy)}</p>`;
+      const credits = (singleVideo ? motionCards : [motionCards[index]])
+        .filter(([image]) => image)
+        .map(([, , , name, href]) => `<a href="${escapeHTML(href)}" target="_blank" rel="noopener noreferrer">${escapeHTML(name)}</a>`);
       stage.innerHTML = `
-        <article class="motion-slide${file ? '' : ' motion-slide--text'}">
-          ${file ? `<figure>
-            <img src="assets/report/${escapeHTML(file)}" alt="" decoding="async">
-            <figcaption>사진: <a href="${escapeHTML(source)}" target="_blank" rel="noopener noreferrer">${escapeHTML(credit)}</a></figcaption>
-          </figure>` : ''}
-          <div class="motion-slide__copy">
-            <p>${escapeHTML(activeTour.name)}</p>
-            <h3>${escapeHTML(title)}</h3>
-            <p>${escapeHTML(copy)}</p>
-          </div>
-        </article>`;
-      counter.textContent = `${index + 1} / ${motionCards.length}`;
+        <figure class="report-reel">
+          ${still ? `<img src="${poster}" width="720" height="1280" alt="${escapeHTML(title)} 정지 카드">` :
+            `<video src="${video}" poster="${poster}" playsinline controls preload="metadata" aria-label="${escapeHTML(singleVideo ? activeTour.name : title)} 모션 카드뉴스"></video>`}
+          <figcaption>
+            <a href="${still ? poster : video}" download>${still ? 'JPG' : 'MP4'} 다운로드</a>
+            <details><summary>내용과 사진 출처</summary>${description}
+              ${credits.length ? `<p>사진: ${[...new Set(credits)].join(' · ')}</p>` : ''}
+            </details>
+          </figcaption>
+        </figure>`;
+      counter.textContent = singleVideo ? `${motionCards.length}개 장면` : `${index + 1} / ${motionCards.length}`;
+      previous.hidden = next.hidden = singleVideo;
       previous.disabled = index === 0;
       next.disabled = index === motionCards.length - 1;
+      view.textContent = still ? '모션 영상 보기' : '정지 카드 보기';
+      view.setAttribute('aria-pressed', String(still));
     };
-    const advance = () => {
-      timer = window.setTimeout(() => {
-        if (index >= motionCards.length - 1) {
-          pause();
-          return;
-        }
-        index += 1;
-        show();
-        advance();
-      }, 5400);
-    };
-    previous.addEventListener('click', () => { pause(); index -= 1; show(); });
-    next.addEventListener('click', () => { pause(); index += 1; show(); });
-    play.addEventListener('click', () => {
-      if (playing) {
-        pause();
-        return;
-      }
-      if (index >= motionCards.length - 1) { index = 0; show(); }
-      playing = true;
-      play.textContent = '일시 정지';
-      play.setAttribute('aria-pressed', 'true');
-      advance();
+    previous.addEventListener('click', () => { index -= 1; show(); });
+    next.addEventListener('click', () => { index += 1; show(); });
+    view.addEventListener('click', () => {
+      still = !still;
+      if (!still && !isSeparateVideo) index = 0;
+      show();
     });
-    play.hidden = reduceMotion.matches;
-    pause();
     show();
   };
 
@@ -433,7 +422,8 @@ if (tourPopup) {
   document.querySelectorAll('[data-popup-title]').forEach((button) => {
     button.addEventListener('click', () => {
       activeTour = tourData[button.dataset.popupKey];
-      motionCards = window.REPORT_MOTION?.[button.dataset.popupKey] || [];
+      motionKey = button.dataset.popupKey;
+      motionCards = window.REPORT_MOTION?.[motionKey] || [];
       motionFolder.hidden = !motionCards.length;
       popupTitle.textContent = `${button.dataset.popupTitle} - 탐색기`;
       officialLink.dataset.homeUrl = button.dataset.officialUrl;

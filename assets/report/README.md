@@ -39,7 +39,11 @@
 
 ## 2026-11-23 모션 카드뉴스
 
-탐색기 15곳의 모션 카드뉴스는 `report-motion.js`에 장소별 장면과 출처가 있고, `report-motion.css`에서 사진과 문구의 전환을 처리합니다. 부산현대미술관 5개 장면에는 아래의 서로 다른 기록 사진을 사용했습니다. 부산관광공사 부산관광아카이브 제공, 공공누리 제2유형. 웹 전송을 위해 크기와 파일 형식을 조정했습니다.
+탐색기 15곳의 카드뉴스는 `report-motion.js`에 장소별 장면과 출처를 기록합니다. 부산현대미술관은 세로 MP4 5편, 다른 14곳은 2개 장면을 담은 MP4 1편씩입니다. 각 장면은 JPG로도 볼 수 있습니다. 탐색기의 모션 카드뉴스 폴더에서 재생하거나 JPG로 전환할 수 있고, 두 형식 모두 다운로드할 수 있습니다.
+
+영상은 720×1280(9:16), 초당 24프레임, H.264입니다. 부산현대미술관 편은 한 장에 5초, 다른 공간은 총 10초입니다. `scripts/build-report-motion.cjs`에서 원본 사진·타이포그래피 레이어를 Chromium으로 렌더링하고 FFmpeg로 글자와 안내 상자의 등장 모션을 인코딩합니다.
+
+부산현대미술관 5개 장면에는 아래의 서로 다른 기록 사진을 사용했습니다. 부산관광공사 부산관광아카이브 제공, 공공누리 제2유형. 세로 영상에 맞게 배경의 크기와 구도를 조정했습니다.
 
 - `motion/moca-1.webp` [METADATA019846](https://visitbusan.net/archive/dataSearch/view.nm?dataSid=METADATA019846)
 - `motion/moca-2.webp` [METADATA019848](https://visitbusan.net/archive/dataSearch/view.nm?dataSid=METADATA019848)
@@ -47,4 +51,4 @@
 - `motion/moca-4.webp` [METADATA019857](https://visitbusan.net/archive/dataSearch/view.nm?dataSid=METADATA019857)
 - `motion/moca-5.webp` [METADATA019851](https://visitbusan.net/archive/dataSearch/view.nm?dataSid=METADATA019851)
 
-다른 장소는 기존 탐색기 사진을 사용합니다. 한국관광공사 제3유형 사진은 원본 파일을 그대로 표시합니다. 원본을 한 장만 확보한 뮤지엄 원·아르떼뮤지엄 부산·허심청은 두 번째 장을 사진 없는 관람 안내로 구성했습니다.
+다른 장소는 기존 탐색기 사진을 사용합니다. 한국관광공사 제3유형 사진은 비율을 유지해 자르거나 색을 바꾸지 않고 배치했습니다. 원본을 한 장만 확보한 뮤지엄 원·아르떼뮤지엄 부산·허심청은 두 번째 장을 사진 없는 관람 안내로 구성했습니다.
