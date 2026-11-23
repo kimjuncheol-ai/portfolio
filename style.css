@@ -933,13 +933,12 @@ a:focus-visible {
   overflow-wrap: normal;
 }
 
-.typing-line,
-.intro-copy-line {
+.typing-line {
   min-height: 1.85em;
   margin: 0 0 clamp(1.5rem, 3vw, 2.5rem);
 }
 
-.intro-copy-line:last-of-type { margin-bottom: 0; }
+.typing-line:has(+ .intro-personal-site) { margin-bottom: 0; }
 
 .terminal-heading {
   animation: none;
@@ -949,8 +948,7 @@ a:focus-visible {
   display: none;
 }
 
-.typing-line.is-typing::after,
-.typing-line.typing-complete::after {
+.typing-line.is-typing::after {
   content: "_";
   display: inline-block;
   animation: blink 0.8s steps(1) infinite;

@@ -37,7 +37,23 @@ document.querySelectorAll('.site-nav a').forEach((link) => {
   }
 });
 
-// Logo: letters light up one by one, left to right, on a loop; on the first visit of a session it types itself in first.
+// Wait for both the initial loading cover and the SSH dialog to clear.
+function afterPortfolioBoot(callback) {
+  const root = document.documentElement;
+  const covered = () => root.matches('.portfolio-boot-pending, .portfolio-boot-active');
+  if (!covered()) {
+    callback();
+    return;
+  }
+  const observer = new MutationObserver(() => {
+    if (covered()) return;
+    observer.disconnect();
+    callback();
+  });
+  observer.observe(root, { attributes: true, attributeFilter: ['class'] });
+}
+
+// Type the logo on the first page of the session, then start its light sweep.
 (() => {
   const logo = document.querySelector('.site-header .logo');
   if (!logo || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -55,19 +71,19 @@ document.querySelectorAll('.site-nav a').forEach((link) => {
   try { played = sessionStorage.getItem('kimjuncheol-logo-typed') === 'true'; } catch { played = false; }
   if (played) {
     logo.replaceChildren(...letters);
-    wave();
+    afterPortfolioBoot(wave);
     return;
   }
   try { sessionStorage.setItem('kimjuncheol-logo-typed', 'true'); } catch { /* the animation still runs without storage */ }
   logo.replaceChildren();
   logo.classList.add('is-typing');
-  letters.forEach((span, index) => setTimeout(() => {
+  afterPortfolioBoot(() => letters.forEach((span, index) => setTimeout(() => {
     logo.append(span);
     if (index === letters.length - 1) {
       logo.classList.replace('is-typing', 'is-settling');
       setTimeout(() => { logo.classList.remove('is-settling'); wave(); }, 1800);
     }
-  }, 120 + index * 45));
+  }, 120 + index * 45)));
 })();
 
 const typingLines = [...document.querySelectorAll('.typing-line')];
@@ -78,9 +94,10 @@ if (typingLines.length) {
   const TYPE_DELAY = 32 / 1.5;
   const START_DELAY = 500 / 1.5;
   const LINE_DELAY = 350 / 1.5;
-  const storageKey = 'kimjuncheol-intro-played';
+  const storageKey = 'kimjuncheol-intro-played-v2';
+  const ending = document.querySelectorAll('.typing-copy .intro-personal-site, .typing-copy .terminal-prompt');
   const savedContent = typingLines.map((line) => [...line.childNodes].map((node) => ({
-    text: node.textContent,
+    text: node.textContent.trim(),
     isBreak: node.nodeName === 'BR'
   })));
   const wait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -115,17 +132,20 @@ if (typingLines.length) {
     line.classList.remove('is-typing');
   };
 
-  const playIntroduction = async () => {
+  const prepareIntroduction = () => {
     typingLines.forEach((line) => {
       line.textContent = '';
       line.hidden = true;
     });
+    ending.forEach((element) => { element.hidden = true; });
     typedCharacters = 0;
     if (profileOutput) {
       profileOutput.style.setProperty('--print-progress', '0%');
       profileOutput.classList.add('is-printing');
     }
+  };
 
+  const playIntroduction = async () => {
     try {
       sessionStorage.setItem(storageKey, 'true');
     } catch (error) {
@@ -137,7 +157,7 @@ if (typingLines.length) {
       await typeLine(typingLines[index], savedContent[index]);
       await wait(LINE_DELAY);
     }
-    typingLines.at(-1).classList.add('typing-complete');
+    ending.forEach((element) => { element.hidden = false; });
     if (profileOutput) {
       profileOutput.style.setProperty('--print-progress', '100%');
       profileOutput.classList.remove('is-printing');
@@ -145,10 +165,10 @@ if (typingLines.length) {
   };
 
   if (introductionPlayed || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    typingLines.at(-1).classList.add('typing-complete');
     if (profileOutput) profileOutput.style.setProperty('--print-progress', '100%');
   } else {
-    playIntroduction();
+    prepareIntroduction();
+    afterPortfolioBoot(playIntroduction);
   }
 }
 
