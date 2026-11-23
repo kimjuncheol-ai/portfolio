@@ -938,8 +938,6 @@ a:focus-visible {
   margin: 0 0 clamp(1.5rem, 3vw, 2.5rem);
 }
 
-.typing-line:has(+ .intro-personal-site) { margin-bottom: 0; }
-
 .terminal-heading {
   animation: none;
 }
