@@ -99,19 +99,25 @@ const channels = CHANNELS.map((channel) => {
     Object.assign(stats, extraLikes(channel.key));
     // A metric the page did not show this time keeps its last known value instead of dropping to empty.
     const old = previous?.channels?.find(c => c.key === channel.key) || {};
-    const kept = ['followers', 'posts', 'views', 'likes', 'top'].filter(k => stats[k] == null && old[k] != null);
-    kept.forEach((k) => { stats[k] = old[k]; });
+    const carried = ['followers', 'posts', 'views', 'likes', 'top'].filter(k => stats[k] == null && old[k] != null);
+    carried.forEach((k) => { stats[k] = old[k]; });
+    const verifiedOn = Object.fromEntries(carried.filter(k => old.verifiedOn?.[k]).map(k => [k, old.verifiedOn[k]]));
+    const kept = carried.filter(k => verifiedOn[k] !== date);
     const core = kept.filter(k => k !== 'likes' && k !== 'top');
-    return { ...channel, ...stats, status: core.length ? 'partial' : 'ok', ...(kept.length ? { kept } : {}) };
+    return {
+      ...channel, ...stats, status: core.length ? 'partial' : 'ok',
+      ...(kept.length ? { kept } : {}), ...(Object.keys(verifiedOn).length ? { verifiedOn } : {})
+    };
   } catch (error) {
     console.error(channel.key, 'failed:', error.message);
     // Keep the last known numbers so the dashboard still renders, but mark them as stale.
     const old = previous?.channels?.find(c => c.key === channel.key);
-    return { ...channel, ...(old ? { followers: old.followers, posts: old.posts, views: old.views, likes: old.likes ?? null, top: old.top ?? null } : {}), status: 'stale', error: error.message.slice(0, 160) };
+    return { ...channel, ...(old ? { followers: old.followers, posts: old.posts, views: old.views, likes: old.likes ?? null, top: old.top ?? null, ...(old.verifiedOn ? { verifiedOn: old.verifiedOn } : {}) } : {}), status: 'stale', error: error.message.slice(0, 160) };
   }
 });
 
-const snapshot = { asOf: date, collectedAt: `${date} ${time} KST`, channels };
+const verificationNote = channels.some(c => c.verifiedOn) ? previous?.verificationNote : undefined;
+const snapshot = { asOf: date, collectedAt: `${date} ${time} KST`, channels, verificationNote };
 if (!channels.some(c => c.status !== 'stale')) {
   console.error('no channel could be read (is Aside running?) - nothing saved');
   process.exit(1);
@@ -131,9 +137,13 @@ console.log(`saved ${date} ${time} · ${channels.filter(c => c.status === 'ok').
 
 if (process.argv.includes('--push')) {
   const git = (...args) => spawnSync('git', ['-c', 'safe.directory=*', ...args], { cwd: ROOT, encoding: 'utf8' });
-  git('add', 'assets/data/sns-stats.json', 'assets/data/sns-history.json', 'assets/data/naver-daily.json', 'assets/data/naver-likes-daily.json');
-  if (git('diff', '--cached', '--quiet').status !== 0) {
-    git('commit', '-m', `chore: update SNS stats ${date}`);
+  const files = ['assets/data/sns-stats.json', 'assets/data/sns-history.json', 'assets/data/naver-daily.json', 'assets/data/naver-likes-daily.json'];
+  if (git('diff', 'HEAD', '--quiet', '--', ...files).status !== 0) {
+    const commit = git('commit', '--only', '-m', `chore: update SNS stats ${date}`, '--', ...files);
+    if (commit.status !== 0) {
+      console.error('commit failed:', commit.stderr);
+      process.exit(1);
+    }
     const push = git('push', 'origin', 'main');
     console.log(push.status === 0 ? 'pushed' : `push failed: ${push.stderr}`);
   } else {

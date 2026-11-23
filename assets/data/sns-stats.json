@@ -27,20 +27,20 @@
       "viewsBasis": "최근 28일",
       "followers": 1,
       "posts": 27,
-      "views": 328,
+      "views": 276,
       "likes": 1,
       "top": {
         "title": "부산의 색과 빛을 따라 여행하던 갈매기. 마지막에 갑자기 진지해집니다",
         "views": 93,
         "url": "https://www.facebook.com/reel/1088883160651033/"
       },
-      "status": "partial",
-      "kept": [
-        "posts",
-        "views",
-        "likes",
-        "top"
-      ]
+      "status": "ok",
+      "verifiedOn": {
+        "posts": "2026-11-23",
+        "top": "2026-11-23",
+        "views": "2026-11-23",
+        "likes": "2026-11-23"
+      }
     },
     {
       "key": "x",
@@ -93,9 +93,10 @@
         "url": "https://blog.naver.com/artour_busan/224480753053"
       },
       "status": "ok",
-      "kept": [
-        "top"
-      ]
+      "verifiedOn": {
+        "top": "2026-11-23"
+      }
     }
-  ]
+  ],
+  "verificationNote": "11월 23일 직접 확인: Facebook 게시물·최고 조회 콘텐츠는 11월 23일까지의 콘텐츠 라이브러리, 조회수·공감은 10월 26일~11월 22일. 네이버 최고 조회 콘텐츠는 10월 14일~11월 22일 일별 조회 순위 합산."
 }
