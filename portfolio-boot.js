@@ -103,7 +103,7 @@
     await wait(150);
     await type('[data-boot-user]', 'kimjuncheol');
     await wait(150);
-    await type('[data-boot-password]', '••••••');
+    await type('[data-boot-password]', '•'.repeat(12));
     await wait(210);
     ready.hidden = false;
     screen.classList.add('is-connected');
