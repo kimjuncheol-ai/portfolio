@@ -1,6 +1,6 @@
 {
-  "asOf": "2026-11-19",
-  "collectedAt": "2026-11-19 16:21 KST",
+  "asOf": "2026-11-23",
+  "collectedAt": "2026-11-23 09:00 KST",
   "channels": [
     {
       "key": "instagram",
@@ -10,11 +10,11 @@
       "viewsBasis": "릴스 누적",
       "followers": 5,
       "posts": 24,
-      "views": 10128,
+      "views": 10131,
       "likes": 90,
       "top": {
         "title": "씨걸이 vs 비둘기, 영도 벽화 스피드 배틀 🎨",
-        "views": 6705,
+        "views": 6706,
         "url": "https://www.instagram.com/artour_busan/reel/DfYq3J3CRIU/"
       },
       "status": "ok"
@@ -34,7 +34,13 @@
         "views": 93,
         "url": "https://www.facebook.com/reel/1088883160651033/"
       },
-      "status": "ok"
+      "status": "partial",
+      "kept": [
+        "posts",
+        "views",
+        "likes",
+        "top"
+      ]
     },
     {
       "key": "x",
@@ -44,11 +50,11 @@
       "viewsBasis": "불러온 게시물 누적",
       "followers": 1,
       "posts": 28,
-      "views": 692,
+      "views": 744,
       "likes": 1,
       "top": {
         "title": "씨걸이의 부산 예술여행 하루 코스 ",
-        "views": 53,
+        "views": 55,
         "url": "https://x.com/artour_busan/status/2118566560453587037"
       },
       "counted": 28,
@@ -79,15 +85,17 @@
       "viewsBasis": "월간·일별 합산 누적",
       "followers": 1,
       "posts": 24,
-      "views": 65,
+      "views": 73,
       "likes": 2,
       "top": {
         "title": "영도 깡깡이예술마을, 마을다방에서 벽화 골목까지 씨걸이와 천천히",
         "views": 15,
         "url": "https://blog.naver.com/artour_busan/224480753053"
       },
-      "status": "ok"
+      "status": "ok",
+      "kept": [
+        "top"
+      ]
     }
-  ],
-  "verificationNote": "11월 23일 재확인한 Facebook 게시물 수·최고 조회 콘텐츠는 11월 19일까지의 콘텐츠 라이브러리 기준이며, 네이버 최고 조회 콘텐츠는 10월 14일~11월 22일 일별 조회수 순위 합산입니다."
+  ]
 }
