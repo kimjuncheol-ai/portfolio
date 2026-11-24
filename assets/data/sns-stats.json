@@ -1,6 +1,6 @@
 {
-  "asOf": "2026-11-23",
-  "collectedAt": "2026-11-23 09:00 KST",
+  "asOf": "2026-11-24",
+  "collectedAt": "2026-11-24 09:00 KST",
   "channels": [
     {
       "key": "instagram",
@@ -34,12 +34,18 @@
         "views": 93,
         "url": "https://www.facebook.com/reel/1088883160651033/"
       },
-      "status": "ok",
+      "status": "partial",
+      "kept": [
+        "posts",
+        "views",
+        "likes",
+        "top"
+      ],
       "verifiedOn": {
         "posts": "2026-11-23",
-        "top": "2026-11-23",
         "views": "2026-11-23",
-        "likes": "2026-11-23"
+        "likes": "2026-11-23",
+        "top": "2026-11-23"
       }
     },
     {
@@ -50,11 +56,11 @@
       "viewsBasis": "불러온 게시물 누적",
       "followers": 1,
       "posts": 28,
-      "views": 744,
+      "views": 771,
       "likes": 1,
       "top": {
         "title": "씨걸이의 부산 예술여행 하루 코스 ",
-        "views": 55,
+        "views": 56,
         "url": "https://x.com/artour_busan/status/2118566560453587037"
       },
       "counted": 28,
@@ -75,7 +81,10 @@
       "views": 157,
       "posts": 19,
       "likes": 1,
-      "status": "ok"
+      "status": "ok",
+      "kept": [
+        "likes"
+      ]
     },
     {
       "key": "naver",
@@ -85,7 +94,7 @@
       "viewsBasis": "월간·일별 합산 누적",
       "followers": 1,
       "posts": 24,
-      "views": 73,
+      "views": 77,
       "likes": 2,
       "top": {
         "title": "영도 깡깡이예술마을, 마을다방에서 벽화 골목까지 씨걸이와 천천히",
@@ -93,6 +102,9 @@
         "url": "https://blog.naver.com/artour_busan/224480753053"
       },
       "status": "ok",
+      "kept": [
+        "top"
+      ],
       "verifiedOn": {
         "top": "2026-11-23"
       }
