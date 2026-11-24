@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#122c38"><meta name="description" content="밀면 먹고 달리고, 국밥 먹고 돌파! 부산역에서 광안리까지 여행하는 횡스크롤 게임."><title>부산 한입 대모험 · BUSAN BITE</title><link rel="stylesheet" href="style.css"></head>
+<body><main>
+<header><a class="brand" href="./"><span class="brand-mark">B<span>↗</span></span><span>BUSAN BITE<small>부산 한입 대모험</small></span></a><div class="top-actions"><span class="edition">A LITTLE TRIP. A BIG APPETITE.</span><button id="sound" aria-label="소리 켜기" aria-pressed="false">소리 OFF</button><button id="pause" disabled>일시정지</button></div></header>
+<section class="arcade" aria-label="부산 횡스크롤 게임">
+<div class="hud"><div><span class="eyebrow">NOW TRAVELING</span><strong id="stage">01 부산역</strong></div><div class="hud-right"><span id="health" aria-label="체력 3">♥ ♥ ♥</span><span class="score">✦ <b id="score">00000</b></span></div></div>
+<div class="screen"><canvas id="game" width="1200" height="600" tabindex="0" aria-label="좌우 방향키로 이동하고 스페이스로 점프하세요. 부산 음식을 모으며 오른쪽 도착 지점으로 이동하세요."></canvas><div class="buffs" id="buffs"></div><div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="overlay" id="overlay"><div class="intro"><span class="ticket" id="ticket">BUSAN, READY TO BITE?</span><h1 id="title">부산 한입<br><em>대모험!</em></h1><p id="description">한 그릇 먹고, 한 번 더 점프.<br>부산역에서 광안리까지 맛있게 달려요.</p><button class="primary" id="play">여행 시작 <span>→</span></button><p class="start-hint" id="startHint">방향키로 이동 · SPACE로 점프</p></div></div>
+</div><div class="route"><span id="routeStart">01 부산역</span><div class="track"><i id="progress"></i></div><span id="routeEnd">광안리로 →</span></div>
+</section>
+<div class="under"><p><kbd>←</kbd><kbd>→</kbd> 이동 <kbd>SPACE</kbd> 점프 <span class="desktop">· 길게 누르면 높이 점프 · 적은 위에서 밟기</span></p><button id="restart">처음부터 ↺</button></div>
+<div class="touch" aria-label="터치 조작"><div><button data-key="left" aria-label="왼쪽 이동">◀</button><button data-key="right" aria-label="오른쪽 이동">▶</button></div><button data-key="jump" class="jump" aria-label="점프">JUMP ↑</button></div>
+<section class="food-guide" aria-label="부산 음식 아이템"><div class="guide-heading"><span class="eyebrow">EAT LOCAL. PLAY SUPER.</span><h2>맛있는 게 능력이다.</h2></div><article><span class="food-icon mint">🍜</span><div><h3>밀면 <small>8초</small></h3><p>시원하게 질주! 이동 속도 ×1.5</p></div></article><article><span class="food-icon orange">🍲</span><div><h3>돼지국밥 <small>8초</small></h3><p>든든하게 돌파! 무적 + 적 격파</p></div></article><article><span class="food-icon yellow">🥮</span><div><h3>씨앗호떡 <small>즉시</small></h3><p>달콤한 휴식! 체력 한 칸 회복</p></div></article></section>
+<footer><span>ORIGINAL BUSAN ARCADE · 2 STAGES</span><span>음식 효과와 지형은 게임용 각색입니다. <a href="https://www.visitbusan.net/kr/index.do?lang_cd=ko&menuCd=DOM_000000202003001000&uc_seq=1005" target="_blank" rel="noopener noreferrer">음식 이야기 · 비짓부산 ↗</a></span></footer>
+</main><script src="engine.js"></script><script src="game.js"></script></body></html>
