@@ -31,7 +31,8 @@ document.querySelectorAll('link[data-deferred-style]').forEach((link) => { link.
     element.textContent = message;
     element.classList.toggle('is-error', error);
   };
-  const formatDate = (value) => value ? new Intl.DateTimeFormat('ko-KR', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(value)) : '—';
+  let dateFormatter;
+  const formatDate = (value) => value ? (dateFormatter ??= new Intl.DateTimeFormat('ko-KR', { dateStyle: 'medium', timeStyle: 'short' })).format(new Date(value)) : '—';
 
   const verifyAdmin = async () => {
     const { data, error } = await client.from('site_admins').select('user_id').limit(1).maybeSingle();
